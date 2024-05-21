@@ -44,8 +44,8 @@ $pag = 'tarefas';
 
 						<div class="col-md-3" id="nasc">						
 							<div class="form-group"> 
-								<label>Hora</label> 
-								<input type="time" class="form-control" name="hora" id="hora" value="" required> 
+								<label>Hora?</label> 
+								<input type="time" class="form-control" name="hora" id="hora" value=""> 
 							</div>						
 						</div>					
 

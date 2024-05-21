@@ -13,6 +13,8 @@ $servidor = 'localhost';
 $banco = 'escritorio';
 
 
+
+
 try {
 	$pdo = new PDO("mysql:dbname=$banco;host=$servidor", "$usuario", "$senha");
 } catch (Exception $e) {
@@ -22,7 +24,7 @@ try {
 
 
 //VARIAVEIS GLOBAIS DO SISTEMA
-$nome_sistema = 'Consult - Contabilidade & Consultoria';
+$nome_sistema = 'Consult';
 $email_adm = 'ualbardeiro@gmail.com';
 
 

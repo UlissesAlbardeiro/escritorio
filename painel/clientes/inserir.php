@@ -2,6 +2,7 @@
 $tabela = 'clientes';
 require_once("../../conexao.php");
 
+$codigo = $_POST['codigo'];
 $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
 $doc = $_POST['doc'];
@@ -36,18 +37,18 @@ if($total_reg > 0 and $res[0]['id'] != $id){
 
 
 if($id == ""){
-	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, pessoa = '$pessoa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_cad = curDate(), data_nasc = '$data_nasc', obs = :obs, ativo = 'Sim'");
+	$query = $pdo->prepare("INSERT INTO $tabela SET codigo = '$codigo', nome = :nome, pessoa = '$pessoa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_cad = curDate(), data_nasc = '$data_nasc', obs = :obs, ativo = 'Sim'");
 	$acao = 'inserção';
 	
 
 }else{
-	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, pessoa = '$pessoa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_nasc = '$data_nasc', obs = :obs where id = '$id'");
+	$query = $pdo->prepare("UPDATE $tabela SET codigo = '$codigo', nome = :nome, pessoa = '$pessoa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_nasc = '$data_nasc', obs = :obs where id = '$id'");
 	$acao = 'edição';
 
 	
 }
 
-$query->bindValue(":nome", "$nome");
+	$query->bindValue(":nome", "$nome");
 	$query->bindValue(":doc", "$doc");
 	$query->bindValue(":telefone", "$telefone");
 	$query->bindValue(":email", "$email");

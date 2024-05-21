@@ -11,8 +11,8 @@ if($total_reg > 0){
 echo <<<HTML
 	<table class="table table-hover" id="tabela">
 		<thead> 
-			<tr>
-				<th class="esc">ID</th> 				
+			<tr> 				
+				<th>Código</th>
 				<th>Nome</th>
 				<th class="esc">Pessoa</th> 
 				<th class="esc">Documento</th>
@@ -26,6 +26,7 @@ HTML;
 for($i=0; $i < $total_reg; $i++){
 	foreach ($res[$i] as $key => $value){}
 $id = $res[$i]['id'];
+$codigo = $res[$i]['codigo'];
 $nome = $res[$i]['nome'];
 $telefone = $res[$i]['telefone'];
 $doc = $res[$i]['doc'];
@@ -58,16 +59,16 @@ if($ativo == 'Sim'){
 
 echo <<<HTML
 			<tr class="{$classe_linha}"> 
-				<th class="esc">{$id}</th>
+				<td>{$codigo}</td>
 				<td>{$nome}</td> 
 				<td class="esc">{$pessoa}</td>
 				<td class="esc">{$doc}</td>
 				<td class="esc">{$telefone}</td>
 				<td class="esc">{$email}</td>
 				<td>
-					<big><a href="#" onclick="editar('{$id}', '{$nome}', '{$pessoa}','{$doc}','{$telefone}','{$email}','{$data_nasc}','{$endereco}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					<big><a href="#" onclick="editar('{$id}','{$codigo}','{$nome}', '{$pessoa}','{$doc}','{$telefone}','{$email}','{$data_nasc}','{$endereco}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
-					<big><a href="#" onclick="mostrar('{$id}', '{$nome}', '{$pessoa}','{$doc}','{$telefone}','{$email}','{$endereco}','{$data_cadF}','{$data_nascF}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+					<big><a href="#" onclick="mostrar('{$id}','{$codigo}','{$nome}', '{$pessoa}','{$doc}','{$telefone}','{$email}','{$endereco}','{$data_cadF}','{$data_nascF}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
 					<big><a href="#" onclick="excluir('{$id}', '{$nome}')" title="Excluir Item"><i class="fa fa-trash-o text-danger"></i></a></big>
 
@@ -103,7 +104,7 @@ HTML;
 
 
 
-	function editar(id, nome, pessoa, doc, telefone, email, data_nasc, endereco, obs){
+	function editar(id, codigo, nome, pessoa, doc, telefone, email, data_nasc, endereco, obs){
 
 		for (let letra of obs){  				
 					if (letra === '+'){
@@ -113,6 +114,7 @@ HTML;
 
 
 		$('#id').val(id);
+		$('#codigo').val(codigo);
 		$('#nome').val(nome);
 		$('#pessoa').val(pessoa).change();
 		$('#doc').val(doc);
@@ -131,7 +133,7 @@ HTML;
 
 
 
-	function mostrar(id, nome, pessoa, doc, telefone, email, endereco, data_cad, data_nasc, obs){
+	function mostrar(id, codigo, nome, pessoa, doc, telefone, email, endereco, data_cad, data_nasc, obs){
 
 		for (let letra of obs){  				
 					if (letra === '+'){
@@ -145,6 +147,7 @@ HTML;
 			document.getElementById('div_data_nasc_mostrar').style.display = 'block';
 		}
 		
+		$('#codigo_mostrar').text(codigo);
 		$('#nome_mostrar').text(nome);
 		$('#pessoa_mostrar').text(pessoa);
 		$('#doc_mostrar').text(doc);
@@ -161,6 +164,7 @@ HTML;
 
 	function limparCampos(){
 		$('#id').val('');
+		$('#codigo').val('');
 		$('#nome').val('');		
 		$('#doc').val('');
 		$('#telefone').val('');

@@ -28,14 +28,21 @@ $pag = 'clientes';
 				<div class="modal-body">
 
 					<div class="row">
-						<div class="col-md-4">						
+						<div class="col-md-2">						
 							<div class="form-group"> 
-								<label>Nome</label> 
-								<input type="text" class="form-control" name="nome" id="nome" required> 
+								<label>Código</label> 
+								<input type="text" class="form-control" name="codigo" id="codigo" required> 
 							</div>						
 						</div>
 
 						<div class="col-md-4">						
+							<div class="form-group"> 
+								<label>Razão Social</label> 
+								<input type="text" class="form-control" name="nome" id="nome" required> 
+							</div>						
+						</div>
+
+						<div class="col-md-3">						
 							<div class="form-group"> 
 								<label>Física / Jurídica</label> 
 								<select class="form-control" name="pessoa" id="pessoa"> 
@@ -46,7 +53,7 @@ $pag = 'clientes';
 						</div>
 
 
-						<div class="col-md-4">						
+						<div class="col-md-3">						
 							<div class="form-group"> 
 								<label>CPF / CNPJ</label> 
 								<input type="text" class="form-control" name="doc" id="doc" required> 
@@ -81,22 +88,6 @@ $pag = 'clientes';
 								<input type="date" class="form-control" name="data_nasc" id="data_nasc" value="<?php echo date('Y-m-d') ?>"> 
 							</div>						
 						</div>
-
-					
-						<div class="col-md-4">						
-							<div class="form-group"> 
-								<label>Razão Social</label> 
-								<input type="text" class="form-control" name="nome" id="nome" required> 
-							</div>						
-						</div>
-
-						<div class="col-md-4" id="alvara">						
-							<div class="form-group"> 
-								<label>Vencimento do Alvará</label> 
-								<input type="date" class="form-control" name="alvara" id="alvara" value="<?php echo date('Y-m-d') ?>"> 
-							</div>						
-						</div>						
-					
 
 
 					</div>
@@ -185,13 +176,21 @@ $pag = 'clientes';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="tituloModal"><span id="nome_mostrar"> </span></h4>
+				<h2 class="modal-title" id="tituloModal"><span id="nome_mostrar"> </span></h2>
 				<button id="btn-fechar-excluir" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			
-			<div class="modal-body">			
+			<div class="modal-body">	
+				
+			
+				<div class="row" style="border-bottom: 1px solid #cac7c7;">
+					<div class="col-md-6">							
+						<span><b>Código: </b></span>
+						<span id="codigo_mostrar"></span>							
+					</div>
+				</div>
 
 
 
@@ -200,6 +199,7 @@ $pag = 'clientes';
 						<span><b>Pessoa: </b></span>
 						<span id="pessoa_mostrar"></span>							
 					</div>
+				
 					<div class="col-md-6">							
 						<span><b>Documento: </b></span>
 						<span id="doc_mostrar"></span>

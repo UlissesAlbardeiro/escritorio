@@ -53,10 +53,13 @@ exit();
 
 
 					<div class="row">
+
+					<!-- CAMPO DE HORA DA TAREFA INUTILIZADO -->
+
 						<div class="col-md-3" id="nasc">						
 							<div class="form-group"> 
 								<label>Hora</label> 
-								<input type="time" class="form-control" name="hora" id="hora" value="" required> 
+								<input type="time" class="form-control" name="hora" id="hora" value=""> 
 							</div>						
 						</div>	
 

@@ -297,7 +297,7 @@ for($i=1; $i <= 12; $i++){
 		</a>
 
 
-		<!-- <a href="index.php?pagina=movimentacoes" class="<?php echo $esc_rh ?>">
+		<a href="index.php?pagina=movimentacoes" class="<?php echo $esc_rh ?>">
 		<div class="col-md-3 widget widget1">
 			<div class="r3_counter_box">
 				<div class="row">
@@ -317,10 +317,10 @@ for($i=1; $i <= 12; $i++){
 			</div>
 		</div>
 		</a>
- -->
+
 	
 		
-		<!-- <a href="index.php?pagina=movimentacoes" class="<?php echo $esc_rh ?>">
+		<a href="index.php?pagina=movimentacoes" class="<?php echo $esc_rh ?>">
 		<div class="col-md-3 widget widget1">
 			<div class="r3_counter_box">
 				<div class="row">
@@ -339,7 +339,7 @@ for($i=1; $i <= 12; $i++){
 				</div>
 			</div>
 		</div>
-		</a> -->
+		</a>
 
 
 		<a href="index.php?pagina=clientes">
@@ -366,7 +366,7 @@ for($i=1; $i <= 12; $i++){
 
 		
 		
-		<!-- <a href="index.php?pagina=receber" class="<?php echo $esc_rh ?>">
+		<a href="index.php?pagina=receber" class="<?php echo $esc_rh ?>">
 		<div class="col-md-3 widget widget1">
 			<div class="r3_counter_box">
 				<div class="row">
@@ -385,11 +385,11 @@ for($i=1; $i <= 12; $i++){
 				</div>
 			</div>
 		</div>
-		</a> -->
+		</a>
 
 	
 		
-		<!-- <a href="index.php?pagina=pagar" class="<?php echo $esc_rh ?>">
+		<a href="index.php?pagina=pagar" class="<?php echo $esc_rh ?>">
 		<div class="col-md-3 widget widget1">
 			<div class="r3_counter_box">
 				<div class="row">
@@ -408,11 +408,11 @@ for($i=1; $i <= 12; $i++){
 				</div>
 			</div>
 		</div>
-		</a> -->
+		</a>
 
 
 
-		<!-- <a href="index.php?pagina=receber" class="<?php echo $esc_rh ?>">
+		<a href="index.php?pagina=receber" class="<?php echo $esc_rh ?>">
 		<div class="col-md-3 widget widget1">
 			<div class="r3_counter_box">
 				<div class="row">
@@ -431,9 +431,9 @@ for($i=1; $i <= 12; $i++){
 				</div>
 			</div>
 		</div>
-		</a> -->
+		</a>
 
-		<!-- <a href="index.php?pagina=pagar" class="<?php echo $esc_rh ?>">
+		<a href="index.php?pagina=pagar" class="<?php echo $esc_rh ?>">
 		<div class="col-md-3 widget widget1">
 			<div class="r3_counter_box">
 				<div class="row">
@@ -452,7 +452,7 @@ for($i=1; $i <= 12; $i++){
 				</div>
 			</div>
 		</div>
-		</a> -->
+		</a>
 
 
 		<a href="index.php?pagina=funcionarios" class="<?php echo $esc_tes ?>">
@@ -477,7 +477,7 @@ for($i=1; $i <= 12; $i++){
 		</a>
 
 
-		<!-- <a href="index.php?pagina=receber" class="<?php echo $esc_gerente ?> <?php echo $esc_admin ?> <?php echo $esc_rh ?> <?php echo $esc_sec ?> <?php echo $esc_recep ?>">
+		<a href="index.php?pagina=receber" class="<?php echo $esc_gerente ?> <?php echo $esc_admin ?> <?php echo $esc_rh ?> <?php echo $esc_sec ?> <?php echo $esc_recep ?>">
 		<div class="col-md-3 widget">
 			<div class="r3_counter_box">
 				<div class="row">
@@ -496,7 +496,7 @@ for($i=1; $i <= 12; $i++){
 				</div>
 			</div>			
 		</div>
-		</a> -->
+		</a>
 
 
 		<div class="clearfix"> </div>
@@ -504,7 +504,7 @@ for($i=1; $i <= 12; $i++){
 
 
 
-	<!-- <div class="row-one widgettable">
+	<div class="row-one widgettable">
 		<div class="col-md-8 content-top-2 card">
 			<div class="agileinfo-cdr">
 				<div class="card-header">
@@ -557,76 +557,18 @@ for($i=1; $i <= 12; $i++){
 				</div>
 			</a>
 		</div>
-		-->
+		
 		<div class="clearfix"> </div>
 	</div>
 
 	<div class="row-one widgettable">
-		<!-- <div class="col-md-8 content-top-2 card" style="padding:20px">
+		<div class="col-md-8 content-top-2 card" style="padding:20px">
 			<div class="card-header">
 				<h3>Entradas e Saídas</h3>
 			</div>			
 				<canvas id="canvas" style="width: 100%; height:450px;"></canvas>
 				
-		</div>	 --> 
-
-		<!-- CHAT -->
-
-		<div class="col-md-4 span_8">
-				<div class="activity_box activity_box1">
-					<h3>chat</h3>
-					<div class="scrollbar" id="style-3">
-						<div class="activity-row activity-row1">
-							<div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt=""/><span>06:01 AM</span></div>
-							<div class="col-xs-5 activity-img1">
-								<div class="activity-desc-sub">
-									<h5>Carlos </h5>
-									<p>Revise o documento</p>
-								</div>
-							</div>
-							<div class="col-xs-4 activity-desc1"></div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="activity-row activity-row1">
-							<div class="col-xs-2 activity-desc1"></div>
-							<div class="col-xs-7 activity-img2">
-								<div class="activity-desc-sub1">
-									<h5>Maria</h5>
-									<p>Vou Olhar</p>
-								</div>
-							</div>
-							<div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt=""/><span>06:02 AM</span></div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="activity-row activity-row1">
-							<div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt=""/><span>06:05 AM</span></div>
-							<div class="col-xs-5 activity-img1">
-								<div class="activity-desc-sub">
-									<h5>Carlos</h5>
-									<p>Me mande quando acabar</p>
-								</div>
-							</div>
-							<div class="col-xs-4 activity-desc1"></div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="activity-row activity-row1">
-							<div class="col-xs-2 activity-desc1"></div>
-							<div class="col-xs-7 activity-img2">
-								<div class="activity-desc-sub1">
-									<h5>Maria</h5>
-									<p>Ok</p>
-								</div>
-							</div>
-							<div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt=""/><span>06:20 PM</span></div>
-							<div class="clearfix"> </div>
-						</div>
-					</div>
-					<form action="#" method="post">
-						<input type="text" value="Digite..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
-						<input type="submit" value="Enviar"/>		
-					</form>
-				</div>
-			</div>
+		</div>	
 
 
 
@@ -731,7 +673,7 @@ for($i=1; $i <= 12; $i++){
 
 	<!-- GRAFICO DE LINHA -->
 	<script type="text/javascript">
-		/* $(document).ready(function() {
+		$(document).ready(function() {
 
 		var valor_col_graf_linha = $('#valor_coluna').val()
     	var colunas_graf_linha = valor_col_graf_linha.split("-");
@@ -811,14 +753,14 @@ for($i=1; $i <= 12; $i++){
     			responsive: true,
     		});
 
-	}) */
+	})
 	
 	</script>
 
 
 	<!-- GRAFICO DE BARRAS -->
 	<script type="text/javascript">
-		/* $(document).ready(function() {
+		$(document).ready(function() {
 
 			var valor_graf_barra_saidas = $('#total_saidas_grafico').val()
     		var total_saidas = valor_graf_barra_saidas.split("-");
@@ -891,5 +833,5 @@ for($i=1; $i <= 12; $i++){
 					});
 
 	})
-	 */
-	</script>*/
+	
+	</script>

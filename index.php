@@ -3,12 +3,12 @@ require_once("conexao.php");
 
 //APAGAR DEPOIS
  //Criar um Usuário ADMIN NOVO
-$query = $pdo->query("SELECT * FROM usuarios WHERE email = 'renato@consult.com' and senha = '123' and cpf = '000.000.000-00' ");
+$query = $pdo->query("SELECT * FROM usuarios WHERE email = 'ualbardeiro@gmail.com' and senha = '123' and cpf = '000.000.000-00' ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 $senha_cript = md5('123');
 if($total_reg == 0){
-	$pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', email = 'renato@consult.com', senha_crip = '$senha_cript', senha = '123', nivel = 'Administrador', foto = 'sem-perfil.jpg'");
+	$pdo->query("INSERT INTO usuarios SET nome = 'Administrador', cpf = '000.000.000-00', email = 'ualbardeiro@gmail.com', senha_crip = '$senha_cript', senha = '123', nivel = 'Administrador', foto = 'sem-perfil.jpg'");
 }
 
 
@@ -89,12 +89,12 @@ if($total_reg == 0){
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title> <?php echo $nome_sistema;?> </title>
+	<title><?php echo $nome_sistema; ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/login.css">
-	<link rel="icon" href="img/logo_svg.ico" type="image/x-icon">
+	<link rel="icon" href="img/<?php echo $favicon ?>" type="image/x-icon">
 </head>
 <body>
 	<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
@@ -102,22 +102,22 @@ if($total_reg == 0){
 			<div class="card login-card">
 				<div class="row no-gutters">
 					<div class="col-md-5">
-						<img src="img/logo_login.png" alt="" class="login-card-img">
+						<img src="img/login2.jpg" alt="" class="login-card-img">
 					</div>
 					<div class="col-md-7">
 						<div class="card-body">
-							<!-- <div class="brand-wrapper">
-								<img src="" alt="logo" class="logo">
-							</div> -->
+							<div class="brand-wrapper">
+								<img src="img/<?php echo $logo ?>" alt="logo" class="logo">
+							</div>
 
 							<form action="autenticar.php" method="post">
 								<div class="form-group">
 									<label for="email" class="sr-only">Usuário</label>
-									<input type="text" name="usuario" id="usuario" class="form-control" placeholder="Email ou CPF" required>
+									<input type="text" name="usuario" id="usuario" class="form-control" placeholder="Email ou CPF" value="ualbardeiro@gmail.com" required>
 								</div>
 								<div class="form-group mb-4">
 									<label for="password" class="sr-only">Senha</label>
-									<input type="password" name="senha" id="senha" class="form-control" placeholder="***********" required>
+									<input type="password" name="senha" id="senha" class="form-control" placeholder="***********" value="123" required>
 								</div>
 								<input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Login">
 							</form>
@@ -141,7 +141,7 @@ if($total_reg == 0){
 
 
 
-<!-- Modal recuperar senha -->
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

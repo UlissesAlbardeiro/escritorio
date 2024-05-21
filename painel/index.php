@@ -66,10 +66,10 @@ $data_ano = $ano_atual."-01-01";
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> <?php echo $nome_sistema; ?> </title>
+	<title><?php echo $nome_sistema; ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Sistema para Escritórios desenvolvido por AlbaWeb- Desenvilvimento Web" />
+	<meta name="keywords" content="Sistema para Escritórios desenvolvido no curso do Hugo Vasconcelos do Portal Hugo Cursos" />
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 	<!-- Bootstrap Core CSS -->
@@ -106,7 +106,7 @@ $data_ano = $ano_atual."-01-01";
 	<link href="css/custom.css" rel="stylesheet">
 	<!--//Metis Menu -->
 
-	<link rel="icon" href="../img/logo_svg.ico" type="image/x-icon">
+	<link rel="icon" href="../img/<?php echo $favicon ?>" type="image/x-icon">
 	<style>
 		#chartdiv {
 			width: 100%;
@@ -197,7 +197,7 @@ $data_ano = $ano_atual."-01-01";
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1><a class="navbar-brand" href="./"><span class="fa fa-area-chart"></span> Consult<span class="dashboard_text">Painel de Gestão</span></a></h1>
+						<h1><a class="navbar-brand" href="./"><span class="fa fa-area-chart"></span> Escritório<span class="dashboard_text">Sistema Gestão</span></a></h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
@@ -216,9 +216,9 @@ $data_ano = $ano_atual."-01-01";
 								<ul class="treeview-menu">
 									<li><a href="index.php?pagina=cargos"><i class="fa fa-angle-right"></i> Cargos</a></li>
 
-									<!-- <li><a href="index.php?pagina=frequencias"><i class="fa fa-angle-right"></i> Frequências</a></li>
+									<li><a href="index.php?pagina=frequencias"><i class="fa fa-angle-right"></i> Frequências</a></li>
 
-									<li><a href="index.php?pagina=contas_banco"><i class="fa fa-angle-right"></i> Contas Bancárias</a></li> -->
+									<li><a href="index.php?pagina=contas_banco"><i class="fa fa-angle-right"></i> Contas Bancárias</a></li>
 									
 								</ul>
 							</li>
@@ -227,7 +227,7 @@ $data_ano = $ano_atual."-01-01";
 							<li class="treeview">
 								<a href="#">
 									<i class="fa fa-user"></i>
-									<span>Pessoas e Clientes</span>
+									<span>Pessoas</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">								
@@ -235,7 +235,7 @@ $data_ano = $ano_atual."-01-01";
 
 									<li><a href="index.php?pagina=clientes"><i class="fa fa-angle-right"></i> Clientes</a></li>
 
-									<!-- <li class="<?php #echo $esc_todos ?>"><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
+									<li class="<?php echo $esc_todos ?>"><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li>
 
 									<li class="<?php echo $esc_todos ?>"><a href="index.php?pagina=usuarios"><i class="fa fa-angle-right"></i> Usuários</a></li>
 
@@ -250,13 +250,13 @@ $data_ano = $ano_atual."-01-01";
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">								
-									<!-- <li><a href="index.php?pagina=pagar"><i class="fa fa-angle-right"></i> Contas à Pagar</a></li>
+									<li><a href="index.php?pagina=pagar"><i class="fa fa-angle-right"></i> Contas à Pagar</a></li>
 
 									<li><a href="index.php?pagina=receber"><i class="fa fa-angle-right"></i> Contas à Receber</a></li>
 
 									<li><a href="index.php?pagina=movimentacoes"><i class="fa fa-angle-right"></i> Extrato Caixa</a></li>
 
-									<li><a href="#" data-toggle="modal" data-target="#RelFin"><i class="fa fa-angle-right"></i> Relatório Financeiro</a></li> -->
+									<li><a href="#" data-toggle="modal" data-target="#RelFin"><i class="fa fa-angle-right"></i> Relatório Financeiro</a></li>
 
 								</ul>
 							</li>
@@ -296,11 +296,11 @@ $data_ano = $ano_atual."-01-01";
 									<li><a href="index.php?pagina=arquivos"><i class="fa fa-angle-right"></i> Cadastro de Arquivos</a></li>									
 
 								</ul>
-							<!-- </li>
+							</li>
 
 
 
-									<li class="treeview <?php #echo $esc_tes ?> <?php #echo $esc_sec ?> <?php #echo $esc_recep ?> ">
+									<li class="treeview <?php echo $esc_tes ?> <?php echo $esc_sec ?> <?php echo $esc_recep ?> ">
 								<a href="#">
 									<i class="fa fa-wpforms"></i>
 									<span>Gestão RH</span>
@@ -312,7 +312,7 @@ $data_ano = $ano_atual."-01-01";
 																	
 
 								</ul>
-							</li> -->
+							</li>
 
 
 							<li class="treeview <?php echo $esc_todos ?>">
@@ -408,19 +408,6 @@ $data_ano = $ano_atual."-01-01";
 						<div class="clearfix"> </div>
 					</div>
 					<div class="header-right">
-
-
-					<!--search-box-->
-				<div class="search-box">
-					<form class="input">
-						<input class="sb-search-input input__field--madoka" placeholder="Buscar no Sistema..." type="search" id="input-31" />
-						<label class="input__label" for="input-31">
-							<svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-								<path/>
-							</svg>
-						</label>
-					</form>
-				</div><!--//end-search-box-->
 
 
 
@@ -689,7 +676,7 @@ $data_ano = $ano_atual."-01-01";
 				</div>	
 
 
-				<!-- <div class="row">
+				<div class="row">
 					<div class="col-md-2">						
 						<div class="form-group"> 
 							<label>Logo</label> 
@@ -698,7 +685,7 @@ $data_ano = $ano_atual."-01-01";
 					</div>
 					<div class="col-md-4">
 						<div id="divImgLogo">
-							<img src="../img/<?php #echo $logo ?>"  width="100px" id="target-logo">									
+							<img src="../img/<?php echo $logo ?>"  width="100px" id="target-logo">									
 						</div>
 					</div>
 
@@ -712,10 +699,10 @@ $data_ano = $ano_atual."-01-01";
 					</div>
 					<div class="col-md-2">
 						<div id="divImgFavicon">
-							<img src="../img/ <?php #echo $favicon ?>"  width="20px" id="target-favicon">									
+							<img src="../img/<?php echo $favicon ?>"  width="20px" id="target-favicon">									
 						</div>
 					</div>
- -->
+
 
 
 					
