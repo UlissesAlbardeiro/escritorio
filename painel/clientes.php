@@ -2,9 +2,9 @@
 require_once("verificar.php");
 require_once("../conexao.php");
 $pag = 'clientes';
-
-
 ?>
+
+<!-- BOTÃO PARA COLOCAR NOVO CLIENTE -->
 <button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Novo Cliente</button>
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
@@ -14,7 +14,7 @@ $pag = 'clientes';
 
 
 
-<!-- Modal -->
+<!-- MODAL PARA INSERIR NOVO CLIENTE -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">

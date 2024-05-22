@@ -5,6 +5,9 @@ $pag = 'tarefas';
 
 
 ?>
+
+<!-- BOTÃO "NOVA TAREFA" DA PÁGINA 'MINHAS TAREFAS' -->
+
 <button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Nova Tarefa</button>
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
@@ -14,7 +17,7 @@ $pag = 'tarefas';
 
 
 
-<!-- Modal -->
+<!-- Modal DE TAREFAS -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -38,21 +41,23 @@ $pag = 'tarefas';
 						<div class="col-md-4" id="nasc">						
 							<div class="form-group"> 
 								<label>Data </label> 
-								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('Y-m-d') ?>"> 
+								<input type="date" class="form-control" name="data" id="data" value="<?php echo $data = date('Y-m-d');?>"> 
 							</div>						
 						</div>
 
-						<div class="col-md-3" id="nasc">						
+						<!-- INUTILIZAÇÃO DE HORA DE -->
+
+						<!-- <div class="col-md-3" id="nasc">						
 							<div class="form-group"> 
-								<label>Hora?</label> 
-								<input type="time" class="form-control" name="hora" id="hora" value=""> 
+								<label>Hora (opcional)</label> 
+								<input type="time" class="form-control" name="hora" id="hora" value="<?php echo $hora = date('H:i');?>"> 
 							</div>						
-						</div>					
+						</div>	 -->				
 
 
 					</div>
 
-					<div class="col-md-12">						
+						<div class="col-md-12">						
 							<div class="form-group"> 
 								<label>Descrição <small>(Máx 100 Caracteres)</small></label> 
 								<input maxlength="100" type="text" class="form-control" name="descricao" id="descricao">
@@ -60,27 +65,28 @@ $pag = 'tarefas';
 						</div>
 
 
-					
-					<div class="col-md-12">
-						<div class="form-group"> 
-							<label>OBS <small>(Max 1000 Caracteres)</small></label> 
-							<textarea maxlength="1000" name="area" id="area" class="textarea"> </textarea>
-						</div>
-					</div>	
-					
+						
+						<div class="col-md-12">
+							<div class="form-group"> 
+								<label>OBS <small>(Max 1000 Caracteres)</small></label> 
+								<textarea maxlength="1000" name="area" id="area" class="textarea"> </textarea>
+							</div>
+						</div>	
 
-					<br>
-					<input type="hidden" name="id" id="id"> 
-					<small><div id="mensagem" align="center" class="mt-3"></div></small>					
+						<br>
+						<input type="hidden" name="id" id="id"> 
+						<small>
+							<div id="mensagem" style="align:center;" class="mt-3"></div>
+						</small>					
+
+					</div>
+
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
 
 				</div>
-
-
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-				</div>
-
-
 
 			</form>
 
@@ -90,7 +96,7 @@ $pag = 'tarefas';
 
 
 
-<!-- ModalExcluir -->
+<!-- MODAL EXCLUIR TAREFA -->
 <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width:400px; margin:0 auto;">
@@ -103,7 +109,7 @@ $pag = 'tarefas';
 			<form method="post" id="form-excluir">
 				<div class="modal-body">
 
-					<div class="row" align="center">
+					<div class="row" style="align:center;">
 						<div class="col-md-6">
 							<button type="submit" class="btn btn-danger" style="width:100px">Sim</button>
 						</div>
@@ -115,7 +121,7 @@ $pag = 'tarefas';
 					<br>
 					<input type="hidden" name="id" id="id-excluir"> 
 					<input type="hidden" name="nome" id="nome-excluir"> 
-					<small><div id="mensagem-excluir" align="center" class="mt-3"></div></small>					
+					<small><div id="mensagem-excluir" style="align: center;" class="mt-3"></div></small>					
 
 				</div>
 
@@ -132,7 +138,7 @@ $pag = 'tarefas';
 
 
 
-<!-- ModalMostrar -->
+<!-- MODAL MOSTRAR 'MINHAS TAREFAS' -->
 <div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -153,10 +159,10 @@ $pag = 'tarefas';
 						<span><b>Data: </b></span>
 						<span id="data_mostrar"></span>							
 					</div>
-					<div class="col-md-6">							
+					<!-- <div class="col-md-6">							
 						<span><b>Hora: </b></span>
 						<span id="hora_mostrar"></span>
-					</div>
+					</div> -->
 				</div>
 
 
@@ -200,11 +206,12 @@ $pag = 'tarefas';
 </div>
 
 
-<script type="text/javascript">var pag = "<?=$pag?>"</script>
+<script type="text/javascript">var pag = "tarefas"; </script>
 <script src="js/ajax.js"></script>
 
 <script>
 	
+//AJAX PARA SUBIR TAREFA PARA O BANCO DE DADOS
 
 $("#form-text").submit(function () {
 	event.preventDefault();

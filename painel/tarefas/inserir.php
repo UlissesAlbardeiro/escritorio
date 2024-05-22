@@ -1,35 +1,39 @@
 <?php 
-$tabela = 'tarefas';
 require_once("../../conexao.php");
+$tabela = 'tarefas';
 
 @session_start();
 $id_usuario = @$_SESSION['id_usuario'];
 
 $titulo = $_POST['titulo'];
 $data = $_POST['data'];
-$hora = $_POST['hora'];
+/* $hora = $_POST['hora']; */
 $descricao = $_POST['descricao'];
 $obs = $_POST['area'];
 $id = $_POST['id'];
 
+/* var_dump($hora);
+exit();
+ */
 
-//validar cpf
-$query = $pdo->query("SELECT * FROM $tabela where data = '$data' and hora = '$hora' and usuario = '$id_usuario'");
+
+//IMPEDIR QUE SE AGENDE DUAS TAREFAS NA MESMA DATA E HORA
+/* $query = $pdo->query("SELECT * FROM $tabela where data = '$data' and hora = '$hora' and usuario = '$id_usuario'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if($total_reg > 0 and $res[0]['id'] != $id){
 	echo 'Este horário não está disponível!';
 	exit();
-}
+} */
 
 
 if($id == ""){
-	$query = $pdo->prepare("INSERT INTO $tabela SET titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$id_usuario', status = 'Agendada', obs = :obs");
+	$query = $pdo->prepare("INSERT INTO $tabela SET titulo = :titulo, descricao = :descricao, /* hora = '$hora', */data = '$data', usuario = '$id_usuario', usuario_lanc = '$id_usuario', status = 'Agendada', obs = :obs");
 	$acao = 'inserção';
 	
 
 }else{
-	$query = $pdo->prepare("UPDATE $tabela SET titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', obs = :obs where id = '$id'");
+	$query = $pdo->prepare("UPDATE $tabela SET titulo = :titulo, descricao = :descricao,/*  hora = '$hora', */ data = '$data', usuario = '$id_usuario', obs = :obs where id = '$id'");
 	$acao = 'edição';
 
 	

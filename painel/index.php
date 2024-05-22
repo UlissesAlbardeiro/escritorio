@@ -187,7 +187,7 @@ $data_ano = $ano_atual."-01-01";
 
 	<div class="main-content">
 		<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-			<!--left-fixed -navigation-->
+			<!--MENU DE NAVEGAÇÃO FIXO A ESQUERDA-->
 			<aside class="sidebar-left" >
 				<nav class="navbar navbar-inverse" style="overflow: scroll; height:100%">
 					<div class="navbar-header">
@@ -261,7 +261,7 @@ $data_ano = $ano_atual."-01-01";
 								</ul>
 							</li>
 
-
+							<!-- MENU TAREFAS -->
 							<li class="treeview">
 								<a href="#">
 									<i class="fa fa-calendar-o"></i>
@@ -279,7 +279,7 @@ $data_ano = $ano_atual."-01-01";
 							</li>
 
 
-
+							<!-- MENU ARQUIVOS -->
 							<li class="treeview">
 								<a href="#">
 									<i class="fa fa-file-o"></i>
@@ -521,7 +521,7 @@ $data_ano = $ano_atual."-01-01";
 
 
 
-<!-- Modal -->
+<!-- MODAL PERFIL -->
 <div class="modal fade" id="modalPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -603,7 +603,7 @@ $data_ano = $ano_atual."-01-01";
 
 
 
-<!-- Modal -->
+<!-- MODAL CONFIGURAÇÕES-->
 <div class="modal fade" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -750,7 +750,7 @@ $data_ano = $ano_atual."-01-01";
 
 
 
-<!-- Modal Rel Logs -->
+<!-- MODAL RELATÓRIOS DE LOGS -->
 <div class="modal fade" id="RelLogs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -873,7 +873,7 @@ $data_ano = $ano_atual."-01-01";
 
 
 
-<!-- Modal Rel Fin -->
+<!-- MODAL RELATÓRIO FINANCEIRO -->
 <div class="modal fade" id="RelFin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

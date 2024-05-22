@@ -15,7 +15,7 @@ echo <<<HTML
 		<thead> 
 			<tr> 				
 				<th>Título</th>
-				<th>Hora</th> 
+				<!-- <th>Hora</th>  -->
 				<th class="esc">Data</th>
 				<th class="esc">Status</th>									
 				<th>Ações</th>
@@ -28,15 +28,15 @@ for($i=0; $i < $total_reg; $i++){
 $id = $res[$i]['id'];
 $titulo = $res[$i]['titulo'];
 $descricao = $res[$i]['descricao'];
-$hora = $res[$i]['hora'];
+/* $hora = $res[$i]['hora']; */
 $data = $res[$i]['data'];
 $usuario = $res[$i]['usuario'];
 $status = $res[$i]['status'];
 $obs = $res[$i]['obs'];
 
-
-$dataF = implode('/', array_reverse(explode('-', $data)));
-$horaF = date("H:i", strtotime($hora));
+/* FORMATAÇÃO DE DATA E HORA */
+$data_formatada = implode('/', array_reverse(explode('-', $data)));
+/* $hora_formatada = date("", strtotime($hora)); */
 
 
 if($status == 'Agendada'){
@@ -67,20 +67,20 @@ if($status == 'Concluída'){
 }
 
 
-//retirar aspas do texto do obs
+//RETIRAR ASPAS DO TExTO OBS (OBSERVAÇÃO)
 $obs = str_replace('"', "**", $obs);
 
 echo <<<HTML
 			<tr> 
 				<td><i class="fa fa-square {$icone_square} mr-1"></i> {$titulo}</td> 
-				<td >{$horaF}</td>
-				<td class="esc">{$dataF}</td>
+				<!-- <td >{$hora_formatada}</td> -->
+				<td class="esc">{$data_formatada}</td>
 				<td class="esc">{$status}</td>
 				
 				<td>
-					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}','{$hora}','{$data}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}',/* '{$hora}', */'{$data}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
-					<big><a href="#" onclick="mostrar('{$id}', '{$titulo}', '{$descricao}','{$horaF}','{$dataF}','{$nome_usu}','{$status}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+					<big><a href="#" onclick="mostrar('{$id}', '{$titulo}', '{$descricao}',/* '{$hora_formatada}', */'{$data_formatada}','{$nome_usu}','{$status}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
 					<big><a href="#" onclick="excluir('{$id}', '{$titulo}')" title="Excluir Item"><i class="fa fa-trash-o text-danger"></i></a></big>
 
@@ -116,7 +116,7 @@ HTML;
 
 
 
-	function editar(id, titulo, descricao, hora, data, obs){
+	function editar(id, titulo, descricao, /* hora,  */data, obs){
 
 		for (let letra of obs){  				
 			if (letra === '*'){
@@ -128,7 +128,7 @@ HTML;
 		$('#id').val(id);
 		$('#titulo').val(titulo);
 		$('#descricao').val(descricao);
-		$('#hora').val(hora);
+		/* $('#hora').val(hora); */
 		$('#data').val(data);
 		nicEditors.findEditor("area").setContent(obs);	
 				
@@ -140,7 +140,7 @@ HTML;
 
 
 
-	function mostrar(id, titulo, descricao, hora, data, usuario, status, obs){
+	function mostrar(id, titulo, descricao, /* hora,  */data, usuario, status, obs){
 
 		for (let letra of obs){  				
 			if (letra === '*'){
@@ -151,7 +151,7 @@ HTML;
 				
 		$('#nome_mostrar').text(titulo);
 		$('#descricao_mostrar').text(descricao);
-		$('#hora_mostrar').text(hora);
+		/* $('#hora_mostrar').text(hora); */
 		$('#data_mostrar').text(data);
 		$('#usuario_mostrar').text(usuario);
 		$('#status_mostrar').text(status);		
@@ -166,7 +166,7 @@ HTML;
 		$('#id').val('');
 		$('#titulo').val('');		
 		$('#descricao').val('');
-		$('#hora').val('');				
+		/* $('#hora').val('');	 */			
 		$('#data').val('<?=$data_atual?>');	
 		nicEditors.findEditor("area").setContent('');	
 		

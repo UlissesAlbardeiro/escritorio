@@ -9,6 +9,9 @@ exit();
 }
 
 ?>
+
+<!-- BOTÃO "DELEGAR TAREFAS" DA PÁGINA "TAREFAS DO ESCRITÓRIO" -->
+
 <button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Delegar Tarefa</button>
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
@@ -18,7 +21,7 @@ exit();
 
 
 
-<!-- Modal -->
+<!-- MODAL "DELEGAR TAREFAS" -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -45,20 +48,13 @@ exit();
 								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('Y-m-d') ?>"> 
 							</div>						
 						</div>
-
-										
-
-
 					</div>
 
 
 					<div class="row">
-
-					<!-- CAMPO DE HORA DA TAREFA INUTILIZADO -->
-
 						<div class="col-md-3" id="nasc">						
 							<div class="form-group"> 
-								<label>Hora</label> 
+								<label>Hora (opcional)</label> 
 								<input type="time" class="form-control" name="hora" id="hora" value=""> 
 							</div>						
 						</div>	
@@ -71,9 +67,8 @@ exit();
 									$query = $pdo->query("SELECT * FROM usuarios order by nome asc");
 									$res = $query->fetchAll(PDO::FETCH_ASSOC);
 									for($i=0; $i < @count($res); $i++){
-										foreach ($res[$i] as $key => $value){}
+										foreach ($res[$i] as $key => $value){}?>	
 
-											?>	
 										<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome']  ?> - <?php echo $res[$i]['nivel']  ?></option>
 
 									<?php } ?>
@@ -81,20 +76,16 @@ exit();
 								</select>
 							</div>						
 						</div>
-
-										
-
-
 					</div>
 
 					
 
 					<div class="col-md-12">						
-							<div class="form-group"> 
-								<label>Descrição <small>(Máx 100 Caracteres)</small></label> 
-								<input maxlength="100" type="text" class="form-control" name="descricao" id="descricao">
-							</div>						
-						</div>
+						<div class="form-group"> 
+							<label>Descrição <small>(Máx 100 Caracteres)</small></label> 
+							<input maxlength="100" type="text" class="form-control" name="descricao" id="descricao">
+						</div>						
+					</div>
 
 
 					
@@ -108,7 +99,7 @@ exit();
 
 					<br>
 					<input type="hidden" name="id" id="id"> 
-					<small><div id="mensagem" align="center" class="mt-3"></div></small>					
+					<small><div id="mensagem" style="align:center;" class="mt-3"></div></small>					
 
 				</div>
 
@@ -116,8 +107,6 @@ exit();
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary">Salvar</button>
 				</div>
-
-
 
 			</form>
 
@@ -127,7 +116,7 @@ exit();
 
 
 
-<!-- ModalExcluir -->
+<!-- MODAL EXCLUIR TAREFAS ESCRITÓRIO -->
 <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width:400px; margin:0 auto;">
@@ -140,7 +129,7 @@ exit();
 			<form method="post" id="form-excluir">
 				<div class="modal-body">
 
-					<div class="row" align="center">
+					<div class="row" style="align:center;">
 						<div class="col-md-6">
 							<button type="submit" class="btn btn-danger" style="width:100px">Sim</button>
 						</div>
@@ -152,7 +141,7 @@ exit();
 					<br>
 					<input type="hidden" name="id" id="id-excluir"> 
 					<input type="hidden" name="nome" id="nome-excluir"> 
-					<small><div id="mensagem-excluir" align="center" class="mt-3"></div></small>					
+					<small><div id="mensagem-excluir" style="align:center;" class="mt-3"></div></small>					
 
 				</div>
 
@@ -169,7 +158,7 @@ exit();
 
 
 
-<!-- ModalMostrar -->
+<!-- MODAL MOSTRAR TAREFAS ESCRITÓRIO -->
 <div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -237,7 +226,7 @@ exit();
 </div>
 
 
-<script type="text/javascript">var pag = "<?=$pag?>"</script>
+<script type="text/javascript">var pag = "tarefas-escritorio"; </script>
 <script src="js/ajax.js"></script>
 
 <script type="text/javascript">
@@ -249,7 +238,10 @@ exit();
 </script>
 
 
+
 <script>
+
+	//AJAX PARA SUBIR TAREFA PARA O BANCO DE DADOS
 
 $("#form-text").submit(function () {
 	event.preventDefault();
