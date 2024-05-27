@@ -216,6 +216,8 @@ $data_ano = $ano_atual."-01-01";
 								<ul class="treeview-menu">
 									<li><a href="index.php?pagina=cargos"><i class="fa fa-angle-right"></i> Cargos</a></li>
 
+									<li><a href="index.php?pagina=tipos_empresas"><i class="fa fa-angle-right"></i> Tipos de Empresas</a></li>
+
 									<li><a href="index.php?pagina=frequencias"><i class="fa fa-angle-right"></i> Frequências</a></li>
 
 									<li><a href="index.php?pagina=contas_banco"><i class="fa fa-angle-right"></i> Contas Bancárias</a></li>
