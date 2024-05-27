@@ -14,7 +14,7 @@ echo <<<HTML
 			<tr> 				
 				<th>Código</th>
 				<th>Nome</th>
-				<th class="esc">Pessoa</th> 
+				<th class="esc">tipo da empresa</th> 
 				<th class="esc">Documento</th>
 				<th class="esc">Telefone</th> 
 				<th class="esc">Email</th>						
@@ -28,17 +28,18 @@ for($i=0; $i < $total_reg; $i++){
 $id = $res[$i]['id'];
 $codigo = $res[$i]['codigo'];
 $nome = $res[$i]['nome'];
+$tipo_empresa = $res[$i]['tipo_empresa'];
+$pessoa = $res[$i]['pessoa'];
 $telefone = $res[$i]['telefone'];
 $doc = $res[$i]['doc'];
 $email = $res[$i]['email'];
 $endereco = $res[$i]['endereco'];
-$pessoa = $res[$i]['pessoa'];
 $data_cad = $res[$i]['data_cad'];
 $data_nasc = $res[$i]['data_nasc'];
 $obs = $res[$i]['obs'];
 $ativo = $res[$i]['ativo'];
 
-//retirar quebra de texto do obs
+//RETIRAR QUEBRA DE TEXTO DAS OBSERVAÇÕES
 $obs = str_replace(array("\n", "\r"), ' + ', $obs);
 
 $data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
@@ -61,16 +62,17 @@ echo <<<HTML
 			<tr class="{$classe_linha}"> 
 				<td>{$codigo}</td>
 				<td>{$nome}</td> 
-				<td class="esc">{$pessoa}</td>
+				<td class="esc">{$tipo_empresa}</td>
 				<td class="esc">{$doc}</td>
 				<td class="esc">{$telefone}</td>
 				<td class="esc">{$email}</td>
 				<td>
-					<big><a href="#" onclick="editar('{$id}','{$codigo}','{$nome}', '{$pessoa}','{$doc}','{$telefone}','{$email}','{$data_nasc}','{$endereco}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					
+					<big><a href="#" onclick="editar('{$id}','{$codigo}','{$nome}','{$tipo_empresa}','{pessoa}','{$doc}','{$telefone}','{$email}','{$data_nasc}','{$endereco}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
-					<big><a href="#" onclick="mostrar('{$id}','{$codigo}','{$nome}', '{$pessoa}','{$doc}','{$telefone}','{$email}','{$endereco}','{$data_cadF}','{$data_nascF}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+					<big><a href="#" onclick="mostrar('{$codigo}','{$nome}','{$tipo_empresa}','{$doc}','{$telefone}','{$email}','{$endereco}','{$data_cadF}','{$data_nascF}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
-					<big><a href="#" onclick="excluir('{$id}', '{$nome}')" title="Excluir Item"><i class="fa fa-trash-o text-danger"></i></a></big>
+					<big><a href="#" onclick="excluir('{$id}','{$nome}')" title="Excluir Item"><i class="fa fa-trash-o text-danger"></i></a></big>
 
 					<big><a href="#" onclick="ativar('{$id}', '{$nome}', '{$acao}')" title="{$titulo_link}"><i class="fa {$icone} text-success"></i></a></big>
 
@@ -104,19 +106,18 @@ HTML;
 
 
 
-	function editar(id, codigo, nome, pessoa, doc, telefone, email, data_nasc, endereco, obs){
+	function editar(id, codigo, nome, tipo_empresa, pessoa, doc, telefone, email, data_nasc, endereco, obs){
 
 		for (let letra of obs){  				
 					if (letra === '+'){
 						obs = obs.replace(' +  + ', '\n')
 					}			
 				}
-
-
 		$('#id').val(id);
 		$('#codigo').val(codigo);
 		$('#nome').val(nome);
-		$('#pessoa').val(pessoa).change();
+		$('#tipo_empresa').val(tipo_empresa).change();
+		$('#pessoa').text(pessoa).change();
 		$('#doc').val(doc);
 		$('#telefone').val(telefone);
 		$('#email').val(email);
@@ -133,7 +134,7 @@ HTML;
 
 
 
-	function mostrar(id, codigo, nome, pessoa, doc, telefone, email, endereco, data_cad, data_nasc, obs){
+	function mostrar(codigo, nome, tipo_empresa, doc, telefone, email, endereco, data_cad, data_nasc, obs){
 
 		for (let letra of obs){  				
 					if (letra === '+'){
@@ -149,13 +150,14 @@ HTML;
 		
 		$('#codigo_mostrar').text(codigo);
 		$('#nome_mostrar').text(nome);
-		$('#pessoa_mostrar').text(pessoa);
+		$('#tipo_mostrar').text(tipo_empresa);
 		$('#doc_mostrar').text(doc);
 		$('#telefone_mostrar').text(telefone);
 		$('#email_mostrar').text(email);
 		$('#endereco_mostrar').text(endereco);
+			
+		$('#data_cad_mostrar').text(data_cad);
 		$('#data_nasc_mostrar').text(data_nasc);	
-		$('#data_cad_mostrar').text(data_cad);	
 		$('#obs_mostrar').text(obs);
 		
 		
@@ -165,7 +167,8 @@ HTML;
 	function limparCampos(){
 		$('#id').val('');
 		$('#codigo').val('');
-		$('#nome').val('');		
+		$('#nome').val('');	
+		$('#tipo_empresa').val('');	
 		$('#doc').val('');
 		$('#telefone').val('');
 		$('#email').val('');

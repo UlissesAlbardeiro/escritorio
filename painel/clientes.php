@@ -35,14 +35,7 @@ $pag = 'clientes';
 							</div>						
 						</div>
 
-						<div class="col-md-4">						
-							<div class="form-group"> 
-								<label>Razão Social</label> 
-								<input type="text" class="form-control" name="nome" id="nome" required> 
-							</div>						
-						</div>
-
-						<div class="col-md-3">						
+						<div class="col-md-2">						
 							<div class="form-group"> 
 								<label>Física / Jurídica</label> 
 								<select class="form-control" name="pessoa" id="pessoa"> 
@@ -58,13 +51,37 @@ $pag = 'clientes';
 								<label>CPF / CNPJ</label> 
 								<input type="text" class="form-control" name="doc" id="doc" required> 
 							</div>						
-						</div>						
-
+						</div>
+						
+						<div class="col-md-5">						
+							<div class="form-group"> 
+								<label>Razão Social/Nome</label> 
+								<input type="text" class="form-control" name="nome" id="nome" required> 
+							</div>						
+						</div>
 
 					</div>
 
 
 					<div class="row">
+
+					<div class="col-md-4" id="tipo_empresa">						
+							<div class="form-group"> 
+								<label>Tipo da Empresa </label> 
+								<select class="form-control sel2" name="tipo_empresa" required style="width:100%;"> 
+									<?php 
+									$query = $pdo->query("SELECT * FROM tipos_empresas order by tipo asc");
+									$res = $query->fetchAll(PDO::FETCH_ASSOC);
+									for($i=0; $i < @count($res); $i++){
+										foreach ($res[$i] as $key => $value){}?>	
+
+										<option><?php echo $res[$i]['tipo']?></option>
+
+									<?php } ?>
+
+								</select>
+							</div>						
+						</div>
 
 						<div class="col-md-4">						
 							<div class="form-group"> 
@@ -129,7 +146,7 @@ $pag = 'clientes';
 
 
 
-<!-- ModalExcluir -->
+<!-- MODAL PARA EXCLUIR CLIENTE -->
 <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width:400px; margin:0 auto;">
@@ -171,7 +188,7 @@ $pag = 'clientes';
 
 
 
-<!-- ModalMostrar -->
+<!-- MODAL MOSTRAR CLIENTE -->
 <div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -196,8 +213,8 @@ $pag = 'clientes';
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
 					<div class="col-md-6">							
-						<span><b>Pessoa: </b></span>
-						<span id="pessoa_mostrar"></span>							
+						<span><b>Tipo: </b></span>
+						<span id="tipo_mostrar"></span>							
 					</div>
 				
 					<div class="col-md-6">							
@@ -319,23 +336,29 @@ $pag = 'clientes';
 
 
 
-<script type="text/javascript">var pag = "<?=$pag?>"</script>
+<script type="text/javascript">var pag = "clientes";</script>
 <script src="js/ajax.js"></script>
 
 <script>
+
+	//AJAX PARA SELECIONAR CAMPO DE FÍSICA E JURÍDICA
 	$(document).ready(function() {
-		$('#doc').mask('000.000.000-00');
-		$('#doc').attr('placeholder','CPF');
+		$('#doc').mask('00.000.000/0000-00');
+		$('#doc').attr('placeholder','CNPJ');
 
 		$('#pessoa').change(function(){
 			if($(this).val() == 'Física'){
 				$('#doc').mask('000.000.000-00');
 				$('#doc').attr('placeholder','CPF');
+				$('#nome').attr('placeholder','Nome do Cliente');
 				document.getElementById('nasc').style.display = 'block';
+				document.getElementById('tipo_empresa').style.display = 'none';
 			}else{
 				$('#doc').mask('00.000.000/0000-00');
 				$('#doc').attr('placeholder','CNPJ');
+				$('#nome').attr('placeholder','Razão Social');
 				document.getElementById('nasc').style.display = 'none';
+				document.getElementById('tipo_empresa').style.display = 'block';
 				
 			}
 		});

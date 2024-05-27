@@ -8,7 +8,7 @@ $nome = $_POST['tipo_empresa'];
 $query = $pdo->query("SELECT * FROM clientes where tipo_empresa = '$id'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if(@count($res) > 0){
-	echo 'Este tipo não pode ser excluído, primeiro exclua/mude as empresas e clientes relacionados com esse tipo!';
+	echo 'Este tipo não pode ser excluído, primeiro exclua ou mude as empresas e clientes relacionados com esse tipo de empresa!';
 	exit();
 }
 

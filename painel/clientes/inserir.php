@@ -4,8 +4,9 @@ require_once("../../conexao.php");
 
 $codigo = $_POST['codigo'];
 $nome = $_POST['nome'];
-$telefone = $_POST['telefone'];
 $doc = $_POST['doc'];
+$tipo_empresa = $_POST['tipo_empresa'];
+$telefone = $_POST['telefone'];
 $pessoa = $_POST['pessoa'];
 $email = $_POST['email'];
 $data_nasc = $_POST['data_nasc'];
@@ -17,7 +18,11 @@ if($pessoa == 'Jurídica'){
 	$data_nasc = '0000-00-00';
 }
 
-//validar cpf
+if($pessoa == 'Física'){
+	$tipo_empresa = 'Física';
+}
+
+//IMPEDIR UPDATE DUPLICADO DE DOCUMENTOS
 $query = $pdo->query("SELECT * FROM $tabela where doc = '$doc'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
@@ -26,7 +31,7 @@ if($total_reg > 0 and $res[0]['id'] != $id){
 	exit();
 }
 
-
+//IMPEDIR UPDATE DUPLICADO DE EMAIL
 $query = $pdo->query("SELECT * FROM $tabela where email = '$email'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
@@ -37,12 +42,12 @@ if($total_reg > 0 and $res[0]['id'] != $id){
 
 
 if($id == ""){
-	$query = $pdo->prepare("INSERT INTO $tabela SET codigo = '$codigo', nome = :nome, pessoa = '$pessoa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_cad = curDate(), data_nasc = '$data_nasc', obs = :obs, ativo = 'Sim'");
+	$query = $pdo->prepare("INSERT INTO $tabela SET codigo = '$codigo', nome = :nome, pessoa = '$pessoa', tipo_empresa = '$tipo_empresa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_cad = curDate(), data_nasc = '$data_nasc', obs = :obs, ativo = 'Sim'");
 	$acao = 'inserção';
 	
 
 }else{
-	$query = $pdo->prepare("UPDATE $tabela SET codigo = '$codigo', nome = :nome, pessoa = '$pessoa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_nasc = '$data_nasc', obs = :obs where id = '$id'");
+	$query = $pdo->prepare("UPDATE $tabela SET codigo = '$codigo', nome = :nome, pessoa = '$pessoa', tipo_empresa = '$tipo_empresa', doc = :doc, telefone = :telefone, email = :email, endereco = :endereco, data_nasc = '$data_nasc', obs = :obs where id = '$id'");
 	$acao = 'edição';
 
 	

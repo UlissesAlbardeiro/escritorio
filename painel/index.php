@@ -229,7 +229,7 @@ $data_ano = $ano_atual."-01-01";
 							<li class="treeview">
 								<a href="#">
 									<i class="fa fa-user"></i>
-									<span>Pessoas</span>
+									<span>Pessoas e Empresas</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">								
