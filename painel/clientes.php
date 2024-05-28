@@ -65,10 +65,10 @@ $pag = 'clientes';
 
 					<div class="row">
 
-					<div class="col-md-4" id="tipo_empresa">						
+					<div class="col-md-4" id="tipo_empresa_select">						
 							<div class="form-group"> 
 								<label>Tipo da Empresa </label> 
-								<select class="form-control sel2" name="tipo_empresa" required style="width:100%;"> 
+								<select class="form-control sel2" id="tipo_empresa name="tipo_empresa" required style="width:100%;"> 
 									<?php 
 									$query = $pdo->query("SELECT * FROM tipos_empresas order by tipo asc");
 									$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -352,13 +352,13 @@ $pag = 'clientes';
 				$('#doc').attr('placeholder','CPF');
 				$('#nome').attr('placeholder','Nome do Cliente');
 				document.getElementById('nasc').style.display = 'block';
-				document.getElementById('tipo_empresa').style.display = 'none';
+				document.getElementById('tipo_empresa_select').style.display = 'none';
 			}else{
 				$('#doc').mask('00.000.000/0000-00');
 				$('#doc').attr('placeholder','CNPJ');
 				$('#nome').attr('placeholder','Razão Social');
 				document.getElementById('nasc').style.display = 'none';
-				document.getElementById('tipo_empresa').style.display = 'block';
+				document.getElementById('tipo_empresa_select').style.display = 'block';
 				
 			}
 		});

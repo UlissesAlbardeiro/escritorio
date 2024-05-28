@@ -68,7 +68,7 @@ echo <<<HTML
 				<td class="esc">{$email}</td>
 				<td>
 					
-					<big><a href="#" onclick="editar('{$id}','{$codigo}','{$nome}','{$tipo_empresa}','{pessoa}','{$doc}','{$telefone}','{$email}','{$data_nasc}','{$endereco}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					<big><a href="#" onclick="editar('{$id}','{$codigo}','{$nome}','{$tipo_empresa}','{$pessoa}','{$doc}','{$telefone}','{$email}','{$data_nasc}','{$endereco}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 					<big><a href="#" onclick="mostrar('{$codigo}','{$nome}','{$tipo_empresa}','{$doc}','{$telefone}','{$email}','{$endereco}','{$data_cadF}','{$data_nascF}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
@@ -117,7 +117,7 @@ HTML;
 		$('#codigo').val(codigo);
 		$('#nome').val(nome);
 		$('#tipo_empresa').val(tipo_empresa).change();
-		$('#pessoa').text(pessoa).change();
+		$('#pessoa').val(pessoa).change();
 		$('#doc').val(doc);
 		$('#telefone').val(telefone);
 		$('#email').val(email);
