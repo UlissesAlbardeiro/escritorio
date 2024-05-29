@@ -30,7 +30,7 @@ for($i=0; $i < $total_reg; $i++){
 $id = $res[$i]['id'];
 $titulo = $res[$i]['titulo'];
 $descricao = $res[$i]['descricao'];
-$hora = $res[$i]['hora'];
+$horaF = $res[$i]['hora'];
 $data = $res[$i]['data'];
 $usuario = $res[$i]['usuario'];
 $usuario_lanc = $res[$i]['usuario_lanc'];
@@ -39,7 +39,7 @@ $obs = $res[$i]['obs'];
 
 
 $dataF = implode('/', array_reverse(explode('-', $data)));
-$horaF = date("H:i", strtotime($hora));
+
 
 
 if($status == 'Concluída'){
@@ -80,7 +80,7 @@ if(@count($res2) > 0){
 }
 
 
-//retirar aspas do texto do obs
+//RETIRAR ASPAS DO TEXTO OBS
 $obs = str_replace('"', "**", $obs);
 
 echo <<<HTML
@@ -93,7 +93,7 @@ echo <<<HTML
 				<td class="esc">{$status}</td>
 				
 				<td>
-					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}','{$hora}','{$data}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}','{$horaf}','{$data}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 					<big><a href="#" onclick="mostrar('{$id}', '{$titulo}', '{$descricao}','{$horaF}','{$dataF}','{$nome_usu}', '{$nome_usu_lanc}', '{$status}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
@@ -143,7 +143,7 @@ HTML;
 		$('#id').val(id);
 		$('#titulo').val(titulo);
 		$('#descricao').val(descricao);
-		$('#hora').val(hora);
+		$('#hora').val(hora).change();
 		$('#data').val(data);
 		nicEditors.findEditor("area").setContent(obs);	
 				

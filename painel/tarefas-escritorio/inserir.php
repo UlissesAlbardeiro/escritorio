@@ -1,6 +1,7 @@
 <?php 
-$tabela = 'tarefas';
 require_once("../../conexao.php");
+$tabela = 'tarefas';
+
 
 @session_start();
 $usuario_logado = @$_SESSION['id_usuario'];
@@ -13,17 +14,23 @@ $obs = $_POST['area'];
 $id_usuario = $_POST['usuario'];
 $id = $_POST['id'];
 
-$dataF = implode('/', array_reverse(explode('-', $data)));
- $horaF = date("H:i", strtotime($hora));
-
-//validar cpf
-$query = $pdo->query("SELECT * FROM $tabela where data = '$data' and hora = '$hora' and usuario = '$id_usuario'");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$total_reg = @count($res);
-if($total_reg > 0 and $res[0]['id'] != $id){
-	echo 'Este horário não está disponível!';
-	exit();
+if($hora == null){
+	$hora = '----';
+}else{
+	$horaF = date("H:i", strtotime($hora));
 }
+
+$dataF = implode('/', array_reverse(explode('-', $data)));
+
+
+	//IMPEDIR TAREFA DUPLICADA NO MESMO HORÁRIO 
+	/* $query = $pdo->query("SELECT * FROM $tabela where data = '$data' and hora = '$hora' and usuario = '$id_usuario'");
+	$res = $query->fetchAll(PDO::FETCH_ASSOC);
+	$total_reg = @count($res);
+	if($total_reg > 0 and $res[0]['id'] != $id){
+		echo 'Este horário não está disponível!';
+		exit();
+	} */
 
 
 if($id == ""){
@@ -49,8 +56,7 @@ if(@$ult_id == "" || @$ult_id == 0){
 	$ult_id = $id;
 }
 
-
-//NOTIFICAR NO APP
+ //NOTIFICAR NO APP
 $query_not = $pdo->query("SELECT * FROM token where usuario = '$id_usuario'");	
 $res_not = $query_not->fetchAll(PDO::FETCH_ASSOC);
 for ($i_not=  0; $i_not < count($res_not); $i_not++) { 
@@ -69,6 +75,6 @@ $descricao = $titulo;
 $id_reg = $ult_id;
 require_once("../inserir-logs.php");
 
-echo 'Salvo com Sucesso'; 
+echo "Salvo com Sucesso"; 
 
 ?>

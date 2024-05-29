@@ -88,17 +88,15 @@ $data_ano = $ano_atual."-01-01";
 
 	<link rel="stylesheet" href="css/monthly.css">
 
-	<!-- js-->
+	<!-- JS-->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/modernizr.custom.js"></script>
 
-	<!--webfonts-->
-	<link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
-	<!--//webfonts--> 
+	<!--GOOGLE FONTES-->
+	<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
 
-	<!-- chart -->
+	<!-- CHART -->
 	<script src="js/Chart.js"></script>
-	<!-- //chart -->
 
 	<!-- Metis Menu -->
 	<script src="js/metisMenu.min.js"></script>
@@ -183,13 +181,13 @@ $data_ano = $ano_atual."-01-01";
 
 
 </head> 
-<body class="cbp-spmenu-push">
+<body class="cbp-spmenu-push ">
 
-	<div class="main-content">
+	<div class="main-content ">
 		<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 			<!--MENU DE NAVEGAÇÃO FIXO A ESQUERDA-->
-			<aside class="sidebar-left" >
-				<nav class="navbar navbar-inverse" style="overflow: scroll; height:100%">
+			<aside class="sidebar-left .bg-secondary" >
+				<nav class="navbar navbar-inverse" style="overflow: hidden; height:100%">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapse" aria-expanded="false">
 							<span class="sr-only">Toggle navigation</span>
@@ -197,14 +195,14 @@ $data_ano = $ano_atual."-01-01";
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1><a class="navbar-brand" href="./"><span class="fa fa-area-chart"></span> Escritório<span class="dashboard_text">Sistema Gestão</span></a></h1>
+						<!-- <h1><a class="navbar-brand" href="./"><span class="fa fa-area-chart"></span> Escritório<span class="dashboard_text">Sistema Gestão</span></a></h1> -->
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
 							<li class="header">MENU DE NAVEGAÇÃO</li>
 							<li class="treeview">
 								<a href="./">
-									<i class="fa fa-dashboard"></i> <span>Home</span>
+									<i class="fa fa-dashboard font-italic "></i> <span>Home</span>
 								</a>
 							</li>
 							<li class="treeview <?php echo $esc_todos ?>">
@@ -345,7 +343,7 @@ $data_ano = $ano_atual."-01-01";
 				<!-- header-starts -->
 				<div class="sticky-header header-section ">
 					<div class="header-left">
-						<!--toggle button start-->
+						<!--BOTÃO MENU LATERAL-->
 						<button id="showLeftPush"><i class="fa fa-bars"></i></button>
 						<!--toggle button end-->
 						<div class="profile_details_left"><!--notifications of menu start -->
@@ -458,7 +456,7 @@ $data_ano = $ano_atual."-01-01";
 
 
 
-			</div>
+	</div>
 
 			<!-- new added graphs chart js-->
 

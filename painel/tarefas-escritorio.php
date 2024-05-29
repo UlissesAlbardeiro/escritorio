@@ -1,11 +1,11 @@
-<?php 
+<?php
 require_once("verificar.php");
 require_once("../conexao.php");
 $pag = 'tarefas-escritorio';
 
-if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente"){
-echo "<script>window.location='../index.php'</script>";
-exit();
+if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente") {
+	echo "<script>window.location='../index.php'</script>";
+	exit();
 }
 
 ?>
@@ -15,7 +15,7 @@ exit();
 <button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Delegar Tarefa</button>
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
-	
+
 </div>
 
 
@@ -35,79 +35,82 @@ exit();
 				<div class="modal-body">
 
 					<div class="row">
-						<div class="col-md-8">						
-							<div class="form-group"> 
-								<label>Título <small>(Máx 40 Caracteres)</small></label> 
-								<input maxlength="40" type="text" class="form-control" name="titulo" id="titulo" required> 
-							</div>						
+						<div class="col-md-8">
+							<div class="form-group">
+								<label>Título <small>(Máx 40 Caracteres)</small></label>
+								<input maxlength="40" type="text" class="form-control" name="titulo" id="titulo" required>
+							</div>
 						</div>
 
-						<div class="col-md-4" id="nasc">						
-							<div class="form-group"> 
-								<label>Data </label> 
-								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('Y-m-d') ?>"> 
-							</div>						
+						<div class="col-md-4" id="nasc">
+							<div class="form-group">
+								<label>Data </label>
+								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('Y-m-d') ?>">
+							</div>
 						</div>
 					</div>
 
 
 					<div class="row">
-						<div class="col-md-3" id="nasc">						
-							<div class="form-group"> 
-								<label>Hora (opcional)</label> 
-								<input type="time" class="form-control" name="hora" id="hora" value=""> 
-							</div>						
-						</div>	
+						<div class="col-md-3" id="nasc">
+							<div class="form-group">
+								<label>Hora (opcional)</label>
+								<input type="time" class="form-control" name="hora" id="hora" value="<?php echo $hora = date('H:i'); ?>">
+							</div>
+						</div>
 
-						<div class="col-md-9" id="nasc">						
-							<div class="form-group"> 
-								<label>Funcionário / Usuário </label> 
-								<select class="form-control sel2" name="usuario" id="usuario" required style="width:100%;"> 
-									<?php 
+						<div class="col-md-9" id="nasc">
+							<div class="form-group">
+								<label>Funcionário / Usuário </label>
+								<select class="form-control sel2" name="usuario" id="usuario" required style="width:100%;">
+									<?php
 									$query = $pdo->query("SELECT * FROM usuarios order by nome asc");
 									$res = $query->fetchAll(PDO::FETCH_ASSOC);
-									for($i=0; $i < @count($res); $i++){
-										foreach ($res[$i] as $key => $value){}?>	
+									for ($i = 0; $i < @count($res); $i++) {
+										foreach ($res[$i] as $key => $value) {
+										} ?>
 
-										<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome']  ?> - <?php echo $res[$i]['nivel']  ?></option>
+										<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome']?> - <?php echo $res[$i]['nivel']  ?></option>
 
 									<?php } ?>
 
 								</select>
-							</div>						
+							</div>
 						</div>
 					</div>
 
-					
 
-					<div class="col-md-12">						
-						<div class="form-group"> 
-							<label>Descrição <small>(Máx 100 Caracteres)</small></label> 
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Descrição <small>(Máx 100 Caracteres)</small></label>
 							<input maxlength="100" type="text" class="form-control" name="descricao" id="descricao">
-						</div>						
+						</div>
 					</div>
 
 
-					
+
 					<div class="col-md-12">
-						<div class="form-group"> 
-							<label>OBS <small>(Max 1000 Caracteres)</small></label> 
+						<div class="form-group">
+							<label>OBS <small>(Max 1000 Caracteres)</small></label>
 							<textarea maxlength="1000" name="area" id="area" class="textarea"> </textarea>
 						</div>
-					</div>	
-					
+					</div>
+
 
 					<br>
-					<input type="hidden" name="id" id="id"> 
-					<small><div id="mensagem" style="align:center;" class="mt-3"></div></small>					
+					<input type="hidden" name="id" id="id">
+					<small>
+						<div id="mensagem" style="align:center;" class="mt-3"></div>
+					</small>
 
+
+
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
 				</div>
-
-
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-				</div>
-
 			</form>
 
 		</div>
@@ -117,7 +120,7 @@ exit();
 
 
 <!-- MODAL EXCLUIR TAREFAS ESCRITÓRIO -->
-<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width:400px; margin:0 auto;">
 			<div class="modal-header">
@@ -134,14 +137,16 @@ exit();
 							<button type="submit" class="btn btn-danger" style="width:100px">Sim</button>
 						</div>
 						<div class="col-md-6">
-							<button type="button" data-dismiss="modal" class="btn btn-success" style="width:100px">Não</button>	
+							<button type="button" data-dismiss="modal" class="btn btn-success" style="width:100px">Não</button>
 						</div>
 					</div>
 
 					<br>
-					<input type="hidden" name="id" id="id-excluir"> 
-					<input type="hidden" name="nome" id="nome-excluir"> 
-					<small><div id="mensagem-excluir" style="align:center;" class="mt-3"></div></small>					
+					<input type="hidden" name="id" id="id-excluir">
+					<input type="hidden" name="nome" id="nome-excluir">
+					<small>
+						<div id="mensagem-excluir" style="align:center;" class="mt-3"></div>
+					</small>
 
 				</div>
 
@@ -159,7 +164,7 @@ exit();
 
 
 <!-- MODAL MOSTRAR TAREFAS ESCRITÓRIO -->
-<div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -168,18 +173,18 @@ exit();
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			
-			<div class="modal-body">			
+
+			<div class="modal-body">
 
 
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-6">							
+					<div class="col-md-6">
 						<span><b>Data: </b></span>
-						<span id="data_mostrar"></span>							
+						<span id="data_mostrar"></span>
 					</div>
-					<div class="col-md-6">							
+					<div class="col-md-6">
 						<span><b>Hora: </b></span>
 						<span id="hora_mostrar"></span>
 					</div>
@@ -187,11 +192,11 @@ exit();
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-6">							
+					<div class="col-md-6">
 						<span><b>Usuário: </b></span>
-						<span id="usuario_mostrar"></span>							
+						<span id="usuario_mostrar"></span>
 					</div>
-					<div class="col-md-6">							
+					<div class="col-md-6">
 						<span><b>Lançado Por: </b></span>
 						<span id="usuario_lanc_mostrar"></span>
 					</div>
@@ -199,23 +204,23 @@ exit();
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					
-					<div class="col-md-12">							
+
+					<div class="col-md-12">
 						<span><b>Descrição: </b></span>
 						<span id="descricao_mostrar"></span>
 					</div>
 				</div>
 
 
-				
+
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
-					<div class="col-md-12">							
+					<div class="col-md-12">
 						<span><b>Observações: </b></span>
-						<div id="obs_mostrar" style="margin-top: 15px"></div>							
+						<div id="obs_mostrar" style="margin-top: 15px"></div>
 					</div>
 				</div>
-				
+
 
 
 			</div>
@@ -226,7 +231,9 @@ exit();
 </div>
 
 
-<script type="text/javascript">var pag = "tarefas-escritorio"; </script>
+<script type="text/javascript">
+	var pag = "tarefas-escritorio";
+</script>
 <script src="js/ajax.js"></script>
 
 <script type="text/javascript">
@@ -240,43 +247,42 @@ exit();
 
 
 <script>
-
 	//AJAX PARA SUBIR TAREFA PARA O BANCO DE DADOS
 
-$("#form-text").submit(function () {
-	event.preventDefault();
-    nicEditors.findEditor('area').saveContent();
-	var formData = new FormData(this);
+	$("#form-text").submit(function() {
+		event.preventDefault();
+		nicEditors.findEditor('area').saveContent();
+		var formData = new FormData(this);
 
-	$.ajax({
-		url: pag + "/inserir.php",
-		type: 'POST',
-		data: formData,
+		$.ajax({
+			url: pag + "/inserir.php",
+			type: 'POST',
+			data: formData,
 
-		success: function (mensagem) {
-            $('#mensagem').text('');
-            $('#mensagem').removeClass()
-            if (mensagem.trim() == "Salvo com Sucesso") {                    
-                    $('#btn-fechar').click();
-                    listar();
-                } else {
-                	$('#mensagem').addClass('text-danger')
-                    $('#mensagem').text(mensagem)
-                }
+			success: function(mensagem) {
+				$('#mensagem').text('');
+				$('#mensagem').removeClass()
+				if (mensagem.trim() == "Salvo com Sucesso") {
+					$('#btn-fechar').click();
+					listar();
+				} else {
+					$('#mensagem').addClass('text-danger')
+					$('#mensagem').text(mensagem)
+				}
 
-            },
+			},
 
-            cache: false,
-            contentType: false,
-            processData: false,
-            
-        });
+			cache: false,
+			contentType: false,
+			processData: false,
 
-});
+		});
 
+	});
 </script>
 
 
 <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
-						
+<script type="text/javascript">
+	bkLib.onDomLoaded(nicEditors.allTextAreas);
+</script>
