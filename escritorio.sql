@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 20/05/2024 às 13:31
+-- Tempo de geração: 29/05/2024 às 19:28
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.1.25
 
@@ -114,7 +114,11 @@ CREATE TABLE `cargos` (
 --
 
 INSERT INTO `cargos` (`id`, `nome`) VALUES
-(21, 'Gerente');
+(1, 'Gerente'),
+(3, 'Secretário'),
+(4, 'Recepcionista'),
+(13, 'Administrador'),
+(15, 'Auxiliar administrativo');
 
 -- --------------------------------------------------------
 
@@ -133,7 +137,14 @@ CREATE TABLE `cat_arquivos` (
 --
 
 INSERT INTO `cat_arquivos` (`id`, `nome`, `setor`) VALUES
-(9, 'Todas', 1);
+(1, 'Todas', 1),
+(2, 'Notas Fiscais', 2),
+(3, 'Comprovantes', 2),
+(4, 'Ficha Funcionário', 3),
+(5, 'Folha de Ponto', 4),
+(6, 'Admissão', 4),
+(7, 'Demissão', 4),
+(8, 'Contrato', 5);
 
 -- --------------------------------------------------------
 
@@ -143,6 +154,8 @@ INSERT INTO `cat_arquivos` (`id`, `nome`, `setor`) VALUES
 
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
+  `codigo` varchar(20) DEFAULT NULL,
+  `tipo_empresa` varchar(50) DEFAULT NULL,
   `nome` varchar(50) NOT NULL,
   `pessoa` varchar(20) NOT NULL,
   `doc` varchar(20) NOT NULL,
@@ -159,9 +172,8 @@ CREATE TABLE `clientes` (
 -- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nome`, `pessoa`, `doc`, `telefone`, `email`, `endereco`, `data_cad`, `data_nasc`, `obs`, `ativo`) VALUES
-(5, 'AlbaWeb', 'Jurídica', '00.000.000/0000-00', '(19) 97155-3715', 'contato@albaweb.com', 'Rua Adalto Francisco landigraff, 85, Jd. Santa Clara', '2024-05-08', '0000-00-00', '', 'Sim'),
-(6, 'Livraria Semear', 'Jurídica', '00.000.000/000', '(19) 35614-589', 'contato@semearstore.com', 'Rua ', '2024-05-08', '0000-00-00', 'Observações: Verificar documento brlbla', 'Não');
+INSERT INTO `clientes` (`id`, `codigo`, `tipo_empresa`, `nome`, `pessoa`, `doc`, `telefone`, `email`, `endereco`, `data_cad`, `data_nasc`, `obs`, `ativo`) VALUES
+(17, '55dfsd', 'ME', 'Semear Store', 'Jurídica', '55.456.565/9559-95', '(22) 22222-2222', 'contato@semearstore.com', 'Rua Adalto Francisco landigraff, 85, Jd. Santa Clara', '2024-05-27', '0000-00-00', '', 'Sim');
 
 -- --------------------------------------------------------
 
@@ -188,7 +200,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `nome`, `telefone`, `endereco`, `logo`, `favicon`, `logo_rel`, `email_adm`, `logs`, `dias_limpar_logs`, `relatorio_pdf`) VALUES
-(7, 'Consult', '(19) 99999-9999', 'Rua Francisco Carlos, 154', 'logo.png', 'favicon.ico', 'logo.jpg', 'contato@consult.com.br', 'Sim', 1, 'pdf');
+(7, 'Consult', '(19) 97155-3715', 'Rua Francisco Carlos, 154', 'logo.png', 'favicon.ico', 'logo.jpg', 'ualbardeiro@gmail.com', 'Sim', 40, 'pdf');
 
 -- --------------------------------------------------------
 
@@ -231,6 +243,14 @@ CREATE TABLE `fornecedores` (
   `obs` varchar(1000) DEFAULT NULL,
   `ativo` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `fornecedores`
+--
+
+INSERT INTO `fornecedores` (`id`, `nome`, `pessoa`, `doc`, `telefone`, `email`, `endereco`, `data_cad`, `data_nasc`, `obs`, `ativo`) VALUES
+(1, 'Kamila Silva Santos', 'Física', '588.454.878-54', '(57) 44444-4444', 'kamila@hotmail.com', 'Rua A, Número 150, Bairro XX - Belo Horizonte - MG', '2021-10-13', '2021-10-13', 'Fornecedor de Materiais de Escritório.', 'Não'),
+(2, 'Empresa CD', 'Jurídica', '48.745.874/5454-55', '(84) 55454-5454', 'empresacd@hotmail.com', 'Rua S', '2021-10-13', '0000-00-00', '', 'Sim');
 
 -- --------------------------------------------------------
 
@@ -284,7 +304,8 @@ CREATE TABLE `funcionarios` (
 --
 
 INSERT INTO `funcionarios` (`id`, `nome`, `cpf`, `telefone`, `email`, `endereco`, `cargo`, `data_cad`, `data_nasc`, `obs`, `foto`, `salario`, `valor_hora`, `hora_entrada`, `hora_saida`, `jornada_horas`) VALUES
-(29, 'Ulisses', '377.816.498-85', '(19) 97155-3715', 'ualbardeiro@gmail.com', 'Rua Adalto Francisco landigraff, 85, Jd. Santa Clara', 21, '2024-05-11', '1989-08-14', '', 'sem-perfil.jpg', 4000.00, 85.00, '07:32:00', '17:00:00', '08:00:00');
+(3, 'Pablo Silva', '848.787.878-78', '(00)00000-0000', 'secretario@hotmail.com', 'Rua A, Número 150, Bairro XX - Belo Horizonte - MG', 1, '2024-05-21', '2021-10-13', '', '13-10-2021-11-32-15-img1.png', 1800.00, 0.00, '08:00:00', '17:00:00', '08:00:00'),
+(29, 'Ulisses', '377.816.498-85', '(19) 97155-3715', 'secretario@gmail.com', '', 3, '2024-05-23', '2024-05-21', '', 'sem-perfil.jpg', 4000.00, 85.00, '08:00:00', '18:00:00', '10:00:00');
 
 -- --------------------------------------------------------
 
@@ -298,6 +319,15 @@ CREATE TABLE `grupo_arquivos` (
   `categoria` int(11) NOT NULL,
   `setor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `grupo_arquivos`
+--
+
+INSERT INTO `grupo_arquivos` (`id`, `nome`, `categoria`, `setor`) VALUES
+(1, 'Contrato de Locação', 8, 5),
+(2, 'Reforma Escritório', 2, 2),
+(3, 'Arquivos Prescritos', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -386,7 +416,343 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`id`, `data`, `hora`, `tabela`, `acao`, `usuario`, `id_reg`, `descricao`) VALUES
-(1185, '2024-05-20', '08:25:23', 'usuarios', 'login', 1, 0, 'login');
+(1038, '2024-05-20', '18:49:23', 'usuarios', 'login', 1, 0, 'login'),
+(1039, '2024-05-20', '18:49:42', 'usuarios', 'edição', 1, 1, 'Ulisses Albardeiro'),
+(1040, '2024-05-20', '18:51:05', 'usuarios', 'edição', 1, 1, 'Ulisses Albardeiro'),
+(1041, '2024-05-20', '18:51:08', 'usuarios', 'logout', 1, 0, 'logout'),
+(1042, '2024-05-20', '18:52:53', 'usuarios', 'login', 1, 0, 'login'),
+(1043, '2024-05-20', '18:53:41', 'config', 'edição', 1, 0, 'Dados do Config'),
+(1044, '2024-05-20', '18:54:11', 'config', 'edição', 1, 0, 'Dados do Config'),
+(1045, '2024-05-20', '18:55:24', 'cargos', 'exclusão', 1, 12, 'Auxiliar de serviços gerais'),
+(1046, '2024-05-20', '18:56:12', 'tarefas', 'exclusão', 1, 47, 'teste'),
+(1047, '2024-05-20', '18:56:22', 'tarefas', 'exclusão', 1, 46, 'Diversao'),
+(1048, '2024-05-20', '18:56:25', 'tarefas', 'exclusão', 1, 45, 'Pedido'),
+(1049, '2024-05-20', '18:56:28', 'tarefas', 'exclusão', 1, 44, 'reuniao com func'),
+(1050, '2024-05-20', '18:56:31', 'tarefas', 'exclusão', 1, 43, 'teste'),
+(1051, '2024-05-20', '18:56:34', 'tarefas', 'exclusão', 1, 40, 'Reunião com o chefe'),
+(1052, '2024-05-20', '18:56:36', 'tarefas', 'exclusão', 1, 39, 'Cartorio'),
+(1053, '2024-05-20', '18:56:40', 'tarefas', 'exclusão', 1, 38, 'Cartorio'),
+(1054, '2024-05-20', '18:56:42', 'tarefas', 'exclusão', 1, 37, 'Lavar carro'),
+(1055, '2024-05-20', '18:56:44', 'tarefas', 'exclusão', 1, 36, 'Lavar carro'),
+(1056, '2024-05-20', '18:56:47', 'tarefas', 'exclusão', 1, 35, 'Fff'),
+(1057, '2024-05-20', '18:56:49', 'tarefas', 'exclusão', 1, 33, 'Tarefa Teste'),
+(1058, '2024-05-20', '18:56:52', 'tarefas', 'exclusão', 1, 32, 'tarefa teste'),
+(1059, '2024-05-20', '18:56:55', 'tarefas', 'exclusão', 1, 31, 'ddfddsd'),
+(1060, '2024-05-20', '18:57:36', 'usuarios', 'logout', 1, 0, 'logout'),
+(1061, '2024-05-20', '18:57:40', 'usuarios', 'login', 1, 0, 'login'),
+(1062, '2024-05-20', '19:06:53', 'usuarios', 'login', 1, 0, 'login'),
+(1063, '2024-05-20', '19:07:41', 'funcionarios', 'exclusão', 1, 1, 'Hugo Freitas'),
+(1064, '2024-05-20', '19:07:51', 'funcionarios', 'exclusão', 1, 2, 'Marcelo Freitas'),
+(1065, '2024-05-21', '08:47:03', 'usuarios', 'login', 1, 0, 'login'),
+(1066, '2024-05-21', '09:02:21', 'clientes', 'edição', 1, 0, 'Empresa X'),
+(1067, '2024-05-21', '09:02:22', 'clientes', 'edição', 1, 0, 'Empresa X'),
+(1068, '2024-05-21', '09:03:11', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1069, '2024-05-21', '09:03:12', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1070, '2024-05-21', '09:03:14', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1071, '2024-05-21', '09:03:14', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1072, '2024-05-21', '09:03:15', 'clientes', 'edição', 1, 1, 'Talita Santos'),
+(1073, '2024-05-21', '09:03:16', 'clientes', 'edição', 1, 1, 'Talita Santos'),
+(1074, '2024-05-21', '09:23:45', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1075, '2024-05-21', '09:23:47', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1076, '2024-05-21', '09:27:05', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1077, '2024-05-21', '09:27:18', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1078, '2024-05-21', '09:27:39', 'clientes', 'edição', 1, 2, 'Empresa '),
+(1079, '2024-05-21', '09:35:17', 'clientes', 'edição', 1, 2, 'Empresa '),
+(1080, '2024-05-21', '09:35:33', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1081, '2024-05-21', '10:29:49', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1082, '2024-05-21', '10:32:03', 'clientes', 'edição', 1, 2, 'Empresa X'),
+(1083, '2024-05-21', '10:32:39', 'clientes', 'inserção', 1, 5, 'Ulisses'),
+(1084, '2024-05-21', '10:42:00', 'clientes', 'edição', 1, 5, 'Ulisses'),
+(1085, '2024-05-21', '10:42:01', 'clientes', 'edição', 1, 5, 'Ulisses'),
+(1086, '2024-05-21', '10:42:04', 'clientes', 'exclusão', 1, 5, 'Ulisses'),
+(1087, '2024-05-21', '11:03:05', 'tarefas', 'exclusão', 1, 51, 'teste'),
+(1088, '2024-05-21', '11:03:08', 'tarefas', 'exclusão', 1, 50, 'teste'),
+(1089, '2024-05-21', '11:05:59', 'tarefas', 'exclusão', 1, 49, 'teste'),
+(1090, '2024-05-21', '11:45:04', 'funcionarios', 'edição', 1, 3, 'Pablo Silva'),
+(1091, '2024-05-21', '12:15:21', 'tarefas', 'edição', 1, 54, 'teste'),
+(1092, '2024-05-21', '12:15:23', 'tarefas', 'edição', 1, 53, 'teste'),
+(1093, '2024-05-21', '12:15:25', 'tarefas', 'edição', 1, 52, 'Regularizar documento da empresa'),
+(1094, '2024-05-21', '12:15:30', 'tarefas', 'edição', 1, 54, 'teste'),
+(1095, '2024-05-21', '12:15:31', 'tarefas', 'edição', 1, 53, 'teste'),
+(1096, '2024-05-21', '12:15:32', 'tarefas', 'edição', 1, 52, 'Regularizar documento da empresa'),
+(1097, '2024-05-21', '16:23:02', 'tarefas', 'exclusão', 1, 55, 'Regularizar  '),
+(1098, '2024-05-21', '16:23:05', 'tarefas', 'exclusão', 1, 54, 'teste'),
+(1099, '2024-05-21', '19:22:02', 'funcionarios', 'inserção', 1, 29, 'Ulisses'),
+(1100, '2024-05-21', '20:55:15', 'tarefas', 'edição', 1, 52, 'Regularizar documento da empresa'),
+(1101, '2024-05-21', '20:55:17', 'tarefas', 'edição', 1, 52, 'Regularizar documento da empresa'),
+(1102, '2024-05-21', '20:55:18', 'tarefas', 'edição', 1, 52, 'Regularizar documento da empresa'),
+(1103, '2024-05-21', '20:55:18', 'tarefas', 'edição', 1, 52, 'Regularizar documento da empresa'),
+(1104, '2024-05-21', '20:55:20', 'tarefas', 'edição', 1, 53, 'teste'),
+(1105, '2024-05-21', '20:55:21', 'tarefas', 'edição', 1, 53, 'teste'),
+(1106, '2024-05-21', '20:55:21', 'tarefas', 'edição', 1, 53, 'teste'),
+(1107, '2024-05-21', '20:55:22', 'tarefas', 'edição', 1, 53, 'teste'),
+(1108, '2024-05-21', '20:56:26', 'tarefas', 'inserção', 1, 59, 'teste9'),
+(1109, '2024-05-21', '20:56:52', 'tarefas', 'inserção', 1, 60, 'documento da empresa'),
+(1110, '2024-05-21', '21:58:04', 'tarefas', 'exclusão', 1, 63, 'Regularizar  45'),
+(1111, '2024-05-21', '21:58:07', 'tarefas', 'exclusão', 1, 62, 'teste00'),
+(1112, '2024-05-21', '21:58:09', 'tarefas', 'exclusão', 1, 61, 'teste00'),
+(1113, '2024-05-21', '21:58:12', 'tarefas', 'exclusão', 1, 58, 'teste'),
+(1114, '2024-05-21', '21:58:16', 'tarefas', 'exclusão', 1, 57, 'teste'),
+(1115, '2024-05-21', '21:58:22', 'tarefas', 'exclusão', 1, 56, 'teste2'),
+(1116, '2024-05-21', '21:58:25', 'tarefas', 'exclusão', 1, 53, 'teste'),
+(1117, '2024-05-21', '21:58:29', 'tarefas', 'exclusão', 1, 52, 'Regularizar documento da empresa'),
+(1118, '2024-05-21', '21:59:11', 'tarefas', 'inserção', 1, 64, 'teste'),
+(1119, '2024-05-21', '22:09:56', 'tarefas', 'inserção', 1, 65, 'teste2'),
+(1120, '2024-05-21', '22:29:24', 'tarefas', 'inserção', 1, 66, 'teste9'),
+(1121, '2024-05-22', '08:40:07', 'usuarios', 'login', 1, 0, 'login'),
+(1122, '2024-05-22', '08:40:30', 'tarefas', 'exclusão', 1, 66, 'teste9'),
+(1123, '2024-05-22', '08:40:33', 'tarefas', 'exclusão', 1, 65, 'teste2'),
+(1124, '2024-05-22', '08:56:12', 'tarefas', 'inserção', 1, 70, 'Regularizar documento da empresa'),
+(1125, '2024-05-22', '09:07:14', 'tarefas', 'inserção', 1, 71, 'teste'),
+(1126, '2024-05-22', '09:16:43', 'tarefas', 'inserção', 1, 72, 'Regularizar '),
+(1127, '2024-05-22', '09:17:08', 'tarefas', 'inserção', 1, 73, 'kljsdahfgkas'),
+(1128, '2024-05-22', '09:17:49', 'tarefas', 'inserção', 1, 74, 'fgasdfgsadf'),
+(1129, '2024-05-22', '09:18:38', 'tarefas', 'inserção', 1, 75, 'teste5'),
+(1130, '2024-05-22', '09:24:57', 'tarefas', 'exclusão', 1, 75, 'teste5'),
+(1131, '2024-05-22', '09:25:00', 'tarefas', 'exclusão', 1, 74, 'fgasdfgsadf'),
+(1132, '2024-05-22', '09:25:02', 'tarefas', 'exclusão', 1, 73, 'kljsdahfgkas'),
+(1133, '2024-05-22', '09:25:05', 'tarefas', 'exclusão', 1, 72, 'Regularizar '),
+(1134, '2024-05-22', '09:25:07', 'tarefas', 'exclusão', 1, 71, 'teste'),
+(1135, '2024-05-22', '09:25:10', 'tarefas', 'exclusão', 1, 70, 'Regularizar documento da empresa'),
+(1136, '2024-05-22', '09:25:18', 'tarefas', 'inserção', 1, 76, 'Regularizar documento da empresa'),
+(1137, '2024-05-22', '09:25:41', 'tarefas', 'exclusão', 1, 76, 'Regularizar documento da empresa'),
+(1138, '2024-05-22', '09:25:44', 'tarefas', 'exclusão', 1, 69, 'Regularizar  '),
+(1139, '2024-05-22', '09:25:46', 'tarefas', 'exclusão', 1, 68, 'Regularizar  '),
+(1140, '2024-05-22', '09:25:49', 'tarefas', 'exclusão', 1, 67, 'Regularizar documento da empresa'),
+(1141, '2024-05-22', '09:26:16', 'tarefas', 'inserção', 1, 77, 'teste'),
+(1142, '2024-05-22', '09:29:04', 'tarefas', 'inserção', 1, 78, 'teste2'),
+(1143, '2024-05-22', '09:32:23', 'tarefas', 'inserção', 1, 79, 'Regularizar documento da empresa'),
+(1144, '2024-05-22', '09:33:22', 'tarefas', 'inserção', 1, 80, 'a empresa'),
+(1145, '2024-05-22', '09:34:15', 'tarefas', 'inserção', 1, 81, 'Regularizar  8'),
+(1146, '2024-05-22', '09:35:03', 'tarefas', 'inserção', 1, 82, 'Regularizar  10'),
+(1147, '2024-05-22', '11:10:32', 'tarefas', 'inserção', 1, 83, 'DOCUMENTO'),
+(1148, '2024-05-22', '11:16:05', 'tarefas', 'inserção', 1, 84, 'BUSCAR DOCUMENTO'),
+(1149, '2024-05-22', '11:16:46', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENTO'),
+(1150, '2024-05-22', '11:16:47', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENTO'),
+(1151, '2024-05-22', '11:16:51', 'tarefas', 'exclusão', 1, 83, 'DOCUMENTO'),
+(1152, '2024-05-22', '11:19:20', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENTO'),
+(1153, '2024-05-22', '11:19:21', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENTO'),
+(1154, '2024-05-22', '11:19:22', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENTO'),
+(1155, '2024-05-22', '11:19:23', 'tarefas', 'edição', 1, 82, 'Regularizar  10'),
+(1156, '2024-05-22', '11:19:24', 'tarefas', 'edição', 1, 81, 'Regularizar  8'),
+(1157, '2024-05-22', '11:19:26', 'tarefas', 'edição', 1, 82, 'Regularizar  10'),
+(1158, '2024-05-22', '11:19:27', 'tarefas', 'edição', 1, 81, 'Regularizar  8'),
+(1159, '2024-05-22', '11:19:27', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENTO'),
+(1160, '2024-05-22', '11:23:19', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENT'),
+(1161, '2024-05-22', '17:09:35', 'tarefas', 'edição', 1, 85, 'Pegar documento'),
+(1162, '2024-05-22', '17:09:37', 'tarefas', 'edição', 1, 86, 'teste'),
+(1163, '2024-05-22', '17:09:39', 'tarefas', 'edição', 1, 86, 'teste'),
+(1164, '2024-05-22', '17:09:40', 'tarefas', 'edição', 1, 86, 'teste'),
+(1165, '2024-05-22', '17:09:41', 'tarefas', 'edição', 1, 85, 'Pegar documento'),
+(1166, '2024-05-22', '17:09:42', 'tarefas', 'edição', 1, 85, 'Pegar documento'),
+(1167, '2024-05-22', '17:09:43', 'tarefas', 'edição', 1, 85, 'Pegar documento'),
+(1168, '2024-05-22', '17:09:43', 'tarefas', 'edição', 1, 85, 'Pegar documento'),
+(1169, '2024-05-22', '17:09:45', 'tarefas', 'edição', 1, 85, 'Pegar documento'),
+(1170, '2024-05-23', '09:36:27', 'tarefas', 'edição', 1, 86, 'teste'),
+(1171, '2024-05-23', '11:48:03', 'funcionarios', 'edição', 1, 29, 'Ulisses'),
+(1172, '2024-05-23', '11:48:48', 'usuarios', 'logout', 1, 0, 'logout'),
+(1173, '2024-05-23', '11:48:57', 'usuarios', 'login', 17, 0, 'login'),
+(1174, '2024-05-23', '13:30:32', 'usuarios', 'logout', 17, 0, 'logout'),
+(1175, '2024-05-23', '13:30:34', 'usuarios', 'login', 1, 0, 'login'),
+(1176, '2024-05-23', '13:32:56', 'tarefas', 'edição', 1, 79, 'Regularizar documento da empresa'),
+(1177, '2024-05-23', '13:32:57', 'tarefas', 'edição', 1, 79, 'Regularizar documento da empresa'),
+(1178, '2024-05-26', '18:55:29', 'usuarios', 'login', 1, 0, 'login'),
+(1179, '2024-05-27', '09:42:15', 'usuarios', 'login', 1, 0, 'login'),
+(1180, '2024-05-27', '09:44:00', 'cargos', 'exclusão', 1, 14, 'Auxiliar de Cadastro'),
+(1181, '2024-05-27', '09:44:04', 'cargos', 'exclusão', 1, 7, 'RH'),
+(1182, '2024-05-27', '09:44:08', 'cargos', 'exclusão', 1, 6, 'Auxiliar Administrativo'),
+(1183, '2024-05-27', '09:44:11', 'cargos', 'exclusão', 1, 5, 'Limpeza'),
+(1184, '2024-05-27', '09:44:26', 'cargos', 'inserção', 1, 15, 'Auxiliar administrativo'),
+(1185, '2024-05-27', '11:17:02', 'tipos_empresas', 'inserção', 1, 1, ''),
+(1186, '2024-05-27', '11:22:14', 'tipos_empresas', 'inserção', 1, 2, ''),
+(1187, '2024-05-27', '11:22:48', 'tipos_empresas', 'edição', 1, 2, ''),
+(1188, '2024-05-27', '11:24:43', 'tipos_empresas', 'edição', 1, 2, ''),
+(1189, '2024-05-27', '11:24:49', 'cargos', 'exclusão', 1, 2, ''),
+(1190, '2024-05-27', '11:24:59', 'cargos', 'exclusão', 1, 2, ''),
+(1191, '2024-05-27', '11:25:38', 'cargos', 'exclusão', 1, 2, 'LTDA'),
+(1192, '2024-05-27', '11:25:47', 'cargos', 'exclusão', 1, 2, 'LTDA'),
+(1193, '2024-05-27', '11:27:09', 'tipos_empresas', 'inserção', 1, 3, ''),
+(1194, '2024-05-27', '11:27:14', 'cargos', 'exclusão', 1, 2, 'LTDA'),
+(1195, '2024-05-27', '11:35:17', 'tipos_empresas', 'exclusão', 1, 3, ''),
+(1196, '2024-05-27', '11:38:45', 'tipos_empresas', 'edição', 1, 2, ''),
+(1197, '2024-05-27', '11:38:54', 'tipos_empresas', 'exclusão', 1, 2, ''),
+(1198, '2024-05-27', '11:38:59', 'tipos_empresas', 'inserção', 1, 4, ''),
+(1199, '2024-05-27', '11:39:04', 'tipos_empresas', 'inserção', 1, 5, ''),
+(1200, '2024-05-27', '12:01:35', 'tipos_empresas', 'inserção', 1, 6, ''),
+(1201, '2024-05-27', '12:01:42', 'tipos_empresas', 'exclusão', 1, 6, ''),
+(1202, '2024-05-27', '12:42:28', 'clientes', 'exclusão', 1, 1, 'Talita Santos'),
+(1203, '2024-05-27', '12:42:32', 'clientes', 'exclusão', 1, 2, 'Empresa X'),
+(1204, '2024-05-27', '15:00:43', 'clientes', 'inserção', 1, 6, 'Semear Store'),
+(1205, '2024-05-27', '15:05:37', 'clientes', 'exclusão', 1, 6, 'Semear Store'),
+(1206, '2024-05-27', '15:06:25', 'clientes', 'inserção', 1, 7, 'Ulisses'),
+(1207, '2024-05-27', '15:07:26', 'clientes', 'inserção', 1, 8, 'Semear Store'),
+(1208, '2024-05-27', '15:10:11', 'clientes', 'inserção', 1, 9, 'Empresa X'),
+(1209, '2024-05-27', '15:15:22', 'clientes', 'inserção', 1, 10, 'Empresa '),
+(1210, '2024-05-27', '15:16:26', 'clientes', 'exclusão', 1, 9, 'Empresa X'),
+(1211, '2024-05-27', '15:16:29', 'clientes', 'exclusão', 1, 10, 'Empresa '),
+(1212, '2024-05-27', '15:16:31', 'clientes', 'exclusão', 1, 8, 'Semear Store'),
+(1213, '2024-05-27', '15:16:34', 'clientes', 'exclusão', 1, 7, 'Ulisses'),
+(1214, '2024-05-27', '15:17:25', 'clientes', 'inserção', 1, 11, 'Empresa X'),
+(1215, '2024-05-27', '15:18:08', 'clientes', 'inserção', 1, 12, 'Ulisses'),
+(1216, '2024-05-27', '16:19:41', 'clientes', 'exclusão', 1, 12, 'Ulisses'),
+(1217, '2024-05-27', '16:19:44', 'clientes', 'exclusão', 1, 11, 'Empresa X'),
+(1218, '2024-05-27', '16:20:03', 'clientes', 'inserção', 1, 13, 'Empresa X'),
+(1219, '2024-05-27', '16:35:15', 'clientes', 'edição', 1, 13, 'Empresa X'),
+(1220, '2024-05-27', '16:35:36', 'clientes', 'edição', 1, 13, 'Empresa X'),
+(1221, '2024-05-27', '16:36:51', 'clientes', 'edição', 1, 13, 'Empresa X'),
+(1222, '2024-05-27', '16:37:38', 'clientes', 'inserção', 1, 14, 'Semear Store'),
+(1223, '2024-05-27', '16:38:33', 'clientes', 'edição', 1, 14, 'Semear Store'),
+(1224, '2024-05-27', '16:40:24', 'clientes', 'edição', 1, 13, 'Ulisses'),
+(1225, '2024-05-27', '16:44:49', 'clientes', 'edição', 1, 13, 'Ulisses'),
+(1226, '2024-05-27', '16:51:10', 'clientes', 'exclusão', 1, 14, 'Semear Store'),
+(1227, '2024-05-27', '16:51:14', 'clientes', 'exclusão', 1, 13, 'Ulisses'),
+(1228, '2024-05-27', '16:53:08', 'clientes', 'inserção', 1, 15, 'Empresa X'),
+(1229, '2024-05-27', '16:53:27', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1230, '2024-05-27', '16:53:29', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1231, '2024-05-27', '16:53:30', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1232, '2024-05-27', '16:53:34', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1233, '2024-05-27', '17:39:35', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1234, '2024-05-27', '17:39:37', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1235, '2024-05-27', '18:13:42', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1236, '2024-05-27', '18:13:43', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1237, '2024-05-27', '22:28:57', 'usuarios', 'login', 1, 0, 'login'),
+(1238, '2024-05-27', '22:30:11', 'clientes', 'edição', 1, 15, 'Empresa X'),
+(1239, '2024-05-27', '22:30:42', 'clientes', 'exclusão', 1, 15, 'Empresa X'),
+(1240, '2024-05-27', '22:30:57', 'clientes', 'inserção', 1, 16, 'Empresa X'),
+(1241, '2024-05-27', '22:45:03', 'clientes', 'edição', 1, 16, 'Empresa X'),
+(1242, '2024-05-27', '22:45:08', 'clientes', 'edição', 1, 16, 'Empresa X'),
+(1243, '2024-05-27', '22:45:25', 'clientes', 'edição', 1, 16, 'Empresa X'),
+(1244, '2024-05-27', '22:49:30', 'clientes', 'inserção', 1, 17, 'Semear Store'),
+(1245, '2024-05-27', '22:52:38', 'clientes', 'exclusão', 1, 16, 'Empresa X'),
+(1246, '2024-05-27', '22:52:45', 'clientes', 'edição', 1, 17, 'Semear Store'),
+(1247, '2024-05-27', '22:52:46', 'clientes', 'edição', 1, 17, 'Semear Store'),
+(1248, '2024-05-28', '13:08:14', 'usuarios', 'login', 1, 0, 'login'),
+(1249, '2024-05-28', '13:08:47', 'tipos_empresas', 'exclusão', 1, 5, ''),
+(1250, '2024-05-28', '13:09:13', 'tipos_empresas', 'inserção', 1, 7, ''),
+(1251, '2024-05-28', '20:31:15', 'usuarios', 'login', 1, 0, 'login'),
+(1252, '2024-05-29', '10:17:24', 'usuarios', 'logout', 1, 0, 'logout'),
+(1253, '2024-05-29', '10:17:28', 'usuarios', 'login', 17, 0, 'login'),
+(1254, '2024-05-29', '10:23:36', 'usuarios', 'logout', 17, 0, 'logout'),
+(1255, '2024-05-29', '10:23:38', 'usuarios', 'login', 1, 0, 'login'),
+(1256, '2024-05-29', '10:29:55', 'tarefas', 'exclusão', 1, 88, 'da empresa'),
+(1257, '2024-05-29', '10:29:58', 'tarefas', 'exclusão', 1, 87, 'teste00'),
+(1258, '2024-05-29', '10:30:00', 'tarefas', 'exclusão', 1, 86, 'teste'),
+(1259, '2024-05-29', '10:30:03', 'tarefas', 'exclusão', 1, 85, 'Pegar documento'),
+(1260, '2024-05-29', '10:30:05', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENT'),
+(1261, '2024-05-29', '10:30:06', 'tarefas', 'edição', 1, 84, 'BUSCAR DOCUMENT'),
+(1262, '2024-05-29', '10:30:08', 'tarefas', 'exclusão', 1, 84, 'BUSCAR DOCUMENT'),
+(1263, '2024-05-29', '10:30:11', 'tarefas', 'exclusão', 1, 82, 'Regularizar  10'),
+(1264, '2024-05-29', '10:30:13', 'tarefas', 'exclusão', 1, 81, 'Regularizar  8'),
+(1265, '2024-05-29', '10:30:16', 'tarefas', 'exclusão', 1, 80, 'a empresa'),
+(1266, '2024-05-29', '10:30:18', 'tarefas', 'exclusão', 1, 79, 'Regularizar documento da empresa'),
+(1267, '2024-05-29', '10:30:21', 'tarefas', 'exclusão', 1, 78, 'teste2'),
+(1268, '2024-05-29', '10:30:28', 'tarefas', 'exclusão', 1, 77, 'teste'),
+(1269, '2024-05-29', '10:31:42', 'tarefas', 'inserção', 1, 89, 'CORRIGIR BUG'),
+(1270, '2024-05-29', '10:32:28', 'tarefas', 'inserção', 1, 90, 'TESTAR CÓDIGO'),
+(1271, '2024-05-29', '10:34:17', 'tarefas', 'edição', 1, 90, 'TESTAR CÓDIGO'),
+(1272, '2024-05-29', '10:35:45', 'tarefas', 'edição', 1, 90, 'TESTAR CÓDIGO'),
+(1273, '2024-05-29', '10:36:53', 'tarefas', 'edição', 1, 90, 'TESTAR CÓDIGO'),
+(1274, '2024-05-29', '10:39:01', 'usuarios', 'login', 1, 0, 'login'),
+(1275, '2024-05-29', '10:43:10', 'tarefas', 'inserção', 1, 91, 'CRIAR UM SITE'),
+(1276, '2024-05-29', '10:43:16', 'tarefas', 'edição', 1, 91, 'CRIAR UM SITE'),
+(1277, '2024-05-29', '10:43:17', 'tarefas', 'edição', 1, 91, 'CRIAR UM SITE'),
+(1278, '2024-05-29', '10:43:18', 'tarefas', 'edição', 1, 90, 'TESTAR CÓDIGO'),
+(1279, '2024-05-29', '10:43:18', 'tarefas', 'edição', 1, 90, 'TESTAR CÓDIGO'),
+(1280, '2024-05-29', '10:43:20', 'tarefas', 'edição', 1, 89, 'CORRIGIR BUG'),
+(1281, '2024-05-29', '10:43:20', 'tarefas', 'edição', 1, 89, 'CORRIGIR BUG'),
+(1282, '2024-05-29', '10:45:37', 'tarefas', 'inserção', 1, 92, 'Visitar cliente'),
+(1283, '2024-05-29', '10:45:44', 'tarefas', 'exclusão', 1, 91, 'CRIAR UM SITE'),
+(1284, '2024-05-29', '10:45:47', 'tarefas', 'exclusão', 1, 89, 'CORRIGIR BUG'),
+(1285, '2024-05-29', '10:46:16', 'tarefas', 'exclusão', 1, 92, 'Visitar cliente'),
+(1286, '2024-05-29', '10:46:52', 'tarefas', 'inserção', 1, 93, 'FAZER ORÇAMENTO'),
+(1287, '2024-05-29', '10:47:03', 'tarefas', 'edição', 1, 93, 'FAZER ORÇAMENTO'),
+(1288, '2024-05-29', '10:47:04', 'tarefas', 'edição', 1, 93, 'FAZER ORÇAMENTO'),
+(1289, '2024-05-29', '10:47:05', 'tarefas', 'edição', 1, 90, 'TESTAR CÓDIGO'),
+(1290, '2024-05-29', '10:47:05', 'tarefas', 'edição', 1, 90, 'TESTAR CÓDIGO'),
+(1291, '2024-05-29', '10:47:36', 'tarefas', 'inserção', 1, 94, 'teste'),
+(1292, '2024-05-29', '11:03:31', 'tarefas', 'exclusão', 1, 94, 'teste'),
+(1293, '2024-05-29', '11:03:33', 'tarefas', 'exclusão', 1, 93, 'FAZER ORÇAMENTO'),
+(1294, '2024-05-29', '11:03:37', 'tarefas', 'exclusão', 1, 90, 'TESTAR CÓDIGO'),
+(1295, '2024-05-29', '11:06:59', 'tarefas', 'inserção', 1, 96, 'teste'),
+(1296, '2024-05-29', '12:01:30', 'tarefas', 'exclusão', 1, 96, 'teste'),
+(1297, '2024-05-29', '12:01:41', 'tarefas', 'inserção', 1, 97, 'teste'),
+(1298, '2024-05-29', '12:07:14', 'tarefas', 'exclusão', 1, 97, 'teste'),
+(1299, '2024-05-29', '12:07:19', 'tarefas', 'inserção', 1, 98, 'teste'),
+(1300, '2024-05-29', '12:07:27', 'tarefas', 'inserção', 1, 99, 'Regularizar documento da empresa'),
+(1301, '2024-05-29', '12:07:43', 'tarefas', 'inserção', 1, 100, 'teste2'),
+(1302, '2024-05-29', '12:07:56', 'tarefas', 'inserção', 1, 101, 'teste9'),
+(1303, '2024-05-29', '12:08:06', 'tarefas', 'exclusão', 1, 98, 'teste'),
+(1304, '2024-05-29', '12:08:09', 'tarefas', 'exclusão', 1, 99, 'Regularizar documento da empresa'),
+(1305, '2024-05-29', '12:08:12', 'tarefas', 'exclusão', 1, 100, 'teste2'),
+(1306, '2024-05-29', '12:08:26', 'tarefas', 'exclusão', 1, 101, 'teste9'),
+(1307, '2024-05-29', '12:08:40', 'tarefas', 'edição', 1, 0, 'teste'),
+(1308, '2024-05-29', '12:09:02', 'tarefas', 'edição', 1, 0, 'teste'),
+(1309, '2024-05-29', '12:09:10', 'tarefas', 'inserção', 1, 102, 'teste'),
+(1310, '2024-05-29', '12:09:48', 'tarefas', 'exclusão', 1, 95, 'TERMINAR SISTEMA'),
+(1311, '2024-05-29', '12:09:50', 'tarefas', 'exclusão', 1, 102, 'teste'),
+(1312, '2024-05-29', '12:10:21', 'tarefas', 'inserção', 1, 103, 'teste'),
+(1313, '2024-05-29', '12:10:37', 'tarefas', 'edição', 1, 0, 'teste2'),
+(1314, '2024-05-29', '12:12:03', 'tarefas', 'edição', 1, 0, 'teste'),
+(1315, '2024-05-29', '12:14:52', 'tarefas', 'inserção', 1, 104, 'teste'),
+(1316, '2024-05-29', '12:17:06', 'tarefas', 'exclusão', 1, 104, 'teste'),
+(1317, '2024-05-29', '12:17:14', 'tarefas', 'inserção', 1, 105, 'teste'),
+(1318, '2024-05-29', '12:17:30', 'tarefas', 'inserção', 1, 106, 'teste2'),
+(1319, '2024-05-29', '12:17:43', 'tarefas', 'inserção', 1, 107, 'teste3'),
+(1320, '2024-05-29', '12:18:14', 'tarefas', 'exclusão', 1, 107, 'teste3'),
+(1321, '2024-05-29', '12:18:17', 'tarefas', 'exclusão', 1, 106, 'teste2'),
+(1322, '2024-05-29', '12:18:24', 'tarefas', 'exclusão', 1, 105, 'teste'),
+(1323, '2024-05-29', '12:18:29', 'tarefas', 'exclusão', 1, 103, 'teste'),
+(1324, '2024-05-29', '12:19:06', 'tarefas', 'exclusão', 1, 109, 'teste'),
+(1325, '2024-05-29', '12:19:08', 'tarefas', 'exclusão', 1, 108, 'teste'),
+(1326, '2024-05-29', '12:21:43', 'tarefas', 'exclusão', 1, 113, 'teste2'),
+(1327, '2024-05-29', '12:21:45', 'tarefas', 'exclusão', 1, 112, 'teste2'),
+(1328, '2024-05-29', '12:21:48', 'tarefas', 'exclusão', 1, 111, 'teste2'),
+(1329, '2024-05-29', '12:22:34', 'tarefas', 'exclusão', 1, 124, 'teste2'),
+(1330, '2024-05-29', '12:22:36', 'tarefas', 'exclusão', 1, 123, 'teste2'),
+(1331, '2024-05-29', '12:22:39', 'tarefas', 'exclusão', 1, 122, 'teste2'),
+(1332, '2024-05-29', '12:22:40', 'tarefas', 'exclusão', 1, 121, 'teste2'),
+(1333, '2024-05-29', '12:22:43', 'tarefas', 'exclusão', 1, 120, 'teste2'),
+(1334, '2024-05-29', '12:22:45', 'tarefas', 'exclusão', 1, 119, 'teste2'),
+(1335, '2024-05-29', '12:22:48', 'tarefas', 'exclusão', 1, 118, 'teste2'),
+(1336, '2024-05-29', '12:22:52', 'tarefas', 'exclusão', 1, 117, 'teste2'),
+(1337, '2024-05-29', '12:22:55', 'tarefas', 'exclusão', 1, 116, 'teste2'),
+(1338, '2024-05-29', '12:22:57', 'tarefas', 'exclusão', 1, 115, 'teste2'),
+(1339, '2024-05-29', '12:22:59', 'tarefas', 'exclusão', 1, 114, 'teste2'),
+(1340, '2024-05-29', '12:23:03', 'tarefas', 'exclusão', 1, 110, 'teste'),
+(1341, '2024-05-29', '12:26:36', 'tarefas', 'exclusão', 1, 126, 'teste2'),
+(1342, '2024-05-29', '12:26:39', 'tarefas', 'exclusão', 1, 125, 'teste'),
+(1343, '2024-05-29', '12:32:47', 'tarefas', 'exclusão', 1, 128, 'teste2'),
+(1344, '2024-05-29', '12:32:50', 'tarefas', 'exclusão', 1, 127, 'teste'),
+(1345, '2024-05-29', '12:35:28', 'tarefas', 'exclusão', 1, 130, 'teste2'),
+(1346, '2024-05-29', '12:35:30', 'tarefas', 'exclusão', 1, 129, 'teste'),
+(1347, '2024-05-29', '13:09:32', 'tarefas', 'exclusão', 1, 131, 'teste'),
+(1348, '2024-05-29', '13:09:34', 'tarefas', 'exclusão', 1, 132, 'teste2aaaa'),
+(1349, '2024-05-29', '13:09:36', 'tarefas', 'exclusão', 1, 133, 'teste2'),
+(1350, '2024-05-29', '13:14:17', 'tarefas', 'exclusão', 1, 136, 'Regularizar documento da empresa'),
+(1351, '2024-05-29', '13:14:20', 'tarefas', 'exclusão', 1, 135, 'teste2'),
+(1352, '2024-05-29', '13:14:22', 'tarefas', 'exclusão', 1, 134, 'teste'),
+(1353, '2024-05-29', '13:24:07', 'tarefas', 'exclusão', 1, 138, 'teste2'),
+(1354, '2024-05-29', '13:26:30', 'tarefas', 'exclusão', 1, 139, 'teste2'),
+(1355, '2024-05-29', '13:27:12', 'tarefas', 'exclusão', 1, 140, 'teste2'),
+(1356, '2024-05-29', '13:29:00', 'tarefas', 'exclusão', 1, 141, 'teste2'),
+(1357, '2024-05-29', '13:35:08', 'tarefas', 'exclusão', 1, 142, 'teste2'),
+(1358, '2024-05-29', '13:37:12', 'tarefas', 'exclusão', 1, 143, 'teste2'),
+(1359, '2024-05-29', '13:38:40', 'tarefas', 'exclusão', 1, 144, 'teste'),
+(1360, '2024-05-29', '13:43:45', 'tarefas', 'exclusão', 1, 146, 'teste9'),
+(1361, '2024-05-29', '13:43:50', 'tarefas', 'exclusão', 1, 145, 'teste2'),
+(1362, '2024-05-29', '13:52:39', 'tarefas', 'exclusão', 1, 150, 'TESTAR CÓDIGO'),
+(1363, '2024-05-29', '13:52:42', 'tarefas', 'exclusão', 1, 149, 'TESTAR CÓDIGO'),
+(1364, '2024-05-29', '13:52:44', 'tarefas', 'exclusão', 1, 148, 'teste9'),
+(1365, '2024-05-29', '13:52:47', 'tarefas', 'exclusão', 1, 147, 'teste2'),
+(1366, '2024-05-29', '14:00:17', 'tarefas', 'exclusão', 1, 151, 'teste2'),
+(1367, '2024-05-29', '14:00:38', 'tarefas', 'inserção', 1, 153, 'teste'),
+(1368, '2024-05-29', '14:00:45', 'tarefas', 'inserção', 1, 154, 'teste2'),
+(1369, '2024-05-29', '14:05:11', 'tarefas', 'inserção', 1, 155, 'TESTAR CÓDIGO'),
+(1370, '2024-05-29', '14:06:16', 'tarefas', 'exclusão', 1, 156, 'teste'),
+(1371, '2024-05-29', '14:06:18', 'tarefas', 'exclusão', 1, 155, 'TESTAR CÓDIGO'),
+(1372, '2024-05-29', '14:06:20', 'tarefas', 'exclusão', 1, 154, 'teste2'),
+(1373, '2024-05-29', '14:06:23', 'tarefas', 'exclusão', 1, 153, 'teste'),
+(1374, '2024-05-29', '14:06:25', 'tarefas', 'exclusão', 1, 152, 'teste2');
 
 -- --------------------------------------------------------
 
@@ -405,54 +771,6 @@ CREATE TABLE `movimentacoes` (
   `lancamento` varchar(35) NOT NULL,
   `id_mov` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `movimentacoes`
---
-
-INSERT INTO `movimentacoes` (`id`, `tipo`, `movimento`, `descricao`, `valor`, `usuario`, `data`, `lancamento`, `id_mov`) VALUES
-(1, 'Saída', 'Conta à Pagar', 'Conta DDD - Parcela 3', 83.34, 1, '2021-10-18', 'Cartão de Débito', 36),
-(2, 'Saída', 'Conta à Pagar', 'Conta DDD - Parcela 3', 83.34, 1, '2021-10-18', 'Cartão de Débito', 36),
-(3, 'Saída', 'Conta à Pagar', '(Resíduo) Conta DDD - Parcela 2', 50.00, 1, '2021-10-18', 'Caixa', 35),
-(4, 'Saída', 'Conta à Pagar', '(Resíduo) Conta DDD - Parcela 2', 20.00, 1, '2021-10-18', 'Caixa', 35),
-(5, 'Saída', 'Conta à Pagar', '(Resíduo) Conta DDD - Parcela 2', 5.00, 1, '2021-10-18', 'Caixa', 35),
-(6, 'Saída', 'Conta à Pagar', '(Resíduo) Conta DDD - Parcela 2', 5.00, 1, '2021-10-18', 'Caixa', 35),
-(7, 'Saída', 'Conta à Pagar', 'Conta DDD - Parcela 1', 83.33, 1, '2021-10-18', 'Cartão de Débito', 34),
-(8, 'Saída', 'Conta à Pagar', 'Conta', 200.00, 1, '2021-10-18', 'Caixa', 37),
-(9, 'Saída', 'Conta à Pagar', '(Resíduo) Conta', 100.00, 1, '2021-10-18', 'Caixa', 38),
-(10, 'Saída', 'Conta à Pagar', 'Conta', 105.00, 1, '2021-10-18', 'Caixa', 38),
-(11, 'Saída', 'Conta à Pagar', 'Conta DDD - Parcela 2', 3.33, 1, '2021-10-18', 'Caixa', 35),
-(12, 'Entrada', 'Conta à Receber', '(Resíduo) Conta - Parcela 1', 50.00, 1, '2021-10-18', 'Caixa', 4),
-(13, 'Entrada', 'Conta à Receber', 'Conta - Parcela 2', 200.00, 1, '2021-10-18', 'Caixa', 5),
-(14, 'Entrada', 'Conta à Receber', 'Empresa X', 280.00, 1, '2021-10-19', 'Caixa', 7),
-(15, 'Saída', 'Conta à Pagar', 'Conta X - Parcela 1', 66.67, 1, '2021-10-19', 'Itaú', 30),
-(16, 'Entrada', 'Conta à Receber', 'Conta - Parcela 1', 150.00, 1, '2021-10-19', 'Itaú', 4),
-(17, 'Saída', 'Conta à Pagar', 'Aluguél', 1200.00, 1, '2021-10-19', 'Bradesco', 40),
-(18, 'Entrada', 'Conta à Receber', 'Empresa X', 160.00, 1, '2021-10-19', 'Caixa', 1),
-(19, 'Saída', 'Conta à Pagar', 'Conta - Parcela 1', 33.33, 1, '2021-10-19', 'Caixa', 41),
-(20, 'Saída', 'Conta à Pagar', 'Conta - Parcela 1', 33.33, 7, '2021-10-20', 'Caixa', 45),
-(21, 'Entrada', 'Conta à Receber', 'aaaa', 500.00, 7, '2021-10-20', 'Itaú', 8),
-(22, 'Entrada', 'Conta à Receber', 'Conta - Parcela 3', 200.00, 7, '2021-10-20', 'Caixa', 6),
-(23, 'Entrada', 'Conta à Receber', 'Teste', 200.00, 1, '2021-10-27', 'Caixa', 9),
-(24, 'Entrada', 'Conta à Receber', 'Talita Santos', 300.00, 1, '2021-10-27', 'Caixa', 12),
-(25, 'Saída', 'Conta à Pagar', 'Kamila Silva Santos', 500.00, 1, '2021-10-27', 'Caixa', 49),
-(26, 'Saída', 'Conta à Pagar', 'Empresa CD - Parcela 2', 15.00, 1, '2021-11-01', 'Caixa', 52),
-(27, 'Saída', 'Conta à Pagar', 'Empresa CD - Parcela 1', 15.00, 1, '2021-10-29', 'Caixa', 51),
-(28, 'Saída', 'Conta à Pagar', 'Empresa CD', 230.00, 1, '2021-10-31', 'Caixa', 48),
-(29, 'Saída', 'Conta à Pagar', 'Conta - Parcela 3', 33.34, 1, '2021-10-29', 'Caixa', 43),
-(30, 'Saída', 'Conta à Pagar', 'Conta - Parcela 1', 33.33, 1, '2021-10-29', 'Caixa', 46),
-(31, 'Saída', 'Conta à Pagar', 'Conta X - Parcela 3', 66.66, 1, '2021-10-28', 'Cartão de Débito', 32),
-(32, 'Entrada', 'Conta à Receber', 'Empresa X', 800.00, 1, '2021-11-01', 'Caixa', 11),
-(33, 'Entrada', 'Conta à Receber', 'Empresa X', 250.00, 1, '2021-10-29', 'Caixa', 13),
-(34, 'Saída', 'Conta à Pagar', 'Empresa CD', 500.00, 1, '2021-06-15', 'Caixa', 56),
-(35, 'Saída', 'Conta à Pagar', 'Empresa CD', 600.00, 1, '2021-07-15', 'Caixa', 55),
-(36, 'Entrada', 'Conta à Receber', 'Empresa X', 850.00, 1, '2021-06-01', 'Caixa', 15),
-(37, 'Entrada', 'Conta à Receber', 'Talita Santos', 360.00, 1, '2021-07-01', 'Caixa', 14),
-(38, 'Entrada', 'Conta à Receber', 'Empresa X', 200.00, 1, '2021-08-01', 'Caixa', 16),
-(39, 'Entrada', 'Conta à Receber', 'Empresa X', 250.00, 1, '2021-11-01', 'Cartão de Débito', 17),
-(40, 'Entrada', 'Conta à Receber', 'Empresa Y', 353.00, 1, '2024-01-09', 'Caixa', 20),
-(41, 'Saída', 'Conta à Pagar', 'Aluguel', 1500.00, 1, '2024-01-30', 'Caixa', 58),
-(42, 'Saída', 'Conta à Pagar', 'Conta - Parcela 1', 33.33, 1, '2024-02-05', 'Caixa', 54);
 
 -- --------------------------------------------------------
 
@@ -476,41 +794,6 @@ CREATE TABLE `pagar` (
   `pago` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Despejando dados para a tabela `pagar`
---
-
-INSERT INTO `pagar` (`id`, `descricao`, `pessoa`, `valor`, `data_lanc`, `data_venc`, `data_pgto`, `usuario_lanc`, `usuario_pgto`, `frequencia`, `saida`, `arquivo`, `pago`) VALUES
-(2, 'Conta de Luz', 0, 189.99, '2021-10-18', '2021-10-18', '0000-00-00', 0, 0, 0, 'Caixa', 'sem-foto.png', ''),
-(8, 'Conta de àgua', 0, 890.50, '2021-10-18', '2021-10-18', '0000-00-00', 1, 0, 0, 'Caixa', '18-10-2021-15-02-46-conta3.jpg', 'Não'),
-(10, 'Compra de Cadeiras - Parcela 1', 1, 130.00, '2021-10-18', '2021-10-18', '0000-00-00', 0, 0, 0, 'Caixa', 'sem-foto.png', 'Não'),
-(13, 'Conta de Telefone - Parcela 1', 0, 33.33, '2021-10-18', '2021-10-19', '0000-00-00', 0, 0, 0, 'Bradesco', 'sem-foto.png', 'Não'),
-(14, 'Conta de Telefone - Parcela 2', 0, 33.33, '2021-10-18', '2021-11-19', '0000-00-00', 0, 0, 0, 'Bradesco', 'sem-foto.png', 'Não'),
-(30, 'Conta X - Parcela 1', 2, 66.67, '2021-10-18', '2021-10-18', '2021-10-19', 0, 1, 0, 'Itaú', '18-10-2021-17-31-26-pdfteste.zip', 'Sim'),
-(31, 'Conta X - Parcela 2', 2, 66.67, '2021-10-18', '2021-10-19', '0000-00-00', 0, 0, 0, 'Cartão de Débito', '18-10-2021-17-31-26-pdfteste.zip', 'Não'),
-(32, 'Conta X - Parcela 3', 2, 66.66, '2021-10-18', '2021-10-20', '2021-10-28', 0, 1, 0, 'Cartão de Débito', '18-10-2021-17-31-26-pdfteste.zip', 'Sim'),
-(34, 'Conta DDD - Parcela 1', 1, 83.33, '2021-10-18', '2021-10-18', '2021-10-18', 0, 1, 0, 'Cartão de Débito', 'sem-foto.png', 'Sim'),
-(35, 'Conta DDD - Parcela 2', 1, 3.33, '2021-10-18', '2021-11-18', '2021-10-18', 0, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(36, 'Conta DDD - Parcela 3', 1, 83.34, '2021-10-18', '2021-12-18', '2021-10-18', 0, 1, 0, 'Cartão de Débito', 'sem-foto.png', 'Sim'),
-(37, 'Conta', 2, 200.00, '2021-10-18', '2021-10-18', '2021-10-18', 1, 1, 1, 'Caixa', 'sem-foto.png', 'Sim'),
-(38, 'Conta', 2, 105.00, '2021-10-18', '2021-10-19', '2021-10-18', 1, 1, 30, 'Caixa', 'sem-foto.png', 'Sim'),
-(40, 'Aluguél', 1, 1200.00, '2021-10-19', '2021-10-19', '2021-10-19', 1, 1, 30, 'Bradesco', '19-10-2021-11-48-28-pdfteste.pdf', 'Sim'),
-(41, 'Conta - Parcela 1', 2, 33.33, '2021-10-19', '2021-10-17', '2021-10-19', 1, 1, 30, 'Caixa', 'sem-foto.png', 'Sim'),
-(42, 'Conta - Parcela 2', 2, 33.33, '2021-10-19', '2021-11-17', '0000-00-00', 1, 0, 30, 'Caixa', 'sem-foto.png', 'Não'),
-(43, 'Conta - Parcela 3', 2, 33.34, '2021-10-19', '2021-12-17', '2021-10-29', 1, 1, 30, 'Caixa', 'sem-foto.png', 'Sim'),
-(44, 'Aluguél', 1, 1200.00, '2021-10-19', '2021-11-19', '0000-00-00', 0, 0, 30, 'Bradesco', '19-10-2021-11-48-28-pdfteste.pdf', 'Não'),
-(45, 'Conta - Parcela 1', 2, 33.33, '2021-10-19', '2021-11-17', '2021-10-20', 0, 7, 30, 'Caixa', 'sem-foto.png', 'Sim'),
-(46, 'Conta - Parcela 1', 2, 33.33, '2021-10-20', '2021-12-17', '2021-10-29', 0, 1, 30, 'Caixa', 'sem-foto.png', 'Sim'),
-(48, 'Empresa CD', 2, 230.00, '2021-10-27', '2021-10-27', '2021-10-31', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(49, 'Kamila Silva Santos', 1, 400.00, '2021-10-27', '2021-10-27', '2021-10-27', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(51, 'Empresa CD - Parcela 1', 2, 15.00, '2021-10-28', '2021-10-28', '2021-10-29', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(52, 'Empresa CD - Parcela 2', 2, 15.00, '2021-10-28', '2021-11-28', '2021-11-01', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(53, 'Conta - Parcela 3', 2, 33.34, '2021-11-01', '2022-01-17', '0000-00-00', 0, 0, 30, 'Caixa', 'sem-foto.png', 'Não'),
-(54, 'Conta - Parcela 1', 2, 33.33, '2021-11-01', '2022-01-17', '2024-02-05', 0, 1, 30, 'Caixa', 'sem-foto.png', 'Sim'),
-(55, 'Empresa CD', 2, 600.00, '2021-11-01', '2021-11-01', '2021-07-15', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(56, 'Empresa CD', 2, 500.00, '2021-11-01', '2021-11-01', '2021-06-15', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(58, 'Aluguel', 2, 1500.00, '2024-01-09', '2024-01-09', '2024-01-30', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim');
-
 -- --------------------------------------------------------
 
 --
@@ -533,28 +816,6 @@ CREATE TABLE `receber` (
   `pago` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Despejando dados para a tabela `receber`
---
-
-INSERT INTO `receber` (`id`, `descricao`, `pessoa`, `valor`, `data_lanc`, `data_venc`, `data_pgto`, `usuario_lanc`, `usuario_pgto`, `frequencia`, `saida`, `arquivo`, `pago`) VALUES
-(1, 'Empresa X', 2, 160.00, '2021-10-18', '2021-10-19', '2021-10-19', 1, 1, 0, 'Caixa', '18-10-2021-19-55-56-pdfteste.pdf', 'Sim'),
-(4, 'Conta - Parcela 1', 0, 150.00, '2021-10-18', '2021-10-18', '2021-10-19', 1, 1, 0, 'Itaú', 'sem-foto.png', 'Sim'),
-(5, 'Conta - Parcela 2', 0, 200.00, '2021-10-18', '2021-11-18', '2021-10-18', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(6, 'Conta - Parcela 3', 0, 200.00, '2021-10-18', '2021-12-18', '2021-10-20', 1, 7, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(7, 'Empresa X', 2, 280.00, '2021-10-19', '2021-10-19', '2021-10-19', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(8, 'aaaa', 0, 500.00, '2021-10-20', '2021-10-20', '2021-10-20', 7, 7, 0, 'Itaú', 'sem-foto.png', 'Sim'),
-(9, 'Teste', 2, 200.00, '2021-10-25', '2021-10-26', '2021-10-27', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(10, 'Empresa X', 2, 650.00, '2021-10-27', '2021-10-27', '0000-00-00', 1, 0, 0, 'Caixa', 'sem-foto.png', 'Não'),
-(11, 'Empresa X', 2, 800.00, '2021-10-27', '2021-10-27', '2021-11-01', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(12, 'Talita Santos', 1, 300.00, '2021-10-27', '2021-10-27', '2021-10-27', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(13, 'Empresa X', 2, 250.00, '2021-11-01', '2021-11-01', '2021-10-29', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(14, 'Talita Santos', 1, 360.00, '2021-11-01', '2021-11-01', '2021-07-01', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(15, 'Empresa X', 2, 850.00, '2021-11-01', '2021-11-01', '2021-06-01', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(16, 'Empresa X', 2, 200.00, '2021-11-01', '2021-11-01', '2021-08-01', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim'),
-(17, 'Empresa X', 2, 250.00, '2021-11-01', '2021-11-01', '2021-11-01', 1, 1, 0, 'Cartão de Débito', 'sem-foto.png', 'Sim'),
-(20, 'Empresa Y', 1, 353.00, '2024-01-09', '2024-01-09', '2024-01-09', 1, 1, 0, 'Caixa', 'sem-foto.png', 'Sim');
-
 -- --------------------------------------------------------
 
 --
@@ -571,12 +832,12 @@ CREATE TABLE `setor_arquivos` (
 --
 
 INSERT INTO `setor_arquivos` (`id`, `nome`) VALUES
-(15, 'Todos'),
-(16, 'Financeiro'),
-(17, 'Secretaria'),
-(18, 'RH'),
-(19, 'Gerencial'),
-(20, 'Recepção');
+(1, 'Todos'),
+(2, 'Financeiro'),
+(3, 'Secretaria'),
+(4, 'RH'),
+(5, 'Gerencial'),
+(6, 'Recepção');
 
 -- --------------------------------------------------------
 
@@ -588,7 +849,7 @@ CREATE TABLE `tarefas` (
   `id` int(11) NOT NULL,
   `titulo` varchar(40) NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
-  `hora` time NOT NULL,
+  `hora` varchar(20) DEFAULT NULL,
   `data` date NOT NULL,
   `usuario` int(11) NOT NULL,
   `usuario_lanc` int(11) NOT NULL,
@@ -601,10 +862,30 @@ CREATE TABLE `tarefas` (
 --
 
 INSERT INTO `tarefas` (`id`, `titulo`, `descricao`, `hora`, `data`, `usuario`, `usuario_lanc`, `status`, `obs`) VALUES
-(52, 'Regularizar documento da empresa', 'tarefa teste', '21:30:00', '2024-05-11', 17, 1, 'Agendada', 'fazer a remgularizaçãokjahsfdkjahsfjsadhfk'),
-(53, 'Regularizar documento da empresa', 'tarefa teste', '01:37:00', '2024-05-11', 17, 1, 'Agendada', 'fazer a remgularizaçãokjahsfdkjahsfjsadhfk'),
-(54, 'Regularizar documento da empresa', 'tarefa teste', '09:48:00', '2024-05-11', 17, 1, 'Agendada', 'fazer a remgularizaçãokjahsfdkjahsfjsadhfk'),
-(55, 'teste', 'tarefa teste', '02:13:00', '2024-05-11', 1, 1, 'Concluída', 'fghdfgh');
+(137, 'teste', 'tarefa teste', '----', '2024-05-29', 17, 1, 'Agendada', ''),
+(157, 'teste2', 'documento', '----', '2024-05-29', 17, 1, 'Agendada', ''),
+(158, 'TESTAR CÓDIGO', 'documento', '14:50', '2024-05-29', 17, 1, 'Agendada', ''),
+(159, 'teste', 'tarefa teste', '----', '2024-05-29', 17, 1, 'Agendada', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tipos_empresas`
+--
+
+CREATE TABLE `tipos_empresas` (
+  `id` int(11) NOT NULL,
+  `tipo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tipos_empresas`
+--
+
+INSERT INTO `tipos_empresas` (`id`, `tipo`) VALUES
+(1, 'MEI'),
+(4, 'LTDA'),
+(7, 'ME');
 
 -- --------------------------------------------------------
 
@@ -629,8 +910,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `senha_crip`, `senha`, `nivel`, `foto`, `id_usu`) VALUES
-(1, 'Renato Elci', '000.000.000-00', 'renato@consult.com', '202cb962ac59075b964b07152d234b70', '123', 'Administrador', 'sem-perfil.jpg', 0),
-(17, 'Ulisses', '377.816.498-85', 'ualbardeiro@gmail.com', '202cb962ac59075b964b07152d234b70', '123', 'Gerente', 'sem-perfil.jpg', 29);
+(1, 'Ulisses Albardeiro', '000.000.000-00', 'ualbardeiro@gmail.com', '202cb962ac59075b964b07152d234b70', '123', 'Administrador', '11-10-2021-15-36-45-2.jpg', 0),
+(17, 'Ulisses', '377.816.498-85', 'secretario@gmail.com', '202cb962ac59075b964b07152d234b70', '123', 'Secretario', 'sem-perfil.jpg', 29);
 
 -- --------------------------------------------------------
 
@@ -766,6 +1047,12 @@ ALTER TABLE `tarefas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `tipos_empresas`
+--
+ALTER TABLE `tipos_empresas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -791,19 +1078,19 @@ ALTER TABLE `arquivos`
 -- AUTO_INCREMENT de tabela `cargos`
 --
 ALTER TABLE `cargos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `cat_arquivos`
 --
 ALTER TABLE `cat_arquivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `config`
@@ -851,7 +1138,7 @@ ALTER TABLE `jornada`
 -- AUTO_INCREMENT de tabela `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1186;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1375;
 
 --
 -- AUTO_INCREMENT de tabela `movimentacoes`
@@ -875,13 +1162,19 @@ ALTER TABLE `receber`
 -- AUTO_INCREMENT de tabela `setor_arquivos`
 --
 ALTER TABLE `setor_arquivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tarefas`
 --
 ALTER TABLE `tarefas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+
+--
+-- AUTO_INCREMENT de tabela `tipos_empresas`
+--
+ALTER TABLE `tipos_empresas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
