@@ -7,6 +7,9 @@ $tabela = 'tarefas';
 $usuario_logado = @$_SESSION['id_usuario'];
 
 $titulo = $_POST['titulo'];
+$tipo_tarefa = $_POST['tipo_tarefa'];
+$data_início_tarefa = $_POST['data_início_tarefa'];
+$frequencia_tarefa = $_POST['frequencia_tarefa'];
 $data = $_POST['data'];
 $hora = $_POST['hora'];
 $descricao = $_POST['descricao'];
@@ -14,13 +17,21 @@ $obs = $_POST['area'];
 $id_usuario = $_POST['usuario'];
 $id = $_POST['id'];
 
-if($hora == null){
-	$hora = '----';
-}else{
-	$horaF = date("H:i", strtotime($hora));
+if($tipo_tarefa == 'Única'){
+	$data_início_tarefa = $data;
+	$frequencia_tarefa = 'Não repete';
 }
 
-$dataF = implode('/', array_reverse(explode('-', $data)));
+
+
+
+if($hora == null){
+	$hora = 'Sem hora';
+}
+	/* $hora_formatada = date("H:i", strtotime($hora)); */
+
+
+$data_formatada = date('d-m-Y', strtotime($data));
 
 
 	//IMPEDIR TAREFA DUPLICADA NO MESMO HORÁRIO 
@@ -34,12 +45,12 @@ $dataF = implode('/', array_reverse(explode('-', $data)));
 
 
 if($id == ""){
-	$query = $pdo->prepare("INSERT INTO $tabela SET titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$usuario_logado', status = 'Agendada', obs = :obs");
+	$query = $pdo->prepare("INSERT INTO $tabela SET tipo_tarefa = '$tipo_tarefa', data_inicio = '$data_início_tarefa', frequencia = '$frequencia_tarefa', titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$usuario_logado', status = 'Agendada', obs = :obs");
 	$acao = 'inserção';
 	
 
 }else{
-	$query = $pdo->prepare("UPDATE $tabela SET titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$usuario_logado', obs = :obs where id = '$id'");
+	$query = $pdo->prepare("UPDATE $tabela SET tipo_tarefa = '$tipo_tarefa', data_inicio = '$data_início_tarefa', frequencia = '$frequencia_tarefa', titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$usuario_logado', obs = :obs where id = '$id'");
 	$acao = 'edição';
 
 	
@@ -64,7 +75,7 @@ for ($i_not=  0; $i_not < count($res_not); $i_not++) {
 }
 $token = $res_not[$i_not]['token'];
 $titulo_not = 'Tarefa Agendada';
-$conteudo_not = $horaF . ' Data '. $dataF;
+$conteudo_not = $hora_formatada . ' Data '. $data_formatada;
 require("../notificacoes.php");
 
 }	

@@ -37,7 +37,7 @@ $pag = 'clientes';
 
 						<div class="col-md-2">						
 							<div class="form-group"> 
-								<label>Física / Jurídica</label> 
+								<label>Tipo</label> 
 								<select class="form-control" name="pessoa" id="pessoa"> 
 									<option value="Física">Física</option>
 									<option value="Jurídica">Jurídica</option>
@@ -127,7 +127,7 @@ $pag = 'clientes';
 
 					<br>
 					<input type="hidden" name="id" id="id"> 
-					<small><div id="mensagem" align="center" class="mt-3"></div></small>					
+					<small><div id="mensagem" style="text-align: center;" class="mt-3"></div></small>					
 
 				</div>
 
@@ -159,7 +159,7 @@ $pag = 'clientes';
 			<form method="post" id="form-excluir">
 				<div class="modal-body">
 
-					<div class="row" align="center">
+					<div class="row" style="text-align: center;">
 						<div class="col-md-6">
 							<button type="submit" class="btn btn-danger" style="width:100px">Sim</button>
 						</div>
@@ -171,7 +171,7 @@ $pag = 'clientes';
 					<br>
 					<input type="hidden" name="id" id="id-excluir"> 
 					<input type="hidden" name="nome" id="nome-excluir"> 
-					<small><div id="mensagem-excluir" align="center" class="mt-3"></div></small>					
+					<small><div id="mensagem-excluir" style="text-align: center;" class="mt-3"></div></small>					
 
 				</div>
 
@@ -322,7 +322,7 @@ $pag = 'clientes';
 						<small><div id="listar-arquivos"></div></small>
 
 						<br>
-						<small><div align="center" id="mensagem-arquivo"></div></small>
+						<small><div style="text-align: center;" id="mensagem-arquivo"></div></small>
 
 						<input type="hidden" class="form-control" name="id-arquivo"  id="id-arquivo">
 

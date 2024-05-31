@@ -75,7 +75,7 @@ $pag = 'tarefas';
 					<br>
 					<input type="hidden" name="id" id="id">
 					<small>
-						<div id="mensagem" style="align:center;" class="mt-3"></div>
+						<div id="mensagem" style="text-align:center;" class="mt-3"></div>
 					</small>
 
 
@@ -108,7 +108,7 @@ $pag = 'tarefas';
 			<form method="post" id="form-excluir">
 				<div class="modal-body">
 
-					<div class="row" style="align:center;">
+					<div class="row" style="text-align:center;">
 						<div class="col-md-6">
 							<button type="submit" class="btn btn-danger" style="width:100px">Sim</button>
 						</div>
@@ -121,7 +121,7 @@ $pag = 'tarefas';
 					<input type="hidden" name="id" id="id-excluir">
 					<input type="hidden" name="nome" id="nome-excluir">
 					<small>
-						<div id="mensagem-excluir" style="align: center;" class="mt-3"></div>
+						<div id="mensagem-excluir" style="text-align:center;" class="mt-3"></div>
 					</small>
 
 				</div>

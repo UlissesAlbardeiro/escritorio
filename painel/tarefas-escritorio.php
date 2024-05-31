@@ -35,6 +35,63 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 				<div class="modal-body">
 
 					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Tipo</label>
+								<select value="Selecione" class="form-control" name="tipo_tarefa" id="tipo_tarefa">
+								 	<option value="Periódica">Tarefa Periódica</option>
+									<option value="Única">Tarefa Única</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-md-4" id="nasc">
+							<div id="data_início_tarefa" class="form-group">
+								<label>Data de início </label>
+								<input type="date" class="form-control" name="data_início_tarefa" value="<?php echo date('Y-m-d') ?>">
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div id="frequencia_tarefa" class="form-group">
+								<label>Frequência</label>
+								<select class="form-control" name="frequencia_tarefa" >
+									<option value="1">1 dia</option>
+									<option value="2">2 dias</option>
+									<option value="3">3 dias</option>
+									<option value="4">4 dias</option>
+									<option value="5">5 dias</option>
+									<option value="6">6 dias</option>
+									<option value="7">7 dias</option>
+									<option value="8">8 dias</option>
+									<option value="9">9 dias</option>
+									<option value="10">10 dias</option>
+									<option value="11">11 dias</option>
+									<option value="12">12 dias</option>
+									<option value="13">13 dias</option>
+									<option value="14">14 dias</option>
+									<option value="15">15 dias</option>
+									<option value="16">16 dias</option>
+									<option value="17">17 dias</option>
+									<option value="18">18 dias</option>
+									<option value="19">19 dias</option>
+									<option value="20">20 dias</option>
+									<option value="21">21 dias</option>
+									<option value="22">22 dias</option>
+									<option value="23">23 dias</option>
+									<option value="24">24 dias</option>
+									<option value="25">25 dias</option>
+									<option value="26">26 dias</option>
+									<option value="28">28 dias</option>
+									<option value="29">29 dias</option>
+									<option value="30">30 dias</option>
+				
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
 						<div class="col-md-8">
 							<div class="form-group">
 								<label>Título <small>(Máx 40 Caracteres)</small></label>
@@ -42,8 +99,8 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 							</div>
 						</div>
 
-						<div class="col-md-4" id="nasc">
-							<div class="form-group">
+						<div class="col-md-4">
+							<div id="data_tarefa" style="display:none;" class="form-group">
 								<label>Data </label>
 								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('Y-m-d') ?>">
 							</div>
@@ -52,14 +109,14 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 
 
 					<div class="row">
-						<div class="col-md-3" id="nasc">
+						<div class="col-md-4" id="nasc">
 							<div class="form-group">
 								<label>Hora (opcional)</label>
 								<input type="time" class="form-control" name="hora" id="hora" value="<?php echo $hora = date('H:i'); ?>">
 							</div>
 						</div>
 
-						<div class="col-md-9" id="nasc">
+						<div class="col-md-8" id="nasc">
 							<div class="form-group">
 								<label>Funcionário / Usuário </label>
 								<select class="form-control sel2" name="usuario" id="usuario" required style="width:100%;">
@@ -70,7 +127,7 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 										foreach ($res[$i] as $key => $value) {
 										} ?>
 
-										<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome']?> - <?php echo $res[$i]['nivel']  ?></option>
+										<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome'] ?> - <?php echo $res[$i]['nivel']  ?></option>
 
 									<?php } ?>
 
@@ -101,7 +158,7 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 					<br>
 					<input type="hidden" name="id" id="id">
 					<small>
-						<div id="mensagem" style="align:center;" class="mt-3"></div>
+						<div id="mensagem" style="text-align:center;" class="mt-3"></div>
 					</small>
 
 
@@ -132,7 +189,7 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 			<form method="post" id="form-excluir">
 				<div class="modal-body">
 
-					<div class="row" style="align:center;">
+					<div class="row" style="text-align:center;">
 						<div class="col-md-6">
 							<button type="submit" class="btn btn-danger" style="width:100px">Sim</button>
 						</div>
@@ -145,7 +202,7 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 					<input type="hidden" name="id" id="id-excluir">
 					<input type="hidden" name="nome" id="nome-excluir">
 					<small>
-						<div id="mensagem-excluir" style="align:center;" class="mt-3"></div>
+						<div id="mensagem-excluir" style="text-align:center;" class="mt-3"></div>
 					</small>
 
 				</div>
@@ -277,6 +334,26 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 			processData: false,
 
 		});
+
+	});
+</script>
+
+<script>
+	//JQUE PARA SELECIONAR CAMPO DE FREQUÊNCIA DE TAREFA
+	$(document).ready(function() {
+
+		$('#tipo_tarefa').change(function(){
+			if($(this).val() == 'Periódica'){
+				document.getElementById('frequencia_tarefa').style.display = 'block';
+				document.getElementById('data_início_tarefa').style.display = 'block';
+				document.getElementById('data_tarefa').style.display = 'none';
+			}else{
+				document.getElementById('frequencia_tarefa').style.display = 'none';
+				document.getElementById('data_início_tarefa').style.display = 'none';
+				document.getElementById('data_tarefa').style.display = 'block';
+			}
+		});
+
 
 	});
 </script>
