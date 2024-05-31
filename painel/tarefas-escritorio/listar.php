@@ -44,6 +44,8 @@ HTML;
 		$status = $res[$i]['status'];
 		$obs = $res[$i]['obs'];
 
+		
+
 
 		//QUANTIDADE DE DIAS ATÉ A NOTIFICAÇÃO DA TEREFA
 		if ($tipo_tarefa == 'Periódica') {
@@ -54,55 +56,26 @@ HTML;
 			if (($data_inicio - $hoje) > $frequencia_tarefa) {
 				$dias_que_faltam = ($data_inicio - $hoje) / 86400;
 				$data_formatada = 'Em '.$dias_que_faltam.' dia(s)';
+				$frequencia = 'A cada '.$frequencia_tarefa.' dias';
 			} else {
 				$diferenca = $hoje - $data_inicio;
 				$dia = $diferenca / 86400; //transformando segundos em dias
 				$modulo = $dia % $frequencia_tarefa;
+				$frequencia = 'A cada '.$frequencia_tarefa.' dias';
 
 				if ($modulo == 0) {
-
 					echo $data_formatada = 'Hoje';
+					$frequencia = 'A cada '.$frequencia_tarefa.' dias';
 				} else {
 					$data_dias = $modulo - $frequencia_tarefa;
 					$data_formatada = 'Em '.$data_dias.' dia(s)';
+					$frequencia = 'A cada '.$frequencia_tarefa.' dias';
 				}
 			}
 		} else {
 			$data_formatada = date('d/m/Y', strtotime($data));
+			$frequencia = $frequencia_tarefa;
 		}
-
-
-
-
-
-		/* if($tipo_tarefa == 'Periódica'){
-	$hoje = strtotime(date('Y-m-d'));
-	$data_inicio = strtotime(date($data_inicio_tarefa));
-	$diferenca = $hoje - $data_inicio;
-	$dia = $diferenca / 86400; //transformando segundos em dias
-	$modulo = $dia % $frequencia_tarefa;
-
-	if($modulo == 0){
-
-    	$data_formatada = 'Hoje';
- 
-	}else{
-    	$data_formatada = $modulo;
-	}
-}else{
-	$data_formatada = date('d/m/Y', strtotime( $data));
-} */
-
-
-
-
-		/* if($data_início_tarefa != null){
-	$data = $data_início_tarefa;
-} */
-
-
-
-
 
 		if ($status == 'Concluída') {
 			$icone = 'fa-check-square';
@@ -151,15 +124,15 @@ HTML;
 				<td >{$hora_formatada}</td>
 				<td class="esc">{$data_formatada}</td>
 				<td class="esc">{$tipo_tarefa}</td>
-				<td class="esc">{$frequencia_tarefa}</td>
+				<td class="esc">{$frequencia}</td>
 				<td class="esc">{$nome_usu}</td>
 				<td class="esc">{$nome_usu_lanc}</td>
 				<td class="esc">{$status}</td>
 				
 				<td>
-					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}','{$hora_formatada}','{$data}','{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}', '{$hora_formatada}', '{$data_inicio_tarefa}','{$data}', '{$usuario}', '{$tipo_tarefa}', '{$frequencia}', '{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
-					<big><a href="#" onclick="mostrar('{$id}', '{$titulo}', '{$descricao}','{$hora_formatada}','{$data_formatada}','{$nome_usu}', '{$nome_usu_lanc}', '{$status}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
+					<big><a href="#" onclick="mostrar('{$id}', '{$titulo}', '{$descricao}','{$hora_formatada}','{$data_formatada}','{$nome_usu}', '{$tipo_tarefa}', '{$frequencia}', '{$nome_usu_lanc}', '{$status}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
 					<big><a href="#" onclick="excluir('{$id}', '{$titulo}')" title="Excluir Item"><i class="fa fa-trash-o text-danger"></i></a></big>
 
@@ -193,7 +166,7 @@ HTML;
 
 
 
-	function editar(id, titulo, descricao, hora, data, obs) {
+	function editar(id, titulo, descricao, hora, data, data_inicio, usuario, tipo_tarefa, frequencia_tarefa, obs) {
 
 		for (let letra of obs) {
 			if (letra === '*') {
@@ -206,7 +179,11 @@ HTML;
 		$('#titulo').val(titulo);
 		$('#descricao').val(descricao);
 		$('#hora').val(hora).change();
-		$('#data').val(data);
+		$('#data').val(data).change();
+		$('#data_início_tarefa').val(data_inicio).change();
+		$('#usuario').val(usuario).change();
+		$('#tipo_tarefa').val(tipo_tarefa).change();
+		$('#frequencia_tarefa').val(frequencia_tarefa).change();
 		nicEditors.findEditor("area").setContent(obs);
 
 
@@ -217,7 +194,7 @@ HTML;
 
 
 
-	function mostrar(id, titulo, descricao, hora, data, usuario, usuario_lanc, status, obs) {
+	function mostrar(id, titulo, descricao, hora, data, usuario, tipo_tarefa, frequencia_tarefa, usuario_lanc, status, obs) {
 
 		for (let letra of obs) {
 			if (letra === '*') {
@@ -229,6 +206,8 @@ HTML;
 		$('#nome_mostrar').text(titulo);
 		$('#descricao_mostrar').text(descricao);
 		$('#hora_mostrar').text(hora);
+		$('#tipo_mostrar').text(tipo_tarefa);
+		$('#frequencia_mostrar').text(frequencia_tarefa);
 		$('#data_mostrar').text(data);
 		$('#usuario_mostrar').text(usuario);
 		$('#usuario_lanc_mostrar').text(usuario_lanc);

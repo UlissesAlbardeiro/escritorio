@@ -46,9 +46,9 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 						</div>
 
 						<div class="col-md-4" id="nasc">
-							<div id="data_início_tarefa" class="form-group">
+							<div  class="form-group">
 								<label>Data de início </label>
-								<input type="date" class="form-control" name="data_início_tarefa" value="<?php echo date('Y-m-d') ?>">
+								<input type="date" class="form-control" id="data_início_tarefa" name="data_início_tarefa" value="<?php echo date('Y-m-d') ?>">
 							</div>
 						</div>
 
@@ -261,7 +261,18 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
+					<div class="col-md-6">
+						<span><b>Tipo da tarefa: </b></span>
+						<span id="tipo_mostrar"></span>
+					</div>
+					<div class="col-md-6">
+						<span><b>Frequência: </b></span>
+						<span id="frequencia_mostrar"></span>
+					</div>
+				</div>
 
+
+				<div class="row" style="border-bottom: 1px solid #cac7c7;">
 					<div class="col-md-12">
 						<span><b>Descrição: </b></span>
 						<span id="descricao_mostrar"></span>
