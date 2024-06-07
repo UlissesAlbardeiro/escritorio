@@ -72,15 +72,15 @@ $pag = 'agenda';
 		</div>
 	</div>
 
-
-	<div class="col-xs-12 col-md-8 bs-example widget-shadow" style="padding:10px 5px; margin-top: 0px;" id="listar">
+	<!-- CARDS QUE FICAM AO LADO DO CALENDÁRIO -->
+	<div class="col-md-8 bs-example widget-shadow" style="padding:10px 5px; margin-top: 0px;" id="listar">
 
 	</div>
 </div>
 
 
 
-<!-- Modal -->
+<!-- MODAL DELEGAR TAREFA -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -164,7 +164,7 @@ $pag = 'agenda';
 
 
 
-<!-- ModalExcluir -->
+<!-- MODAL EXCLUIR TAREFA-->
 <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width:400px; margin:0 auto;">
@@ -209,7 +209,7 @@ $pag = 'agenda';
 
 
 
-<!-- ModalMostrar -->
+<!-- MODAL MOSTRAR TAREFAS ESCRITÓRIO -->
 <div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -250,7 +250,18 @@ $pag = 'agenda';
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
+					<div class="col-md-6">
+						<span><b>Tipo da tarefa: </b></span>
+						<span id="tipo_mostrar"></span>
+					</div>
+					<div class="col-md-6">
+						<span><b>Frequência: </b></span>
+						<span id="frequencia_mostrar"></span>
+					</div>
+				</div>
 
+
+				<div class="row" style="border-bottom: 1px solid #cac7c7;">
 					<div class="col-md-12">
 						<span><b>Descrição: </b></span>
 						<span id="descricao_mostrar"></span>
@@ -407,7 +418,7 @@ $pag = 'agenda';
 
 
 <script type="text/javascript">
-	function mostrar(id, titulo, descricao, hora, data, usuario, usuario_lanc, status, obs) {
+	function mostrar(id, titulo, descricao, hora, data, usuario, tipo_tarefa, frequencia_tarefa, usuario_lanc, status, obs) {
 
 		for (let letra of obs) {
 			if (letra === '*') {
@@ -419,6 +430,8 @@ $pag = 'agenda';
 		$('#nome_mostrar').text(titulo);
 		$('#descricao_mostrar').text(descricao);
 		$('#hora_mostrar').text(hora);
+		$('#tipo_mostrar').text(tipo_tarefa);
+		$('#frequencia_mostrar').text(frequencia_tarefa);
 		$('#data_mostrar').text(data);
 		$('#usuario_mostrar').text(usuario);
 		$('#usuario_lanc_mostrar').text(usuario_lanc);

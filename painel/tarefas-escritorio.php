@@ -46,9 +46,9 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 						</div>
 
 						<div class="col-md-4" id="nasc">
-							<div  class="form-group">
+							<div  class="form-group" id="campo_data_início_tarefa">
 								<label>Data de início </label>
-								<input type="date" class="form-control" id="data_início_tarefa" name="data_início_tarefa" value="<?php echo date('Y-m-d') ?>">
+								<input type="date" class="form-control" id="data_inicio_tarefa" name="data_inicio_tarefa" value="<?php echo date('d/m/Y'); ?>">
 							</div>
 						</div>
 
@@ -102,7 +102,7 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 						<div class="col-md-4">
 							<div id="data_tarefa" style="display:none;" class="form-group">
 								<label>Data </label>
-								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('Y-m-d') ?>">
+								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('d/m/Y'); ?>">
 							</div>
 						</div>
 					</div>
@@ -356,11 +356,11 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 		$('#tipo_tarefa').change(function(){
 			if($(this).val() == 'Periódica'){
 				document.getElementById('frequencia_tarefa').style.display = 'block';
-				document.getElementById('data_início_tarefa').style.display = 'block';
+				document.getElementById('campo_data_início_tarefa').style.display = 'block';
 				document.getElementById('data_tarefa').style.display = 'none';
 			}else{
 				document.getElementById('frequencia_tarefa').style.display = 'none';
-				document.getElementById('data_início_tarefa').style.display = 'none';
+				document.getElementById('campo_data_início_tarefa').style.display = 'none';
 				document.getElementById('data_tarefa').style.display = 'block';
 			}
 		});

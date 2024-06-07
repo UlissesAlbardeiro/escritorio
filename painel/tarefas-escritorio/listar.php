@@ -44,8 +44,7 @@ HTML;
 		$status = $res[$i]['status'];
 		$obs = $res[$i]['obs'];
 
-		
-
+		$data_inicio_formatada = implode('/', array_reverse(explode('-', $data_inicio_tarefa)));
 
 		//QUANTIDADE DE DIAS ATÉ A NOTIFICAÇÃO DA TEREFA
 		if ($tipo_tarefa == 'Periódica') {
@@ -73,7 +72,7 @@ HTML;
 				}
 			}
 		} else {
-			$data_formatada = date('d/m/Y', strtotime($data));
+			$data_formatada = implode('/', array_reverse(explode('-', $data)));
 			$frequencia = $frequencia_tarefa;
 		}
 
@@ -130,7 +129,7 @@ HTML;
 				<td class="esc">{$status}</td>
 				
 				<td>
-					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}', '{$hora_formatada}', '{$data_inicio_tarefa}','{$data}', '{$usuario}', '{$tipo_tarefa}', '{$frequencia}', '{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}', '{$hora_formatada}', '{$data_inicio_formatada}','{$data_formatada}', '{$usuario}', '{$tipo_tarefa}', '{$frequencia_tarefa}', '{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 					<big><a href="#" onclick="mostrar('{$id}', '{$titulo}', '{$descricao}','{$hora_formatada}','{$data_formatada}','{$nome_usu}', '{$tipo_tarefa}', '{$frequencia}', '{$nome_usu_lanc}', '{$status}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
@@ -180,7 +179,7 @@ HTML;
 		$('#descricao').val(descricao);
 		$('#hora').val(hora).change();
 		$('#data').val(data).change();
-		$('#data_início_tarefa').val(data_inicio).change();
+		$('#data_inicio_tarefa').val(data_inicio).change();
 		$('#usuario').val(usuario).change();
 		$('#tipo_tarefa').val(tipo_tarefa).change();
 		$('#frequencia_tarefa').val(frequencia_tarefa).change();
@@ -224,7 +223,11 @@ HTML;
 		$('#titulo').val('');
 		$('#descricao').val('');
 		$('#hora').val('');
-		$('#data').val('<?= $data_atual ?>');
+		$('#data').val('<?= $data_atual; ?>');
+		$('#data_inicio_tarefa').val('<?= $data_atual; ?>');
+		$('#usuario').val('');
+		$('#tipo_tarefa').val('');
+		$('#frequencia_tarefa').val('');
 		nicEditors.findEditor("area").setContent('');
 
 	}
