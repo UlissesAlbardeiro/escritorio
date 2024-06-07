@@ -79,9 +79,171 @@ $pag = 'agenda';
 </div>
 
 
+<!-- MODAL "DELEGAR TAREFAS" -->
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="tituloModal"></h4>
+				<button id="btn-fechar" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form method="post" id="form-text">
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Tipo</label>
+								<select value="Selecione" class="form-control" name="tipo_tarefa" id="tipo_tarefa">
+								 	<option value="Periódica">Tarefa Periódica</option>
+									<option value="Única">Tarefa Única</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-md-4" id="nasc">
+							<div  class="form-group" id="campo_data_início_tarefa">
+								<label>Data de início </label>
+								<input type="date" class="form-control" id="data_inicio_tarefa" name="data_inicio_tarefa" value="<?php echo date('d/m/Y'); ?>">
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div id="frequencia_tarefa" class="form-group">
+								<label>Frequência</label>
+								<select class="form-control" name="frequencia_tarefa" >
+									<option value="1">1 dia</option>
+									<option value="2">2 dias</option>
+									<option value="3">3 dias</option>
+									<option value="4">4 dias</option>
+									<option value="5">5 dias</option>
+									<option value="6">6 dias</option>
+									<option value="7">7 dias</option>
+									<option value="8">8 dias</option>
+									<option value="9">9 dias</option>
+									<option value="10">10 dias</option>
+									<option value="11">11 dias</option>
+									<option value="12">12 dias</option>
+									<option value="13">13 dias</option>
+									<option value="14">14 dias</option>
+									<option value="15">15 dias</option>
+									<option value="16">16 dias</option>
+									<option value="17">17 dias</option>
+									<option value="18">18 dias</option>
+									<option value="19">19 dias</option>
+									<option value="20">20 dias</option>
+									<option value="21">21 dias</option>
+									<option value="22">22 dias</option>
+									<option value="23">23 dias</option>
+									<option value="24">24 dias</option>
+									<option value="25">25 dias</option>
+									<option value="26">26 dias</option>
+									<option value="28">28 dias</option>
+									<option value="29">29 dias</option>
+									<option value="30">30 dias</option>
+				
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-8">
+							<div class="form-group">
+								<label>Título <small>(Máx 35 Caracteres)</small></label>
+								<input maxlength="35" type="text" class="form-control" name="titulo" id="titulo" required>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div id="data_tarefa" style="display:none;" class="form-group">
+								<label>Data </label>
+								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('d/m/Y'); ?>">
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-4" id="nasc">
+							<div class="form-group">
+								<label>Hora (opcional)</label>
+								<input type="time" class="form-control" name="hora" id="hora" value="<?php echo $hora = date('H:i'); ?>">
+							</div>
+						</div>
+
+						<div class="col-md-8" id="nasc">
+							<div class="form-group">
+								<label>Funcionário / Usuário </label>
+								<select class="form-control sel2" name="usuario" id="usuario" required style="width:100%;">
+									<?php
+									$query = $pdo->query("SELECT * FROM usuarios order by nome asc");
+									$res = $query->fetchAll(PDO::FETCH_ASSOC);
+									for ($i = 0; $i < @count($res); $i++) {
+										foreach ($res[$i] as $key => $value) {
+										} ?>
+
+										<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome'] ?> - <?php echo $res[$i]['nivel']  ?></option>
+
+									<?php } ?>
+
+								</select>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Descrição <small>(Máx 100 Caracteres)</small></label>
+							<input maxlength="100" type="text" class="form-control" name="descricao" id="descricao">
+						</div>
+					</div>
+
+
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>OBS <small>(Max 1000 Caracteres)</small></label>
+							<textarea maxlength="1000" name="area" id="area" class="textarea"> </textarea>
+						</div>
+					</div>
+
+
+					<br>
+					<input type="hidden" name="id" id="id">
+					<small>
+						<div id="mensagem" style="text-align:center;" class="mt-3"></div>
+					</small>
+
+
+
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 <!-- MODAL DELEGAR TAREFA -->
-<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -161,7 +323,7 @@ $pag = 'agenda';
 		</div>
 	</div>
 </div>
-
+ -->
 
 
 <!-- MODAL EXCLUIR TAREFA-->
@@ -293,6 +455,26 @@ $pag = 'agenda';
 	var pag = "<?= $pag ?>"
 </script>
 <script src="js/ajax.js"></script>
+
+<script>
+	//JQUE PARA SELECIONAR CAMPO DE FREQUÊNCIA DE TAREFA
+	$(document).ready(function() {
+
+		$('#tipo_tarefa').change(function(){
+			if($(this).val() == 'Periódica'){
+				document.getElementById('frequencia_tarefa').style.display = 'block';
+				document.getElementById('campo_data_início_tarefa').style.display = 'block';
+				document.getElementById('data_tarefa').style.display = 'none';
+			}else{
+				document.getElementById('frequencia_tarefa').style.display = 'none';
+				document.getElementById('campo_data_início_tarefa').style.display = 'none';
+				document.getElementById('data_tarefa').style.display = 'block';
+			}
+		});
+
+
+	});
+</script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

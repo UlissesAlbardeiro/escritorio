@@ -94,8 +94,8 @@ if (@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario
 					<div class="row">
 						<div class="col-md-8">
 							<div class="form-group">
-								<label>Título <small>(Máx 40 Caracteres)</small></label>
-								<input maxlength="40" type="text" class="form-control" name="titulo" id="titulo" required>
+								<label>Título <small>(Máx 35 Caracteres)</small></label>
+								<input maxlength="35" type="text" class="form-control" name="titulo" id="titulo" required>
 							</div>
 						</div>
 
