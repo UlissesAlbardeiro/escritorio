@@ -67,7 +67,7 @@ HTML;
 					$data_formatada = 'Hoje';
 					$frequencia = 'A cada '.$frequencia_tarefa.' dia(s)';
 				} else {
-					$data_dias = $modulo - $frequencia_tarefa;
+					$data_dias =  $frequencia_tarefa - $modulo;
 					$data_formatada = 'Em '.$data_dias.' dia(s)';
 					$frequencia = 'A cada '.$frequencia_tarefa.' dia(s)';
 				}
