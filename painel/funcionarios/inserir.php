@@ -127,7 +127,7 @@ if($id == ""){
 	
 
 	//inserir o funcionário na tabela de usuários	
-	if(@$nivel_usu != ""){
+	if($nivel_usu != ""){
 		$query_usu = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf,  email = :email, senha_crip = :senha_crip, senha = :senha, nivel = '$nivel_usu',  foto = '$foto' , id_usu = '$ult_id'");
 
 
