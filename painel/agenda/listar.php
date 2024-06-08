@@ -130,7 +130,7 @@ if ($total_reg > 0) {
 				</div>
         		</a>
         		<hr style="margin-top:-2px; margin-bottom: 3px">                    
-                    <div class="stats esc" style="margin-top:-15px;">
+                    <div class="stats" style="margin-top:-15px;">
                       <span>
                       <a href="#" onclick="ativar('{$id}', '{$titulo}', '{$acao}')" title="{$titulo_link}">
                       <i class="fa {$icone} mr-1 text-primary" style="font-size:14px; margin:0; padding:0; width:17px; height: 17px"></i>

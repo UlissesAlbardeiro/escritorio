@@ -16,9 +16,13 @@ $obs = $_POST['area'];
 $id_usuario = $_POST['usuario'];
 $id = $_POST['id'];
 
+if($data_inicio_tarefa == ""){
+	$data_inicio_tarefa = $data;
+}
+
 
 if($tipo_tarefa == 'Única'){
-	$data_início_tarefa = $data;
+	/* $data_início_tarefa = null; */
 	$frequencia_tarefa = 'Não repete';
 }
 

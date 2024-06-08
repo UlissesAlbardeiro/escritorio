@@ -104,7 +104,7 @@ $pag = 'agenda';
 						</div>
 
 						<div class="col-md-4" id="nasc">
-							<div  class="form-group" id="campo_data_início_tarefa">
+							<div  class="form-group" id="campo_data_inicio_tarefa">
 								<label>Data de início </label>
 								<input type="date" class="form-control" id="data_inicio_tarefa" name="data_inicio_tarefa" value="<?php echo date('d/m/Y'); ?>">
 							</div>
@@ -463,11 +463,11 @@ $pag = 'agenda';
 		$('#tipo_tarefa').change(function(){
 			if($(this).val() == 'Periódica'){
 				document.getElementById('frequencia_tarefa').style.display = 'block';
-				document.getElementById('campo_data_início_tarefa').style.display = 'block';
+				document.getElementById('campo_data_inicio_tarefa').style.display = 'block';
 				document.getElementById('data_tarefa').style.display = 'none';
 			}else{
 				document.getElementById('frequencia_tarefa').style.display = 'none';
-				document.getElementById('campo_data_início_tarefa').style.display = 'none';
+				document.getElementById('campo_data_inicio_tarefa').style.display = 'none';
 				document.getElementById('data_tarefa').style.display = 'block';
 			}
 		});

@@ -344,7 +344,7 @@ $data_ano = $ano_atual . "-01-01";
 		</div>
 		<!--left-fixed -navigation-->
 
-		<!-- header-starts -->
+		<!-- INICIO DA HEADER -->
 		<div class="sticky-header header-section ">
 			<div class="header-left">
 				<!--BOTÃO MENU LATERAL-->
@@ -355,26 +355,29 @@ $data_ano = $ano_atual . "-01-01";
 
 
 						<?php
-						$query2 = $pdo->query("SELECT * FROM tarefas where status = 'Agendada' and usuario = '$id_usu' order by data asc, hora asc ");
-						$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-						$tarefasPendentes_taref = @count($res2);
 
-						$query = $pdo->query("SELECT * FROM tarefas where status = 'Agendada' and usuario = '$id_usu' order by data asc, hora asc limit 6 ");
+						$dia_atual = date('Y-m-d');
+						
+						$query2 = $pdo->query("SELECT * FROM tarefas where data <= '$dia_atual' and usuario = '$id_usu' and status = 'Agendada' order by data asc ");
+						$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+						$tarefas_pendentes_hoje = @count($res2);
+
+						$query = $pdo->query("SELECT * FROM tarefas where data <= '$dia_atual' and usuario = '$id_usu' and status = 'Agendada' order by data asc limit 6 ");
 						$res = $query->fetchAll(PDO::FETCH_ASSOC);
-						$tarefasPendentes_taref_limit = @count($res);
+						$tarefas_pendentes_taref_limit = @count($res);
 						?>
 						<li class="dropdown head-dpdn">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue1"><?php echo $tarefasPendentes_taref ?></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge red"><?php echo $tarefas_pendentes_hoje ?></span></a>
 							<ul class="dropdown-menu">
 								<li>
 									<div class="notification_header">
-										<h3>Você possui <?php echo $tarefasPendentes_taref ?> Tarefas Pendentes!</h3>
+										<h3>Você possui <?php echo $tarefas_pendentes_hoje ?> tarefas hoje</h3>
 									</div>
 								</li>
 
 								<?php
-								if ($tarefasPendentes_taref_limit > 0) {
-									for ($i = 0; $i < $tarefasPendentes_taref_limit; $i++) {
+								if ($tarefas_pendentes_taref_limit > 0) {
+									for ($i = 0; $i < $tarefas_pendentes_taref_limit; $i++) {
 										foreach ($res[$i] as $key => $value) {
 										}
 										$id_taref = $res[$i]['id'];

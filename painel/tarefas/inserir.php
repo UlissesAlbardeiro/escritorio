@@ -24,7 +24,7 @@ if ($tipo_tarefa == 'Única') {
 }
 
 if ($hora == null) {
-	$hora = '----';
+	$hora = 'Sem hora';
 }
 
 $data_formatada = date('d-m-Y', strtotime($data));
