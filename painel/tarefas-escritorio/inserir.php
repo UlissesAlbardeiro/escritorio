@@ -27,28 +27,15 @@ if($tipo_tarefa == 'Única'){
 if($hora == null){
 	$hora = 'Sem hora';
 }
-	/* $hora_formatada = date("H:i", strtotime($hora)); */
-
 
 $data_formatada = date('d-m-Y', strtotime($data));
-
-
-	//IMPEDIR TAREFA DUPLICADA NO MESMO HORÁRIO 
-	/* $query = $pdo->query("SELECT * FROM $tabela where data = '$data' and hora = '$hora' and usuario = '$id_usuario'");
-	$res = $query->fetchAll(PDO::FETCH_ASSOC);
-	$total_reg = @count($res);
-	if($total_reg > 0 and $res[0]['id'] != $id){
-		echo 'Este horário não está disponível!';
-		exit();
-	} */
-
 
 if($id == ""){
 	$query = $pdo->prepare("INSERT INTO $tabela SET tipo_tarefa = '$tipo_tarefa', data_inicio = '$data_inicio_tarefa', frequencia = '$frequencia_tarefa', titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$usuario_logado', status = 'Agendada', obs = :obs");
 	$acao = 'inserção';	
 
 }else{
-	$query = $pdo->prepare("UPDATE $tabela SET tipo_tarefa = '$tipo_tarefa', data_inicio = '$data_início_tarefa', frequencia = '$frequencia_tarefa', titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$usuario_logado', obs = :obs where id = '$id'");
+	$query = $pdo->prepare("UPDATE $tabela SET tipo_tarefa = '$tipo_tarefa', data_inicio = '$data_inicio_tarefa', frequencia = '$frequencia_tarefa', titulo = :titulo, descricao = :descricao, hora = '$hora', data = '$data', usuario = '$id_usuario', usuario_lanc = '$usuario_logado', obs = :obs where id = '$id'");
 	$acao = 'edição';
 }
 

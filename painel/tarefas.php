@@ -16,7 +16,7 @@ $pag = 'tarefas';
 
 
 
-
+																						
 <!-- MODAL DE CRIAR/EDITAR MINHAS TAREFAS -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -31,30 +31,89 @@ $pag = 'tarefas';
 				<div class="modal-body">
 
 					<div class="row">
-						<div class="col-md-5">
+						<div class="col-md-4">
 							<div class="form-group">
-								<label>Título <small>(Máx 40 Caracteres)</small></label>
-								<input maxlength="40" type="text" class="form-control" name="titulo" id="titulo" required>
+								<label>Tipo</label>
+								<select value="Selecione" class="form-control" name="tipo_tarefa" id="tipo_tarefa">
+								 	<option value="Periódica">Tarefa Periódica</option>
+									<option value="Única">Tarefa Única</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-md-4" id="nasc">
-							<div class="form-group">
-								<label>Data </label>
-								<input type="date" class="form-control" name="data" id="data" value="<?php echo $data = date('Y-m-d'); ?>">
+							<div  class="form-group" id="campo_data_início_tarefa">
+								<label>Data de início </label>
+								<input type="date" class="form-control" id="data_inicio_tarefa" name="data_inicio_tarefa" value="<?php echo date('d/m/Y'); ?>">
 							</div>
 						</div>
 
+						<div class="col-md-4">
+							<div id="frequencia_tarefa" class="form-group">
+								<label>Frequência</label>
+								<select class="form-control" name="frequencia_tarefa" >
+									<option value="1">1 dia</option>
+									<option value="2">2 dias</option>
+									<option value="3">3 dias</option>
+									<option value="4">4 dias</option>
+									<option value="5">5 dias</option>
+									<option value="6">6 dias</option>
+									<option value="7">7 dias</option>
+									<option value="8">8 dias</option>
+									<option value="9">9 dias</option>
+									<option value="10">10 dias</option>
+									<option value="11">11 dias</option>
+									<option value="12">12 dias</option>
+									<option value="13">13 dias</option>
+									<option value="14">14 dias</option>
+									<option value="15">15 dias</option>
+									<option value="16">16 dias</option>
+									<option value="17">17 dias</option>
+									<option value="18">18 dias</option>
+									<option value="19">19 dias</option>
+									<option value="20">20 dias</option>
+									<option value="21">21 dias</option>
+									<option value="22">22 dias</option>
+									<option value="23">23 dias</option>
+									<option value="24">24 dias</option>
+									<option value="25">25 dias</option>
+									<option value="26">26 dias</option>
+									<option value="28">28 dias</option>
+									<option value="29">29 dias</option>
+									<option value="30">30 dias</option>
+				
+								</select>
+							</div>
+						</div>
+					</div>
 
-						<div class="col-md-3" id="nasc">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="form-group">
+								<label>Título <small>(Máx 35 Caracteres)</small></label>
+								<input maxlength="35" type="text" class="form-control" name="titulo" id="titulo" required>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div id="data_tarefa" style="display:none;" class="form-group">
+								<label>Data </label>
+								<input type="date" class="form-control" name="data" id="data" value="<?php echo date('d/m/Y'); ?>">
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-4" id="nasc">
 							<div class="form-group">
 								<label>Hora (opcional)</label>
 								<input type="time" class="form-control" name="hora" id="hora" value="<?php echo $hora = date('H:i'); ?>">
 							</div>
 						</div>
-
-
 					</div>
+
+
 
 					<div class="col-md-12">
 						<div class="form-group">
@@ -72,6 +131,7 @@ $pag = 'tarefas';
 						</div>
 					</div>
 
+
 					<br>
 					<input type="hidden" name="id" id="id">
 					<small>
@@ -84,9 +144,7 @@ $pag = 'tarefas';
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">Salvar</button>
 					</div>
-
 				</div>
-
 			</form>
 
 		</div>
@@ -95,7 +153,7 @@ $pag = 'tarefas';
 
 
 
-<!-- MODAL EXCLUIR TAREFA -->
+<!-- MODAL EXCLUIR TAREFAS ESCRITÓRIO -->
 <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="width:400px; margin:0 auto;">
@@ -139,12 +197,12 @@ $pag = 'tarefas';
 
 
 
-<!-- MODAL MOSTRAR 'MINHAS TAREFAS' -->
+<!-- MODAL MOSTRAR TAREFAS ESCRITÓRIO -->
 <div class="modal fade" id="modalMostrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="tituloModal"><span id="nome_mostrar"> </span></h4>
+				<h4 class="modal-title" id="tituloModal"><span id="nome_mostrar"> </span> <small>Tarefa : <span id="status_mostrar"> </span></small></h4>
 				<button id="btn-fechar-excluir" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -173,14 +231,25 @@ $pag = 'tarefas';
 						<span id="usuario_mostrar"></span>
 					</div>
 					<div class="col-md-6">
-						<span><b>Status: </b></span>
-						<span id="status_mostrar"></span>
+						<span><b>Lançado Por: </b></span>
+						<span id="usuario_lanc_mostrar"></span>
 					</div>
 				</div>
 
 
 				<div class="row" style="border-bottom: 1px solid #cac7c7;">
+					<div class="col-md-6">
+						<span><b>Tipo da tarefa: </b></span>
+						<span id="tipo_mostrar"></span>
+					</div>
+					<div class="col-md-6">
+						<span><b>Frequência: </b></span>
+						<span id="frequencia_mostrar"></span>
+					</div>
+				</div>
 
+
+				<div class="row" style="border-bottom: 1px solid #cac7c7;">
 					<div class="col-md-12">
 						<span><b>Descrição: </b></span>
 						<span id="descricao_mostrar"></span>
@@ -208,9 +277,19 @@ $pag = 'tarefas';
 
 
 <script type="text/javascript">
-	var pag = "tarefas";
+	var pag = "tarefas"
 </script>
 <script src="js/ajax.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.sel2').select2({
+			dropdownParent: $('#modalForm')
+		});
+	});
+</script>
+
+
 
 <script>
 	//AJAX PARA SUBIR TAREFA PARA O BANCO DE DADOS
@@ -243,6 +322,26 @@ $pag = 'tarefas';
 			processData: false,
 
 		});
+
+	});
+</script>
+
+<script>
+	//JQUE PARA SELECIONAR CAMPO DE FREQUÊNCIA DE TAREFA
+	$(document).ready(function() {
+
+		$('#tipo_tarefa').change(function(){
+			if($(this).val() == 'Periódica'){
+				document.getElementById('frequencia_tarefa').style.display = 'block';
+				document.getElementById('campo_data_início_tarefa').style.display = 'block';
+				document.getElementById('data_tarefa').style.display = 'none';
+			}else{
+				document.getElementById('frequencia_tarefa').style.display = 'none';
+				document.getElementById('campo_data_início_tarefa').style.display = 'none';
+				document.getElementById('data_tarefa').style.display = 'block';
+			}
+		});
+
 
 	});
 </script>
