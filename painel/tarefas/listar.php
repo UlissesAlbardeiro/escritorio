@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("../../conexao.php");
 @session_start();
 $id_usu = @$_SESSION['id_usuario'];
@@ -53,21 +53,21 @@ HTML;
 
 			if (($data_inicio - $hoje) > $frequencia_tarefa) {
 				$dias_que_faltam = ($data_inicio - $hoje) / 86400;
-				$data_formatada = 'Em '.$dias_que_faltam.' dia(s)';
-				$frequencia = 'A cada '.$frequencia_tarefa.' dia(s)';
+				$data_formatada = 'Em ' . $dias_que_faltam . ' dia(s)';
+				$frequencia = 'A cada ' . $frequencia_tarefa . ' dia(s)';
 			} else {
 				$diferenca = $hoje - $data_inicio;
 				$dia = $diferenca / 86400; //transformando segundos em dias
 				$modulo = $dia % $frequencia_tarefa;
-				$frequencia = 'A cada '.$frequencia_tarefa.' dia(s)';
+				$frequencia = 'A cada ' . $frequencia_tarefa . ' dia(s)';
 
 				if ($modulo == 0) {
 					$data_formatada = 'Hoje';
-					$frequencia = 'A cada '.$frequencia_tarefa.' dia(s)';
+					$frequencia = 'A cada ' . $frequencia_tarefa . ' dia(s)';
 				} else {
 					$data_dias =  $frequencia_tarefa - $modulo;
-					$data_formatada = 'Em '.$data_dias.' dia(s)';
-					$frequencia = 'A cada '.$frequencia_tarefa.' dia(s)';
+					$data_formatada = 'Em ' . $data_dias . ' dia(s)';
+					$frequencia = 'A cada ' . $frequencia_tarefa . ' dia(s)';
 				}
 			}
 		} else {

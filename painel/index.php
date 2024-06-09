@@ -3,7 +3,7 @@ require_once("verificar.php");
 require_once("../conexao.php");
 
 $id_usuario = $_SESSION['id_usuario'];
-//recuperar os dados do usuário logado
+//RECUPERAR DADOS DO USUÁRIO LOGADO
 $query = $pdo->query("SELECT * FROM usuarios where id = '$id_usuario' ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
@@ -60,6 +60,46 @@ $ano_atual = Date('Y');
 $data_mes = $ano_atual . "-" . $mes_atual . "-01";
 $data_ano = $ano_atual . "-01-01";
 
+//RECULPERAR TAREFAS QUE VENCEM NA DATA ATUAL E ATRASADAS
+
+/* $query = $pdo->query("SELECT * FROM tarefas ORDER BY id desc");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = @count($res);
+
+	for ($i = 0; $i < $total_reg; $i++) {
+		foreach ($res[$i] as $key => $value) {
+		}
+		$id = $res[$i]['id'];
+		$tipo_tarefa = $res[$i]['tipo_tarefa'];
+		$data_inicio_tarefa = $res[$i]['data_inicio'];
+		$frequencia_tarefa = $res[$i]['frequencia'];
+		$titulo = $res[$i]['titulo'];
+		$descricao = $res[$i]['descricao'];
+		$hora_formatada = $res[$i]['hora'];
+		$data = $res[$i]['data'];
+		$usuario = $res[$i]['usuario'];
+		$usuario_lanc = $res[$i]['usuario_lanc'];
+		$status = $res[$i]['status'];
+		$obs = $res[$i]['obs'];
+
+		$data_inicio_formatada = implode('/', array_reverse(explode('-', $data_inicio_tarefa)));
+
+		//QUANTIDADE DE DIAS ATÉ A NOTIFICAÇÃO DA TEREFA
+		if ($tipo_tarefa == 'Periódica') {
+
+			$hoje = strtotime(date('Y-m-d')); //tranforma data de hoje em segundos
+			$data_inicio = strtotime(date($data_inicio_tarefa)); //transforma data escolhida em segundos
+
+			if (($data_inicio - $hoje) < $frequencia_tarefa) {
+				$diferenca = $hoje - $data_inicio;
+				$dia = $diferenca / 86400; //transformando segundos em dias
+				$modulo = $dia % $frequencia_tarefa;
+			}
+				if ($modulo == 0) {
+					$tarefa_hoje = 'Hoje';
+				} 
+			}
+	} */
 
 ?>
 <!DOCTYPE HTML>
@@ -349,23 +389,14 @@ $data_ano = $ano_atual . "-01-01";
 			<div class="header-left">
 				<!--BOTÃO MENU LATERAL-->
 				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
-				<!--toggle button end-->
-				<div class="profile_details_left"><!--notifications of menu start -->
+
+
+				<!-- BOTÃO E DROPDOWN DE NOTIFICAÇÕES DE TAREFAS -->
+				<div class="profile_details_left">
 					<ul class="nofitications-dropdown">
 
+						<?php require('notificacoes_web.php') ?>
 
-						<?php
-
-						$dia_atual = date('Y-m-d');
-						
-						$query2 = $pdo->query("SELECT * FROM tarefas where data <= '$dia_atual' and usuario = '$id_usu' and status = 'Agendada' order by data asc ");
-						$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-						$tarefas_pendentes_hoje = @count($res2);
-
-						$query = $pdo->query("SELECT * FROM tarefas where data <= '$dia_atual' and usuario = '$id_usu' and status = 'Agendada' order by data asc limit 6 ");
-						$res = $query->fetchAll(PDO::FETCH_ASSOC);
-						$tarefas_pendentes_taref_limit = @count($res);
-						?>
 						<li class="dropdown head-dpdn">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge red"><?php echo $tarefas_pendentes_hoje ?></span></a>
 							<ul class="dropdown-menu">
@@ -374,32 +405,16 @@ $data_ano = $ano_atual . "-01-01";
 										<h3>Você possui <?php echo $tarefas_pendentes_hoje ?> tarefas hoje</h3>
 									</div>
 								</li>
-
-								<?php
-								if ($tarefas_pendentes_taref_limit > 0) {
-									for ($i = 0; $i < $tarefas_pendentes_taref_limit; $i++) {
-										foreach ($res[$i] as $key => $value) {
-										}
-										$id_taref = $res[$i]['id'];
-										$titulo_taref = $res[$i]['titulo'];
-										$hora_taref = $res[$i]['hora'];
-										$data_taref = $res[$i]['data'];
-
-										$dataF_taref = implode('/', array_reverse(explode('-', $data_taref)));
-										$horaF_taref = date("H:i", strtotime($hora_taref));
-								?>
-										<li>
-											<a href="#">
-												<div class="notification_desc">
-													<p><i class="fa fa-calendar-o text-danger" style="margin-right: 3px"></i><?php echo $titulo_taref ?></p>
-													<p><span><?php echo $dataF_taref ?> às <?php echo $horaF_taref ?></span></p>
-												</div>
-												<div class="clearfix"></div>
-											</a>
-											<hr style="margin:2px">
-										</li>
-								<?php }
-								} ?>
+								<li>
+									<a href="#">
+										<div class="notification_desc">
+											<p><i class="fa fa-calendar-o text-danger" style="margin-right: 3px"></i><?php echo $titulo_taref ?></p>
+											<p><span><?php echo $tarefa_hoje ?> <?php echo $hora_formatada_tarefa ?></span></p>
+										</div>
+										<div class="clearfix"></div>
+									</a>
+									<hr style="margin:2px">
+								</li>
 
 
 								<li>
@@ -413,14 +428,11 @@ $data_ano = $ano_atual . "-01-01";
 					</ul>
 					<div class="clearfix"> </div>
 				</div>
-				<!--notification menu end -->
 				<div class="clearfix"> </div>
 			</div>
 			<div class="header-right">
 
-
-
-
+				<!-- INÍCIO AREÁ PESSOAL DO USUÁRIO -->
 				<div class="profile_details">
 					<ul>
 						<li class="dropdown profile_details_drop">
