@@ -395,27 +395,69 @@ $total_reg = @count($res);
 				<div class="profile_details_left">
 					<ul class="nofitications-dropdown">
 
-						<?php require('notificacoes_web.php') ?>
+						<?php
 
+						$hoje = date('Y-m-d');
+					/* 	$query2 = $pdo->query("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND status = 'Agendada')");
+						$query->bindValue(':id_usu', $id_usu);
+						$query->bindValue(':hoje', $hoje);
+						$query->execute();
+						$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+						$tarefasPendentes_taref = @count($res2); */
+
+						$query = $pdo->prepare("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND status = 'Agendada')");
+						$query->bindValue(':id_usu', $id_usu);
+						$query->bindValue(':hoje', $hoje);
+						$query->execute();
+						$res = $query->fetchAll(PDO::FETCH_ASSOC);
+						$tarefas_pendentes = @count($res);
+
+						?>
+
+						<!-- ICONE DE NOTIFICAÇÃO DE TAREFAS -->
 						<li class="dropdown head-dpdn">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge red"><?php echo $tarefas_pendentes_hoje ?></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge red"><?php echo $tarefas_pendentes ?></span></a>
 							<ul class="dropdown-menu">
 								<li>
 									<div class="notification_header">
-										<h3>Você possui <?php echo $tarefas_pendentes_hoje ?> tarefas hoje</h3>
+										<h3>Você possui <?php echo $tarefas_pendentes ?> Tarefas Pendentes!</h3>
 									</div>
 								</li>
-								<li>
-									<a href="#">
-										<div class="notification_desc">
-											<p><i class="fa fa-calendar-o text-danger" style="margin-right: 3px"></i><?php echo $titulo_taref ?></p>
-											<p><span><?php echo $tarefa_hoje ?> <?php echo $hora_formatada_tarefa ?></span></p>
-										</div>
-										<div class="clearfix"></div>
-									</a>
-									<hr style="margin:2px">
-								</li>
 
+								<?php
+								if ($tarefas_pendentes > 0) {
+									for ($i = 0; $i < $tarefas_pendentes; $i++) {
+										foreach ($res[$i] as $key => $value) {
+										}
+										$id_tarefa = $res[$i]['id'];
+										$titulo_tarefa = $res[$i]['titulo'];
+										$hora_tarefa = $res[$i]['hora'];
+										$data_tarefa = $res[$i]['data'];
+
+										if($data_tarefa == null){
+											$data_tarefa = "Hoje(Periódica)";
+										}
+
+										$data_tarefa_formatada = implode('/', array_reverse(explode('-', $data_tarefa)));
+										if ($hora_tarefa != 'Sem hora') {
+											$hora_tarefa = 'às ' . date("H:i", strtotime($hora_tarefa));
+										}
+
+										
+
+								?>
+										<li>
+											<a href="#">
+												<div class="notification_desc">
+													<p><i class="fa fa-calendar-o text-danger" style="margin-right: 3px"></i><?php echo $titulo_tarefa ?></p>
+													<p><span><?php echo $data_tarefa_formatada ?> <?php echo $hora_tarefa ?></span></p>
+												</div>
+												<div class="clearfix"></div>
+											</a>
+											<hr style="margin:2px">
+										</li>
+								<?php }
+								} ?>
 
 								<li>
 									<div class="notification_bottom">
