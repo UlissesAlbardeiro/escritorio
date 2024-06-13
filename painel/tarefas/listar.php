@@ -128,7 +128,7 @@ HTML;
 				<td class="esc">{$status}</td>
 				
 				<td>
-					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}', '{$hora_formatada}', '{$data_inicio_formatada}','{$data_formatada}', '{$usuario}', '{$tipo_tarefa}', '{$frequencia_tarefa}', '{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+					<big><a href="#" onclick="editar('{$id}', '{$titulo}', '{$descricao}', '{$hora_formatada}', '{$data}','{$data_inicio_tarefa}', '{$usuario}', '{$tipo_tarefa}', '{$frequencia_tarefa}', '{$obs}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 					<big><a href="#" onclick="mostrar('{$id}', '{$titulo}', '{$descricao}','{$hora_formatada}','{$data_formatada}','{$nome_usu}', '{$tipo_tarefa}', '{$frequencia}', '{$nome_usu_lanc}', '{$status}','{$obs}')" title="Ver Dados"><i class="fa fa-info-circle text-secondary"></i></a></big>
 
