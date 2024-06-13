@@ -405,7 +405,7 @@ $total_reg = @count($res);
 						$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 						$tarefasPendentes_taref = @count($res2); */
 
-						$query = $pdo->prepare("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND status = 'Agendada')");
+						$query = $pdo->prepare("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND data_inicio = :hoje AND status = 'Agendada')");
 						$query->bindValue(':id_usu', $id_usu);
 						$query->bindValue(':hoje', $hoje);
 						$query->execute();
