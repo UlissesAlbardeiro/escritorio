@@ -52,4 +52,3 @@ $favicon = $res[0]['favicon'];
 $logo_rel = $res[0]['logo_rel'];
 $dias_limpar_logs = $res[0]['dias_limpar_logs'];
 $relatorio_pdf = $res[0]['relatorio_pdf'];
- ?>

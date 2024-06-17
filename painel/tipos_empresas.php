@@ -4,10 +4,10 @@ require_once("../conexao.php");
 $pag = 'tipos_empresas';
 
 
-if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente"){
+/* if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente"){
 echo "<script>window.location='../index.php'</script>";
 exit();
-}
+} */
 ?>
 
 <button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Novo tipo de Empresa</button>

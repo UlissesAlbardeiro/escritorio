@@ -1,7 +1,6 @@
-<?php 
+<?php
 require_once("../conexao.php");
-@session_start();
-$id_usuario = $_SESSION['id'];
+$id_funcionario = $_SESSION['id_funcionario'];
 
 //SEM GRUPO
 $home = 'ocultar';
@@ -14,12 +13,12 @@ $clientes = 'ocultar';
 
 //GRUPO PESSOAS E EMPRESAS
 $usuarios = 'ocultar';
-$mostar_clientes = 'ocultar';
+$mostrar_empresas = 'ocultar';
 
 //TAREFAS
 $tarefas_escritorio = 'ocultar';
-$minhas_tarefas = 'ocultar';
-$agenda_tarefas = 'ocultar';
+$tarefas = 'ocultar';
+$agenda = 'ocultar';
 
 //GED (ARQUIVOS)
 $setor_arquivo = 'ocultar';
@@ -30,145 +29,145 @@ $arquivos = 'ocultar';
 //LOGS
 $logs = 'ocultar';
 
-$query = $pdo->query("SELECT * FROM funcionarios_permissoes where usuario = '$id_usuario'");
+$query = $pdo->query ("SELECT * FROM funcionarios_permissoes where usuario = '$id_funcionario'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
-if($total_reg > 0){
-	for($i=0; $i < $total_reg; $i++){
-		foreach ($res[$i] as $key => $value){}
+if ($total_reg > 0) {
+	for ($i = 0; $i < $total_reg; $i++) {
+		foreach ($res[$i] as $key => $value) {
+		}
 		$permissao = $res[$i]['permissao'];
-		
+
 		$query2 = $pdo->query("SELECT * FROM acessos where id = '$permissao'");
 		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 		$nome = $res2[0]['nome'];
 		$chave = $res2[0]['chave'];
 		$id = $res2[0]['id'];
 
-		if($chave == 'home'){
+		if ($chave == 'home') {
 			$home = '';
 		}
 
-		if($chave == 'cargos'){
+		if ($chave == 'cargos') {
 			$cargos = '';
 		}
 
-		if($chave == 'tipos_empresas'){
+		if ($chave == 'tipos_empresas') {
 			$tipos_empresas = '';
 		}
 
-		if($chave == 'funcionarios'){
+		if ($chave == 'funcionarios') {
 			$funcionarios = '';
 		}
 
-		if($chave == 'clientes'){
+		if ($chave == 'clientes') {
 			$clientes = '';
 		}
-
-
-		if($chave == 'usuarios'){
-			$usuarios = '';
-		}
-
-		if($chave == 'mostar_clientes'){
-			$mostrar_clientes = '';
-		}
-
-		if($chave == 'tarefas_escritorio'){
+		if ($chave == 'tarefas_escritorio') {
 			$tarefas_escritorio = '';
 		}
 
-		if($chave == 'minhas_tarefas'){
-			$minhas_tarefas = '';
+		if ($chave == 'tarefas') {
+			$tarefas = '';
 		}
 
-		if($chave == 'agenda_tarefas'){
-			$agenda_tarefas = '';
+		if ($chave == 'agenda') {
+			$agenda = '';
 		}
 
-		if($chave == 'setor_arquivos'){
-			$setor_arquivos = '';
+		if ($chave == 'setor_arquivo') {
+			$setor_arquivo = '';
 		}
 
-		if($chave == 'cat_arquivos'){
+
+
+		if ($chave == 'cat_arquivos') {
 			$cat_arquivos = '';
 		}
 
-
-		if($chave == 'grupo_arquivos'){
+		if ($chave == 'grupo_arquivos') {
 			$grupo_arquivos = '';
 		}
 
-		if($chave == 'arquivos'){
+		if ($chave == 'arquivos') {
 			$arquivos = '';
 		}
 
-		if($chave == 'logs'){
-			$ver_logs = '';
+		if ($chave == 'logs') {
+			$logs = '';
+		}
+
+
+		if ($chave == 'usuarios') {
+			$usuarios = '';
+		}
+
+		if ($chave == 'mostrar_arquivos') {
+			$mostar_arquivos = '';
 		}
 
 	}
-
 }
 
 
 
-if($home != 'ocultar'){
-	$pag_inicial = 'home';
-}else if($atendimento == 'Sim'){
-	$pag_inicial = 'agenda';
+ if($home != 'ocultar'){
+	$pagina_inicial = 'home';
+}else if($tarefas != 'ocultar'){
+	$pagina_inicial = 'tarefas';
 }else{
-	$query = $pdo->query("SELECT * FROM funcionarios_permissoes where usuario = '$id_usuario' order by id asc limit 1");
+	$query = $pdo->query("SELECT * FROM funcionarios_permissoes where usuario = '$id_funcionario' order by id asc limit 1");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){	
 			$permissao = $res[0]['permissao'];		
 			$query2 = $pdo->query("SELECT * FROM acessos where id = '$permissao'");
 			$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);		
-			$pag_inicial = $res2[0]['chave'];		
+			$pagina_inicial = $res2[0]['chave'];		
 
 	}
+} 
+
+
+//ESCONDER MENU HOME
+if ($home == 'ocultar'){
+	$menu_home = 'ocultar';
+} else{
+	$menu_home = '';
 }
 
-
-
-if($cargos == 'ocultar' and $tipos_empresas == 'ocultar' and $funcionarios == 'ocultar' and $clientes == 'ocultar'){
+//ESCONDE O MENU CADASTROS E EDIÇÕES
+if ($cargos == 'ocultar' and $tipos_empresas == 'ocultar' and $funcionarios == 'ocultar' and $clientes == 'ocultar') {
 	$menu_cadastros = 'ocultar';
-}else{
+} else {
 	$menu_cadastros = '';
 }
 
 
-
-if($usuarios == 'ocultar' and $mostrar_clientes == 'ocultar'){
+//ESCONDER O MENU PESSOAS E EMPRESAS
+if ($usuarios == 'ocultar' and $mostrar_empresas == 'ocultar') {
 	$menu_pessoas_empresas = 'ocultar';
-}else{
+} else {
 	$menu_pessoas_empresas = '';
 }
 
-
-
-if($tarefas_escritorio == 'ocultar' and $minhas_tarefas == 'ocultar' and $agenda_tarefas == 'ocultar'){
+//ESCONDER O MENU TAREFAS
+if ($tarefas_escritorio == 'ocultar' and $tarefas == 'ocultar' and $agenda == 'ocultar') {
 	$menu_tarefas = 'ocultar';
-}else{
+} else {
 	$menu_tarefas = '';
 }
 
-
-
-
-if($setor_arquivo == 'ocultar' and $cat_arquivos == 'ocultar' and $grupo_arquivos == 'ocultar' and $arquivos == 'ocultar'){
-	$menu_arquivos= 'ocultar';
-}else{
+//ESCONDER MENU ARQUIVOS
+if ($setor_arquivo == 'ocultar' and $cat_arquivos == 'ocultar' and $grupo_arquivos == 'ocultar' and $arquivos == 'ocultar') {
+	$menu_aquivos = 'ocultar';
+} else {
 	$menu_aquivos = '';
 }
 
-
-
-if($logs == 'ocultar'){
+//ESCONDER MENU LOGS
+if ($logs == 'ocultar') {
 	$menu_logs = 'ocultar';
-}else{
+} else {
 	$menu_logs = '';
 }
-
-
- ?>

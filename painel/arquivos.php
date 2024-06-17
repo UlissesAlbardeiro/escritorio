@@ -29,7 +29,7 @@ $pag = 'arquivos';
 			<select class="form-control selbusca" name="setor-busca" id="setor-busca" style="width:140px;"> 				
 				<?php 
 				
-				//verificar o nível de acesso do usuário
+			/* 	//verificar o nível de acesso do usuário
 				if(@$_SESSION['nivel_usuario'] == "Tesoureiro"){
 					$buscar_setor = '2';
 				}else if (@$_SESSION['nivel_usuario'] == "Secretario"){
@@ -38,7 +38,7 @@ $pag = 'arquivos';
 					$buscar_setor = '6';
 				}else if (@$_SESSION['nivel_usuario'] == "RH"){
 					$buscar_setor = '4';
-				}
+				} */
 
 				$query = $pdo->query("SELECT * FROM setor_arquivos where id = '$buscar_setor' order by id asc");
 

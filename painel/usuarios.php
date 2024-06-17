@@ -3,10 +3,10 @@ require_once("verificar.php");
 require_once("../conexao.php");
 $pag = 'usuarios';
 
-if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente"){
+/* if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente"){
 echo "<script>window.location='../index.php'</script>";
 exit();
-}
+} */
 
 ?>
 

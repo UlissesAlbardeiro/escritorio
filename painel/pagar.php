@@ -4,10 +4,10 @@ require_once("../conexao.php");
 $pag = 'pagar';
 
 
-if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente" and @$_SESSION['nivel_usuario'] != "Tesoureiro"){
+/* if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente" and @$_SESSION['nivel_usuario'] != "Tesoureiro"){
 	echo "<script>window.location='../index.php'</script>";
 	exit();
-}
+} */
 
 
 ?>

@@ -1,8 +1,14 @@
 <?php
-require_once("verificar.php");
+session_start();
 require_once("../conexao.php");
+require_once("verificar.php");
+
+if(@$_SESSION['nivel_usuario'] != 'Administrador'){
+	require_once("verificar_permissoes.php");
+}
 
 $id_usuario = $_SESSION['id_usuario'];
+$id_funcionario = $_SESSION['id_funcionario'];
 //RECUPERAR DADOS DO USUÁRIO LOGADO
 $query = $pdo->query("SELECT * FROM usuarios where id = '$id_usuario' ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -19,38 +25,13 @@ if ($total_reg > 0) {
 }
 
 if (@$_GET['pagina'] == "") {
-	$pagina = 'home';
+	$pagina = $pagina_inicial;
 } else {
 	$pagina = @$_GET['pagina'];
 }
 
 
-/* $esc_gerente = '';
-$esc_rh = '';
-$esc_tes = '';
-$esc_sec = '';
-$esc_recep = '';
 
-$classe_widget = '';
-//PERMISSÕES DOS USUÁRIOS
-if ($nivel_usu == "Gerente") {
-	$esc_gerente = 'ocultar';
-} else if ($nivel_usu == "RH") {
-	$esc_rh = 'ocultar';
-	$classe_widget = 'widget1';
-} else if ($nivel_usu == "Tesoureiro") {
-	$esc_tes = 'ocultar';
-} else if ($nivel_usu == "Secretario") {
-	$esc_sec = 'ocultar';
-} else if ($nivel_usu == "Recepcionista") {
-	$esc_recep = 'ocultar';
-} else if ($nivel_usu == "Administrador") {
-	$esc_admin = 'ocultar';
-}
-
-if ($nivel_usu != "Gerente" and $nivel_usu != "Administrador") {
-	$esc_todos = 'ocultar';
-} */
 
 
 
@@ -60,46 +41,7 @@ $ano_atual = Date('Y');
 $data_mes = $ano_atual . "-" . $mes_atual . "-01";
 $data_ano = $ano_atual . "-01-01";
 
-//RECULPERAR TAREFAS QUE VENCEM NA DATA ATUAL E ATRASADAS
 
-/* $query = $pdo->query("SELECT * FROM tarefas ORDER BY id desc");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-$total_reg = @count($res);
-
-	for ($i = 0; $i < $total_reg; $i++) {
-		foreach ($res[$i] as $key => $value) {
-		}
-		$id = $res[$i]['id'];
-		$tipo_tarefa = $res[$i]['tipo_tarefa'];
-		$data_inicio_tarefa = $res[$i]['data_inicio'];
-		$frequencia_tarefa = $res[$i]['frequencia'];
-		$titulo = $res[$i]['titulo'];
-		$descricao = $res[$i]['descricao'];
-		$hora_formatada = $res[$i]['hora'];
-		$data = $res[$i]['data'];
-		$usuario = $res[$i]['usuario'];
-		$usuario_lanc = $res[$i]['usuario_lanc'];
-		$status = $res[$i]['status'];
-		$obs = $res[$i]['obs'];
-
-		$data_inicio_formatada = implode('/', array_reverse(explode('-', $data_inicio_tarefa)));
-
-		//QUANTIDADE DE DIAS ATÉ A NOTIFICAÇÃO DA TEREFA
-		if ($tipo_tarefa == 'Periódica') {
-
-			$hoje = strtotime(date('Y-m-d')); //tranforma data de hoje em segundos
-			$data_inicio = strtotime(date($data_inicio_tarefa)); //transforma data escolhida em segundos
-
-			if (($data_inicio - $hoje) < $frequencia_tarefa) {
-				$diferenca = $hoje - $data_inicio;
-				$dia = $diferenca / 86400; //transformando segundos em dias
-				$modulo = $dia % $frequencia_tarefa;
-			}
-				if ($modulo == 0) {
-					$tarefa_hoje = 'Hoje';
-				} 
-			}
-	} */
 
 ?>
 <!DOCTYPE HTML>
@@ -247,25 +189,25 @@ $total_reg = @count($res);
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
 							<li class="header">MENU DE NAVEGAÇÃO</li>
-							<li class="treeview">
+							<li class="treeview <?php echo $menu_home ?>">
 								<a href="./">
 									<i class="fa fa-dashboard font-italic "></i> <span>Home</span>
 								</a>
 							</li>
-							<li class="treeview <?php echo $esc_todos ?>">
+							<li class="treeview <?php echo $menu_cadastros ?>">
 								<a href="#">
 									<i class="fa fa-plus"></i>
 									<span>Cadastro e Edição</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="index.php?pagina=cargos"><i class="fa fa-angle-right"></i> Cargos</a></li>
+									<li><a href="index.php?pagina=cargos"><i class="fa fa-angle-right <?php echo $cargos?> "></i> Cargos</a></li>
 
-									<li><a href="index.php?pagina=tipos_empresas"><i class="fa fa-angle-right"></i> Tipos de Empresas</a></li>
+									<li><a href="index.php?pagina=tipos_empresas"><i class="fa fa-angle-right <?php echo $tipos_empresas?>"></i> Tipos de Empresas</a></li>
 
-									<li><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right"></i> Funcionários</a></li>
+									<li><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right <?php echo $funcionarios?>"></i> Funcionários</a></li>
 
-									<li><a href="index.php?pagina=clientes"><i class="fa fa-angle-right"></i> Clientes</a></li>
+									<li><a href="index.php?pagina=clientes"><i class="fa fa-angle-right <?php echo $clientes?>"></i> Clientes</a></li>
 
 
 									<!-- <li><a href="index.php?pagina=frequencias"><i class="fa fa-angle-right"></i> Frequências</a></li>
@@ -275,31 +217,31 @@ $total_reg = @count($res);
 									<li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
 
 									<li><a href="index.php?pagina=acessos"><i class="fa fa-angle-right"></i> Acessos</a></li>
-								
+
 
 								</ul>
 							</li>
 
 
-							<li class="treeview">
+							<li class="treeview <?php echo $menu_pessoas_empresas?>">
 								<a href="#">
 									<i class="fa fa-user"></i>
 									<span>Pessoas e Empresas</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									
-									<li><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right"></i>Ver Clientes</a></li>
 
-									<!-- <li class="<?php echo $esc_todos ?>"><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
+									<li><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right <?php echo $mostrar_empresas?>"></i>Ver Clientes</a></li>
 
-									<li class="<?php echo $esc_todos ?>"><a href="index.php?pagina=usuarios"><i class="fa fa-angle-right"></i> Usuários</a></li>
+									<!-- <li class=""><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
+
+									<li class="<?php echo $usuarios ?>"><a href="index.php?pagina=usuarios"><i class="fa fa-angle-right"></i> Usuários</a></li>
 
 								</ul>
 							</li>
 
 
-							<!-- <li class="treeview <?php echo $esc_rh ?> <?php echo $esc_recep ?> <?php echo $esc_sec ?>">
+							<!-- <li class="treeview ">
 								<a href="#">
 									<i class="fa fa-usd"></i>
 									<span>Movimentações</span>
@@ -318,38 +260,38 @@ $total_reg = @count($res);
 							</li> -->
 
 							<!-- MENU TAREFAS -->
-							<li class="treeview">
+							<li class="treeview <?php echo $menu_tarefas?>">
 								<a href="#">
 									<i class="fa fa-calendar-o"></i>
 									<span>Tarefas</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li class="<?php echo $esc_todos ?>"><a href="index.php?pagina=tarefas-escritorio"><i class="fa fa-angle-right"></i> Tarefas Escritório</a></li>
+									<li class="<?php echo $tarefas_escritorio ?>"><a href="index.php?pagina=tarefas-escritorio"><i class="fa fa-angle-right"></i> Tarefas Escritório</a></li>
 
-									<li><a href="index.php?pagina=tarefas"><i class="fa fa-angle-right"></i> Minhas Tarefas</a></li>
+									<li class="<?php echo $tarefas?>"><a href="index.php?pagina=tarefas"><i class="fa fa-angle-right"></i> Minhas Tarefas</a></li>
 
-									<li><a href="index.php?pagina=agenda"><i class="fa fa-angle-right"></i> Agenda de Tarefas</a></li>
+									<li class="<?php $agenda ?>"><a href="index.php?pagina=agenda"><i class="fa fa-angle-right"></i> Agenda de Tarefas</a></li>
 
 								</ul>
 							</li>
 
 
 							<!-- MENU ARQUIVOS -->
-							<li class="treeview">
+							<li class="treeview <?php echo $menu_aquivos?>">
 								<a href="#">
 									<i class="fa fa-file-o"></i>
 									<span>GED (Arquivos)</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li class="<?php echo $esc_todos ?>"><a href="index.php?pagina=setor_arquivos"><i class="fa fa-angle-right"></i> Setor Arquivo</a></li>
+									<li class="<?php echo $setor_arquivo ?>"><a href="index.php?pagina=setor_arquivos"><i class="fa fa-angle-right"></i> Setor Arquivo</a></li>
 
-									<li><a href="index.php?pagina=cat_arquivos"><i class="fa fa-angle-right"></i> Categoria Arquivos</a></li>
+									<li class="<?php echo $cat_arquivos?>"><a href="index.php?pagina=cat_arquivos"><i class="fa fa-angle-right"></i> Categoria Arquivos</a></li>
 
-									<li><a href="index.php?pagina=grupo_arquivos"><i class="fa fa-angle-right"></i> Grupo Arquivos</a></li>
+									<li class="<?php echo $grupo_arquivos?>"><a href="index.php?pagina=grupo_arquivos"><i class="fa fa-angle-right"></i> Grupo Arquivos</a></li>
 
-									<li><a href="index.php?pagina=arquivos"><i class="fa fa-angle-right"></i> Cadastro de Arquivos</a></li>
+									<li class="<?php echo $arquivos?>"><a href="index.php?pagina=arquivos"><i class="fa fa-angle-right"></i> Cadastro de Arquivos</a></li>
 
 								</ul>
 							</li>
@@ -368,23 +310,19 @@ $total_reg = @count($res);
 							</li> -->
 
 
-							<li class="treeview <?php echo $esc_todos ?>">
+							<li class="treeview <?php echo $menu_logs ?>">
 								<a href="#">
 									<i class="fa fa-lock"></i>
 									<span>Logs</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="index.php?pagina=logs"><i class="fa fa-angle-right"></i> Ver Logs</a></li>
+									<li class="<?php echo $logs ?>"><a href="index.php?pagina=logs"><i class="fa fa-angle-right"></i> Ver Logs</a></li>
 
 									<li><a href="#" data-toggle="modal" data-target="#RelLogs"><i class="fa fa-angle-right"></i> Relatório de Logs</a></li>
 
 								</ul>
 							</li>
-
-
-
-
 						</ul>
 					</div>
 					<!-- /.navbar-collapse -->
@@ -437,7 +375,7 @@ $total_reg = @count($res);
 										$hora_tarefa = $res[$i]['hora'];
 										$data_tarefa = $res[$i]['data'];
 
-										if($data_tarefa == null){
+										if ($data_tarefa == null) {
 											$data_tarefa = "Hoje(Periódica)";
 										}
 
@@ -446,7 +384,7 @@ $total_reg = @count($res);
 											$hora_tarefa = 'às ' . date("H:i", strtotime($hora_tarefa));
 										}
 
-										
+
 
 								?>
 										<li>
@@ -516,7 +454,7 @@ $total_reg = @count($res);
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<?php
-			require_once($pagina . '.php');
+			require_once($pagina.'.php');
 			?>
 		</div>
 

@@ -10,10 +10,10 @@ $mes_atual = Date('m');
 $ano_atual = Date('Y');
 $data_mes = $ano_atual."-".$mes_atual."-01";
 
-if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente" and @$_SESSION['nivel_usuario'] != "Tesoureiro"){
+/* if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente" and @$_SESSION['nivel_usuario'] != "Tesoureiro"){
 	echo "<script>window.location='../index.php'</script>";
 	exit();
-}
+} */
 
 
 ?>

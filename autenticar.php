@@ -26,16 +26,21 @@ if($total_reg > 0){
 	$_SESSION['nome_usuario'] = $res[0]['nome'];
 	$_SESSION['cpf_usuario'] = $res[0]['cpf'];
 	$_SESSION['nivel_usuario'] = $res[0]['nivel'];
+	$_SESSION['id_funcionario'] = $res[0]['id_usu'];
+
 
 	//inserir log
 	$tabela = 'usuarios';
 	$acao = 'login';
 	$descricao = 'login';
 	require_once("painel/inserir-logs.php");
+	
 
 	echo "<script>window.location='painel'</script>";
 }else{
 	echo "<script>window.alert('Dados Incorretos');</script>";
 	echo "<script>window.location='index.php'</script>";
 }	
- ?>
+
+
+ 

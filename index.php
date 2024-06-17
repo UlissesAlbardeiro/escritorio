@@ -37,7 +37,7 @@ if($total_reg == 0){
 
 
 //inserir os cargos que geram níveis de usuários
-$query = $pdo->query("SELECT * FROM cargos");
+/* $query = $pdo->query("SELECT * FROM cargos");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if($total_reg == 0){
@@ -46,7 +46,7 @@ if($total_reg == 0){
 	$pdo->query("INSERT INTO cargos SET nome = 'Secretário'");
 	$pdo->query("INSERT INTO cargos SET nome = 'Recepcionista'");
 	$pdo->query("INSERT INTO cargos SET nome = 'RH'");
-}
+} */
 
 
 //inserir uma frequencia inicial para as contas
@@ -141,7 +141,7 @@ if($total_reg == 0){
 
 
 
-<!-- Modal -->
+<!-- MODAL RECULPERAR SENHA -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
