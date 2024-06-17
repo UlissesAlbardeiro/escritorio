@@ -25,7 +25,7 @@ if (@$_GET['pagina'] == "") {
 }
 
 
-$esc_gerente = '';
+/* $esc_gerente = '';
 $esc_rh = '';
 $esc_tes = '';
 $esc_sec = '';
@@ -50,7 +50,7 @@ if ($nivel_usu == "Gerente") {
 
 if ($nivel_usu != "Gerente" and $nivel_usu != "Administrador") {
 	$esc_todos = 'ocultar';
-}
+} */
 
 
 
@@ -255,7 +255,7 @@ $total_reg = @count($res);
 							<li class="treeview <?php echo $esc_todos ?>">
 								<a href="#">
 									<i class="fa fa-plus"></i>
-									<span>Cadastros</span>
+									<span>Cadastro e Edição</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
@@ -263,9 +263,19 @@ $total_reg = @count($res);
 
 									<li><a href="index.php?pagina=tipos_empresas"><i class="fa fa-angle-right"></i> Tipos de Empresas</a></li>
 
+									<li><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right"></i> Funcionários</a></li>
+
+									<li><a href="index.php?pagina=clientes"><i class="fa fa-angle-right"></i> Clientes</a></li>
+
+
 									<!-- <li><a href="index.php?pagina=frequencias"><i class="fa fa-angle-right"></i> Frequências</a></li>
 
 									<li><a href="index.php?pagina=contas_banco"><i class="fa fa-angle-right"></i> Contas Bancárias</a></li> -->
+
+									<li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
+
+									<li><a href="index.php?pagina=acessos"><i class="fa fa-angle-right"></i> Acessos</a></li>
+								
 
 								</ul>
 							</li>
@@ -278,9 +288,8 @@ $total_reg = @count($res);
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right"></i> Funcionários</a></li>
-
-									<li><a href="index.php?pagina=clientes"><i class="fa fa-angle-right"></i> Clientes</a></li>
+									
+									<li><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right"></i>Ver Clientes</a></li>
 
 									<!-- <li class="<?php echo $esc_todos ?>"><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
 
@@ -398,12 +407,6 @@ $total_reg = @count($res);
 						<?php
 
 						$hoje = date('Y-m-d');
-					/* 	$query2 = $pdo->query("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND status = 'Agendada')");
-						$query->bindValue(':id_usu', $id_usu);
-						$query->bindValue(':hoje', $hoje);
-						$query->execute();
-						$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-						$tarefasPendentes_taref = @count($res2); */
 
 						$query = $pdo->prepare("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND data_inicio = :hoje AND status = 'Agendada')");
 						$query->bindValue(':id_usu', $id_usu);

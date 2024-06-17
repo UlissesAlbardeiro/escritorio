@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("../../conexao.php");
 $data_atual = date('Y-m-d');
 echo <<<HTML
@@ -7,8 +7,8 @@ HTML;
 $query = $pdo->query("SELECT * FROM funcionarios ORDER BY id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
-if($total_reg > 0){
-echo <<<HTML
+if ($total_reg > 0) {
+	echo <<<HTML
 	<table class="table table-hover" id="tabela">
 		<thead> 
 			<tr> 				
@@ -22,43 +22,44 @@ echo <<<HTML
 		</thead> 
 		<tbody> 
 HTML;
-for($i=0; $i < $total_reg; $i++){
-	foreach ($res[$i] as $key => $value){}
-$id = $res[$i]['id'];
-$nome = $res[$i]['nome'];
-$telefone = $res[$i]['telefone'];
-$cpf = $res[$i]['cpf'];
-$email = $res[$i]['email'];
-$endereco = $res[$i]['endereco'];
-$cargo = $res[$i]['cargo'];
-$data_cad = $res[$i]['data_cad'];
-$data_nasc = $res[$i]['data_nasc'];
-$obs = $res[$i]['obs'];
-$salario = $res[$i]['salario'];
-$valor_hora = $res[$i]['valor_hora'];
-$hora_entrada = $res[$i]['hora_entrada'];
-$hora_saida = $res[$i]['hora_saida'];
-$jornada_horas = $res[$i]['jornada_horas'];
-$foto = $res[$i]['foto'];
+	for ($i = 0; $i < $total_reg; $i++) {
+		foreach ($res[$i] as $key => $value) {
+		}
+		$id = $res[$i]['id'];
+		$nome = $res[$i]['nome'];
+		$telefone = $res[$i]['telefone'];
+		$cpf = $res[$i]['cpf'];
+		$email = $res[$i]['email'];
+		$endereco = $res[$i]['endereco'];
+		$cargo = $res[$i]['cargo'];
+		$data_cad = $res[$i]['data_cad'];
+		$data_nasc = $res[$i]['data_nasc'];
+		$obs = $res[$i]['obs'];
+		$salario = $res[$i]['salario'];
+		$valor_hora = $res[$i]['valor_hora'];
+		$hora_entrada = $res[$i]['hora_entrada'];
+		$hora_saida = $res[$i]['hora_saida'];
+		$jornada_horas = $res[$i]['jornada_horas'];
+		$foto = $res[$i]['foto'];
 
-//retirar quebra de texto do obs
-$obs = str_replace(array("\n", "\r"), ' + ', $obs);
+		//retirar quebra de texto do obs
+		$obs = str_replace(array("\n", "\r"), ' + ', $obs);
 
-$data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
-$data_nascF = implode('/', array_reverse(explode('-', $data_nasc)));
-$salarioF = number_format($salario, 2, ',', '.');
-$valor_horaF = number_format($valor_hora, 2, ',', '.');
+		$data_cadF = implode('/', array_reverse(explode('-', $data_cad)));
+		$data_nascF = implode('/', array_reverse(explode('-', $data_nasc)));
+		$salarioF = number_format($salario, 2, ',', '.');
+		$valor_horaF = number_format($valor_hora, 2, ',', '.');
 
-$query2 = $pdo->query("SELECT * FROM cargos where id = '$cargo'");
-$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-if(@count($res2) > 0){
-	$nome_cargo = $res2[0]['nome'];
-}else{
-	$nome_cargo = 'Sem Cargo';
-}
+		$query2 = $pdo->query("SELECT * FROM cargos where id = '$cargo'");
+		$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+		if (@count($res2) > 0) {
+			$nome_cargo = $res2[0]['nome'];
+		} else {
+			$nome_cargo = 'Sem Cargo';
+		}
 
 
-echo <<<HTML
+		echo <<<HTML
 			<tr> 
 				<td>
 				<img src="images/perfil/{$foto}" width="27px" class="mr-2">
@@ -77,16 +78,18 @@ echo <<<HTML
 
 					<big><a href="#" onclick="arquivo('{$id}', '{$nome}')" title="Inserir / Ver Arquivos"><i class="fa fa-file-o " style="color:#22146e"></i></a></big>
 
+					<big><a href="#" onclick="permissoes('{$id}', '{$nome}')" title="Definir Permissões"><i class="fa fa-lock " style="color:blue; margin-left:3px"></i></a></big>
+
 				</td>  
 			</tr> 
 HTML;
-}
-echo <<<HTML
+	}
+	echo <<<HTML
 		</tbody> 
 	</table>
 </small>
 HTML;
-}else{
+} else {
 	echo 'Não possui nenhum registro cadastrado!';
 }
 
@@ -94,25 +97,23 @@ HTML;
 
 
 <script type="text/javascript">
-
-
-	$(document).ready( function () {
-	    $('#tabela').DataTable({
-	    	"ordering": false,
-	    	"stateSave": true,
-	    });
-	    $('#tabela_filter label input').focus();
-	} );
+	$(document).ready(function() {
+		$('#tabela').DataTable({
+			"ordering": false,
+			"stateSave": true,
+		});
+		$('#tabela_filter label input').focus();
+	});
 
 
 
-	function editar(id, nome, cpf, telefone, email, endereco, cargo, data_nasc, obs, foto, salario, hora, hora_entrada, hora_saida, jornada){
+	function editar(id, nome, cpf, telefone, email, endereco, cargo, data_nasc, obs, foto, salario, hora, hora_entrada, hora_saida, jornada) {
 
-		for (let letra of obs){  				
-					if (letra === '+'){
-						obs = obs.replace(' +  + ', '\n')
-					}			
-				}
+		for (let letra of obs) {
+			if (letra === '+') {
+				obs = obs.replace(' +  + ', '\n')
+			}
+		}
 
 
 		$('#id').val(id);
@@ -121,17 +122,17 @@ HTML;
 		$('#telefone').val(telefone);
 		$('#email').val(email);
 		$('#endereco').val(endereco);
-		$('#cargo').val(cargo).change();		
-		$('#data_nasc').val(data_nasc);	
+		$('#cargo').val(cargo).change();
+		$('#data_nasc').val(data_nasc);
 		$('#obs').val(obs);
-		$('#salario').val(salario);	
-		$('#valor_hora').val(hora);	
-		$('#hora_entrada').val(hora_entrada);	
-		$('#hora_saida').val(hora_saida);	
-		$('#jornada_horas').val(jornada);	
+		$('#salario').val(salario);
+		$('#valor_hora').val(hora);
+		$('#hora_entrada').val(hora_entrada);
+		$('#hora_saida').val(hora_saida);
+		$('#jornada_horas').val(jornada);
 
 		$('#foto').val('');
-		$('#target').attr('src','images/perfil/' + foto);	
+		$('#target').attr('src', 'images/perfil/' + foto);
 
 		$('#tituloModal').text('Editar Registro');
 		$('#modalForm').modal('show');
@@ -140,61 +141,66 @@ HTML;
 
 
 
-	function mostrar(id, nome, cpf, telefone, email, endereco, cargo, data_cad, data_nasc, obs, foto, salario, hora, hora_entrada, hora_saida, jornada){
+	function mostrar(id, nome, cpf, telefone, email, endereco, cargo, data_cad, data_nasc, obs, foto, salario, hora, hora_entrada, hora_saida, jornada) {
 
-		for (let letra of obs){  				
-					if (letra === '+'){
-						obs = obs.replace(' +  + ', '\n')
-					}			
-				}
-		
+		for (let letra of obs) {
+			if (letra === '+') {
+				obs = obs.replace(' +  + ', '\n')
+			}
+		}
+
 		$('#nome_mostrar').text(nome);
 		$('#cpf_mostrar').text(cpf);
 		$('#telefone_mostrar').text(telefone);
 		$('#email_mostrar').text(email);
 		$('#endereco_mostrar').text(endereco);
-		$('#cargo_mostrar').text(cargo);		
-		$('#data_nasc_mostrar').text(data_nasc);	
-		$('#data_cad_mostrar').text(data_cad);	
+		$('#cargo_mostrar').text(cargo);
+		$('#data_nasc_mostrar').text(data_nasc);
+		$('#data_cad_mostrar').text(data_cad);
 		$('#obs_mostrar').text(obs);
 		$('#salario_mostrar').text(salario);
 		$('#hora_mostrar').text(hora);
 		$('#hora_entrada_mostrar').text(hora_entrada);
 		$('#hora_saida_mostrar').text(hora_saida);
 		$('#jornada_mostrar').text(jornada);
-		
-		$('#target_mostrar').attr('src','images/perfil/' + foto);	
 
-		$('#modalMostrar').modal('show');		
+		$('#target_mostrar').attr('src', 'images/perfil/' + foto);
+
+		$('#modalMostrar').modal('show');
 	}
 
-	function limparCampos(){
+	function limparCampos() {
 		$('#id').val('');
-		$('#nome').val('');		
+		$('#nome').val('');
 		$('#cpf').val('');
 		$('#telefone').val('');
 		$('#email').val('');
-		$('#endereco').val('');			
-		$('#data_nasc').val('<?=$data_atual?>');	
+		$('#endereco').val('');
+		$('#data_nasc').val('<?= $data_atual ?>');
 		$('#obs').val('');
-		$('#salario').val('');	
+		$('#salario').val('');
 		$('#valor_hora').val('');
-		$('#hora_entrada').val('');			
-		$('#hora_saida').val('');	
+		$('#hora_entrada').val('');
+		$('#hora_saida').val('');
 		$('#foto').val('');
-		$('#target').attr('src','images/perfil/sem-perfil.jpg');
+		$('#target').attr('src', 'images/perfil/sem-perfil.jpg');
 	}
 
 
-	function arquivo(id, nome){
-    $('#id-arquivo').val(id);    
-    $('#nome-arquivo').text(nome);
-    $('#modalArquivos').modal('show');
-    $('#mensagem-arquivo').text(''); 
-    listarArquivos();   
-}
+	function arquivo(id, nome) {
+		$('#id-arquivo').val(id);
+		$('#nome-arquivo').text(nome);
+		$('#modalArquivos').modal('show');
+		$('#mensagem-arquivo').text('');
+		listarArquivos();
+	}
 
+
+	function permissoes(id, nome) {
+		$('#id-usuario').val(id);
+		$('#nome-usuario').text(nome);
+		$('#modalPermissoes').modal('show');
+		$('#mensagem-permissao').text('');
+		listarPermissoes(id);
+	}
 </script>
-
-
-
