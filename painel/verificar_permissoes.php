@@ -19,7 +19,7 @@ $mostrar_clientes = 'ocultar';
 $tarefas_escritorio = 'ocultar';
 $tarefas = 'ocultar';
 $agenda = 'ocultar';
-$notificacao = 'ocultar';
+$notificacao = 'ocultar'; //oculta icone de notificação de tarefa
 
 //GED (ARQUIVOS)
 $setor_arquivo = 'ocultar';
@@ -89,7 +89,7 @@ if ($total_reg > 0) {
 
 		if ($chave == 'agenda') {
 			$agenda = '';
-			$notificacao = '';
+			$notificacao = ''; //libera icone de notificação de tarefa
 		}
 
 		//--------------
@@ -135,9 +135,7 @@ if ($total_reg > 0) {
 			$pagina_inicial = $res2[0]['chave'];		
 
 	}else{
-		echo '<script>alert("Você ainda não possui permissões de uso do sistema, entre em contato com o seu administrador!")</script>';
-		echo '<script>window.location="../index.php"</script>';
-		exit();
+		$pagina_inicial = 'sem_permissao';
 	}
 } 
 
