@@ -354,13 +354,12 @@ $data_ano = $ano_atual . "-01-01";
 
 						$hoje = date('Y-m-d');
 
-						$query = $pdo->prepare("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND data_inicio = :hoje AND status = 'Agendada')");
+						$query = $pdo->prepare("SELECT * FROM tarefas WHERE status = 'Agendada' AND usuario = :id_usu AND data <= :hoje OR (MOD(DATEDIFF(:hoje, data_inicio), frequencia) = 0 AND data_inicio = :hoje AND status = 'Agendada' AND usuario = :id_usu)");
 						$query->bindValue(':id_usu', $id_usu);
 						$query->bindValue(':hoje', $hoje);
 						$query->execute();
 						$res = $query->fetchAll(PDO::FETCH_ASSOC);
 						$tarefas_pendentes = @count($res);
-
 						?>
 
 						<!-- ICONE DE NOTIFICAÇÃO DE TAREFAS -->
