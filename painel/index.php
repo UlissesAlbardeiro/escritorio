@@ -3,19 +3,32 @@ session_start();
 require_once("../conexao.php");
 require_once("verificar.php");
 
-if(@$_SESSION['nivel_usuario'] != 'Administrador'){
+
+
+if ($_SESSION['nivel_usuario'] != 'Administrador') {
 	require_once("verificar_permissoes.php");
+	$pagina = $pagina_inicial;
+}else{
+	if (@$_GET['pagina'] == "") {
+		$pagina = 'home';
+	} else {
+		$pagina = @$_GET['pagina'];
+	}
 }
 
-$id_usuario = $_SESSION['id_usuario'];
+
+
+
 $id_funcionario = $_SESSION['id_funcionario'];
+$id_usuario = $_SESSION['id_usuario'];
+
 //RECUPERAR DADOS DO USUÁRIO LOGADO
 $query = $pdo->query("SELECT * FROM usuarios where id = '$id_usuario' ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 
 if ($total_reg > 0) {
-	$nome_user = $res[0]['nome'];
+	$nome_usu = $res[0]['nome'];
 	$foto_usu = $res[0]['foto'];
 	$nivel_usu = $res[0]['nivel'];
 	$cpf_usu = $res[0]['cpf'];
@@ -23,16 +36,6 @@ if ($total_reg > 0) {
 	$email_usu = $res[0]['email'];
 	$id_usu = $res[0]['id'];
 }
-
-if (@$_GET['pagina'] == "") {
-	$pagina = $pagina_inicial;
-} else {
-	$pagina = @$_GET['pagina'];
-}
-
-
-
-
 
 
 $data_atual = date('Y-m-d');
@@ -201,29 +204,29 @@ $data_ano = $ano_atual . "-01-01";
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="index.php?pagina=cargos"><i class="fa fa-angle-right <?php echo $cargos?> "></i> Cargos</a></li>
+									<li class="<?php echo $cargos ?>"><a href="index.php?pagina=cargos"><i class="fa fa-angle-right  "></i> Cargos</a></li>
 
-									<li><a href="index.php?pagina=tipos_empresas"><i class="fa fa-angle-right <?php echo $tipos_empresas?>"></i> Tipos de Empresas</a></li>
+									<li class="<?php echo $tipos_empresas ?>"><a href="index.php?pagina=tipos_empresas"><i class="fa fa-angle-right "></i> Tipos de Empresas</a></li>
 
-									<li><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right <?php echo $funcionarios?>"></i> Funcionários</a></li>
+									<li class="<?php echo $funcionarios ?>"><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right "></i> Funcionários</a></li>
 
-									<li><a href="index.php?pagina=clientes"><i class="fa fa-angle-right <?php echo $clientes?>"></i> Clientes</a></li>
+									<li class="<?php echo $clientes ?>"><a href="index.php?pagina=clientes"><i class="fa fa-angle-right "></i> Clientes</a></li>
 
 
 									<!-- <li><a href="index.php?pagina=frequencias"><i class="fa fa-angle-right"></i> Frequências</a></li>
 
 									<li><a href="index.php?pagina=contas_banco"><i class="fa fa-angle-right"></i> Contas Bancárias</a></li> -->
 
-									<li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
+									<!-- <li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
 
-									<li><a href="index.php?pagina=acessos"><i class="fa fa-angle-right"></i> Acessos</a></li>
+									<li><a href="index.php?pagina=acessos"><i class="fa fa-angle-right"></i> Acessos</a></li> -->
 
 
 								</ul>
 							</li>
 
 
-							<li class="treeview <?php echo $menu_pessoas_empresas?>">
+							<li class="treeview <?php echo $menu_pessoas_empresas ?>">
 								<a href="#">
 									<i class="fa fa-user"></i>
 									<span>Pessoas e Empresas</span>
@@ -231,7 +234,7 @@ $data_ano = $ano_atual . "-01-01";
 								</a>
 								<ul class="treeview-menu">
 
-									<li><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right <?php echo $mostrar_empresas?>"></i>Ver Clientes</a></li>
+									<li class="<?php echo $mostrar_empresas ?>"><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right "></i>Ver Clientes</a></li>
 
 									<!-- <li class=""><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
 
@@ -260,7 +263,7 @@ $data_ano = $ano_atual . "-01-01";
 							</li> -->
 
 							<!-- MENU TAREFAS -->
-							<li class="treeview <?php echo $menu_tarefas?>">
+							<li class="treeview <?php echo $menu_tarefas ?>">
 								<a href="#">
 									<i class="fa fa-calendar-o"></i>
 									<span>Tarefas</span>
@@ -269,7 +272,7 @@ $data_ano = $ano_atual . "-01-01";
 								<ul class="treeview-menu">
 									<li class="<?php echo $tarefas_escritorio ?>"><a href="index.php?pagina=tarefas-escritorio"><i class="fa fa-angle-right"></i> Tarefas Escritório</a></li>
 
-									<li class="<?php echo $tarefas?>"><a href="index.php?pagina=tarefas"><i class="fa fa-angle-right"></i> Minhas Tarefas</a></li>
+									<li class="<?php echo $tarefas ?>"><a href="index.php?pagina=tarefas"><i class="fa fa-angle-right"></i> Minhas Tarefas</a></li>
 
 									<li class="<?php $agenda ?>"><a href="index.php?pagina=agenda"><i class="fa fa-angle-right"></i> Agenda de Tarefas</a></li>
 
@@ -278,7 +281,7 @@ $data_ano = $ano_atual . "-01-01";
 
 
 							<!-- MENU ARQUIVOS -->
-							<li class="treeview <?php echo $menu_aquivos?>">
+							<li class="treeview <?php echo $menu_aquivos ?>">
 								<a href="#">
 									<i class="fa fa-file-o"></i>
 									<span>GED (Arquivos)</span>
@@ -287,11 +290,11 @@ $data_ano = $ano_atual . "-01-01";
 								<ul class="treeview-menu">
 									<li class="<?php echo $setor_arquivo ?>"><a href="index.php?pagina=setor_arquivos"><i class="fa fa-angle-right"></i> Setor Arquivo</a></li>
 
-									<li class="<?php echo $cat_arquivos?>"><a href="index.php?pagina=cat_arquivos"><i class="fa fa-angle-right"></i> Categoria Arquivos</a></li>
+									<li class="<?php echo $cat_arquivos ?>"><a href="index.php?pagina=cat_arquivos"><i class="fa fa-angle-right"></i> Categoria Arquivos</a></li>
 
-									<li class="<?php echo $grupo_arquivos?>"><a href="index.php?pagina=grupo_arquivos"><i class="fa fa-angle-right"></i> Grupo Arquivos</a></li>
+									<li class="<?php echo $grupo_arquivos ?>"><a href="index.php?pagina=grupo_arquivos"><i class="fa fa-angle-right"></i> Grupo Arquivos</a></li>
 
-									<li class="<?php echo $arquivos?>"><a href="index.php?pagina=arquivos"><i class="fa fa-angle-right"></i> Cadastro de Arquivos</a></li>
+									<li class="<?php echo $arquivos ?>"><a href="index.php?pagina=arquivos"><i class="fa fa-angle-right"></i> Cadastro de Arquivos</a></li>
 
 								</ul>
 							</li>
@@ -423,7 +426,7 @@ $data_ano = $ano_atual . "-01-01";
 								<div class="profile_img">
 									<span class="prfil-img"><img src="images/perfil/<?php echo $foto_usu ?>" alt="" width="50px" height="50px"> </span>
 									<div class="user-name">
-										<p><?php echo $nome_user ?></p>
+										<p><?php echo $nome_usu ?></p>
 										<span><?php echo $nivel_usu ?></span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
@@ -454,7 +457,7 @@ $data_ano = $ano_atual . "-01-01";
 		<!-- main content start-->
 		<div id="page-wrapper">
 			<?php
-			require_once($pagina.'.php');
+			require_once($pagina . '.php');
 			?>
 		</div>
 
@@ -588,7 +591,7 @@ $data_ano = $ano_atual . "-01-01";
 
 					</div>
 
-					<input type="hidden" name="id_usu" value="<?php echo $id_usuario ?>">
+					<input type="hidden" name="id_usu" value="<?php echo $id_usu ?>">
 					<input type="hidden" name="foto_usu" value="<?php echo $foto_usu ?>">
 
 					<small>
@@ -733,7 +736,7 @@ $data_ano = $ano_atual . "-01-01";
 
 					</div>
 
-					<input type="hidden" name="id_usu" value="<?php echo $id_usuario ?>">
+					<input type="hidden" name="id_usu" value="<?php echo $id_usu ?>">
 					<input type="hidden" name="foto_usu" value="<?php echo $foto_usu ?>">
 
 					<small>

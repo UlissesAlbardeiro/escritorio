@@ -125,6 +125,8 @@ if ($total_reg > 0) {
 			$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);		
 			$pagina_inicial = $res2[0]['chave'];		
 
+	}else{
+		$pagina_inicial = 'sem_permissao';
 	}
 } 
 
