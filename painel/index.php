@@ -7,7 +7,12 @@ require_once("verificar.php");
 
 if ($_SESSION['nivel_usuario'] != 'Administrador') {
 	require_once("verificar_permissoes.php");
-	$pagina = $pagina_inicial;
+	if (@$_GET['pagina'] == "") {
+		$pagina = $pagina_inicial;
+	} else {
+		$pagina = @$_GET['pagina'];
+	}
+
 }else{
 	if (@$_GET['pagina'] == "") {
 		$pagina = 'home';
@@ -234,7 +239,7 @@ $data_ano = $ano_atual . "-01-01";
 								</a>
 								<ul class="treeview-menu">
 
-									<li class="<?php echo $mostrar_empresas ?>"><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right "></i>Ver Clientes</a></li>
+									<li class="<?php echo $mostrar_clientes ?>"><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right "></i>Ver Clientes</a></li>
 
 									<!-- <li class=""><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
 
@@ -274,7 +279,7 @@ $data_ano = $ano_atual . "-01-01";
 
 									<li class="<?php echo $tarefas ?>"><a href="index.php?pagina=tarefas"><i class="fa fa-angle-right"></i> Minhas Tarefas</a></li>
 
-									<li class="<?php $agenda ?>"><a href="index.php?pagina=agenda"><i class="fa fa-angle-right"></i> Agenda de Tarefas</a></li>
+									<li class="<?php echo $agenda ?>"><a href="index.php?pagina=agenda"><i class="fa fa-angle-right"></i> Agenda de Tarefas</a></li>
 
 								</ul>
 							</li>
@@ -342,7 +347,7 @@ $data_ano = $ano_atual . "-01-01";
 
 
 				<!-- BOTÃO E DROPDOWN DE NOTIFICAÇÕES DE TAREFAS -->
-				<div class="profile_details_left">
+				<div class="profile_details_left <?php echo $notificacao ?>">
 					<ul class="nofitications-dropdown">
 
 						<?php
@@ -546,7 +551,7 @@ $data_ano = $ano_atual . "-01-01";
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Nome</label>
-								<input type="text" class="form-control" name="nome_usu" value="<?php echo $nome_user ?>" required>
+								<input type="text" class="form-control" name="nome_usu" value="<?php echo $nome_usu ?>" required>
 							</div>
 						</div>
 						<div class="col-md-6">

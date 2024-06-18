@@ -13,12 +13,13 @@ $clientes = 'ocultar';
 
 //GRUPO PESSOAS E EMPRESAS
 $usuarios = 'ocultar';
-$mostrar_empresas = 'ocultar';
+$mostrar_clientes = 'ocultar';
 
 //TAREFAS
 $tarefas_escritorio = 'ocultar';
 $tarefas = 'ocultar';
 $agenda = 'ocultar';
+$notificacao = 'ocultar';
 
 //GED (ARQUIVOS)
 $setor_arquivo = 'ocultar';
@@ -48,6 +49,8 @@ if ($total_reg > 0) {
 			$home = '';
 		}
 
+		//--------
+
 		if ($chave == 'cargos') {
 			$cargos = '';
 		}
@@ -63,6 +66,19 @@ if ($total_reg > 0) {
 		if ($chave == 'clientes') {
 			$clientes = '';
 		}
+
+		//-----------
+
+		if($chave == 'mostrar_clientes'){
+			$mostrar_clientes = '';
+		}
+
+		if($chave == 'usuarios'){
+			$usuarios = '';
+		}
+
+		//----------
+
 		if ($chave == 'tarefas_escritorio') {
 			$tarefas_escritorio = '';
 		}
@@ -73,13 +89,14 @@ if ($total_reg > 0) {
 
 		if ($chave == 'agenda') {
 			$agenda = '';
+			$notificacao = '';
 		}
+
+		//--------------
 
 		if ($chave == 'setor_arquivo') {
 			$setor_arquivo = '';
 		}
-
-
 
 		if ($chave == 'cat_arquivos') {
 			$cat_arquivos = '';
@@ -93,19 +110,11 @@ if ($total_reg > 0) {
 			$arquivos = '';
 		}
 
+		//---------
+
 		if ($chave == 'logs') {
 			$logs = '';
 		}
-
-
-		if ($chave == 'usuarios') {
-			$usuarios = '';
-		}
-
-		if ($chave == 'mostrar_arquivos') {
-			$mostar_arquivos = '';
-		}
-
 	}
 }
 
@@ -126,7 +135,9 @@ if ($total_reg > 0) {
 			$pagina_inicial = $res2[0]['chave'];		
 
 	}else{
-		$pagina_inicial = 'sem_permissao';
+		echo '<script>alert("Você ainda não possui permissões de uso do sistema, entre em contato com o seu administrador!")</script>';
+		echo '<script>window.location="../index.php"</script>';
+		exit();
 	}
 } 
 
@@ -147,7 +158,7 @@ if ($cargos == 'ocultar' and $tipos_empresas == 'ocultar' and $funcionarios == '
 
 
 //ESCONDER O MENU PESSOAS E EMPRESAS
-if ($usuarios == 'ocultar' and $mostrar_empresas == 'ocultar') {
+if ($usuarios == 'ocultar' and $mostrar_clientes == 'ocultar') {
 	$menu_pessoas_empresas = 'ocultar';
 } else {
 	$menu_pessoas_empresas = '';

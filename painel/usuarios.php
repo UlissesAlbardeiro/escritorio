@@ -32,8 +32,8 @@ exit();
 
 					<div class="row" style="border-bottom: 1px solid #cac7c7;">
 						<div class="col-md-6">							
-							<span><b>CPF: </b></span>
-							<span id="cpf_mostrar"></span>							
+							<span><b>Telefone: </b></span>
+							<span id="telefone_mostrar"></span>							
 						</div>
 
 						<div class="col-md-6">							
@@ -48,10 +48,6 @@ exit();
 						<div class="col-md-6">							
 							<span><b>Email: </b></span>
 							<span id="email_mostrar"></span>							
-						</div>
-						<div class="col-md-6">							
-							<span><b>Senha: </b></span>
-							<span id="senha_mostrar"></span>
 						</div>
 					</div>
 

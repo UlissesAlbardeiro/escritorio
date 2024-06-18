@@ -22,8 +22,10 @@ $pag = 'agenda';
 
 				<?php
 
+				$sessao_usuario = $_SESSION['id_usuario'];
+
 				if ($_SESSION['nivel_usuario'] != 'Administrador') {
-					$query = $pdo->query("SELECT * FROM usuarios where nivel != 'Administrador' order by nome asc");
+					$query = $pdo->query("SELECT * FROM usuarios where id = '$sessao_usuario' order by nome asc");
 				} else {
 					$query = $pdo->query("SELECT * FROM usuarios order by nome asc");
 				}
@@ -179,7 +181,11 @@ $pag = 'agenda';
 								<label>Funcionário / Usuário </label>
 								<select class="form-control sel2" name="usuario" id="usuario" required style="width:100%;">
 									<?php
-									$query = $pdo->query("SELECT * FROM usuarios order by nome asc");
+									if ($_SESSION['nivel_usuario'] != 'Administrador') {
+										$query = $pdo->query("SELECT * FROM usuarios where id = '$sessao_usuario' order by nome asc");
+									} else {
+										$query = $pdo->query("SELECT * FROM usuarios order by nome asc");
+									}
 									$res = $query->fetchAll(PDO::FETCH_ASSOC);
 									for ($i = 0; $i < @count($res); $i++) {
 										foreach ($res[$i] as $key => $value) {

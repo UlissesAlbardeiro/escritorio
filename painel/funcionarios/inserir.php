@@ -88,7 +88,9 @@ if(@$_FILES['foto']['name'] != ""){
 		$nome_cargo = $res2[0]['nome'];
 	}
 
-if($nome_cargo == 'Gerente'){
+	$nivel_usu = $nome_cargo;
+
+/* if($nome_cargo == 'Gerente'){
 	$nivel_usu = 'Gerente';				
 }
 
@@ -106,7 +108,7 @@ if($nome_cargo == 'Recepcionista'){
 
 if($nome_cargo == 'RH'){
 	$nivel_usu = 'RH';			
-}
+} */
 
 if($id == ""){
 	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email, endereco = :endereco, cargo = '$cargo', data_cad = curDate(), data_nasc = '$data_nasc', obs = :obs, foto = '$foto', salario = :salario, valor_hora = :valor_hora, hora_entrada = '$hora_entrada', hora_saida = '$hora_saida', jornada_horas = '$jornada_horas'");
@@ -128,13 +130,14 @@ if($id == ""){
 
 	//inserir o funcionário na tabela de usuários	
 	if($nivel_usu != ""){
-		$query_usu = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf,  email = :email, senha_crip = :senha_crip, senha = :senha, nivel = '$nivel_usu',  foto = '$foto' , id_usu = '$ult_id'");
+		$query_usu = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email, senha_crip = :senha_crip, senha = :senha, nivel = '$nivel_usu',  foto = '$foto' , id_usu = '$ult_id'");
 
 
 		$senha_crip = md5('123');
 		$query_usu->bindValue(":nome", "$nome");
 		$query_usu->bindValue(":email", "$email");
 		$query_usu->bindValue(":cpf", "$cpf");
+		$query_usu->bindValue(":telefone", "$telefone");
 		$query_usu->bindValue(":senha_crip", "$senha_crip");
 		$query_usu->bindValue(":senha", "123");	
 		$query_usu->execute();
@@ -158,13 +161,14 @@ if($id == ""){
 
 	//atualizar na tabela de usuários
 	if(@$nivel_usu != ""){
-		$query_usu = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf,  email = :email, nivel = '$nivel_usu',  foto = '$foto' WHERE id_usu = '$id'");
+		$query_usu = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email, nivel = '$nivel_usu',  foto = '$foto' WHERE id_usu = '$id'");
 
 		if($query_usu != ""){
 			$senha_crip = md5('123');
 			$query_usu->bindValue(":nome", "$nome");
 			$query_usu->bindValue(":email", "$email");
-			$query_usu->bindValue(":cpf", "$cpf");			
+			$query_usu->bindValue(":cpf", "$cpf");
+			$query_usu->bindValue(":telefone", "$telefone");			
 			$query_usu->execute();
 		}
 	}

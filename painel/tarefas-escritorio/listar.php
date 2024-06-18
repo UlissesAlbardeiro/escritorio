@@ -20,7 +20,7 @@ if ($total_reg > 0) {
 				<th class="esc">Data de Vencimento</th>
 				<th class="esc">tipo de tarefa</th>
 				<th class="esc">frequência</th>
-				<th class="esc">Usuário</th>
+				<th class="esc">Responsável</th>
 				<th class="esc">Lançada Por</th>
 				<th class="esc">Status</th>									
 				<th>Ações</th>
