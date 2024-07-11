@@ -97,96 +97,8 @@ if(@$_FILES['foto']['name'] != ""){
 
 	$nivel_usu = $nome_cargo;
 
-/* if($nome_cargo == 'Gerente'){
-	$nivel_usu = 'Gerente';				
-}
-
-if($nome_cargo == 'Tesoureiro'){
-	$nivel_usu = 'Tesoureiro';		
-}
-
-if($nome_cargo == 'Secretário' || $nome_cargo == 'Secretario' || $nome_cargo == 'Secretária' || $nome_cargo == 'Secretaria' || $nome_cargo == 'Secretário(a)'){
-	$nivel_usu = 'Secretario';		
-}
-
-if($nome_cargo == 'Recepcionista'){
-	$nivel_usu = 'Recepcionista';			
-}
-
-if($nome_cargo == 'RH'){
-	$nivel_usu = 'RH';			
-} */
-
-/* if($id == ""){
-	$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email, endereco = :endereco, cargo = '$cargo', data_cad = curDate(), data_nasc = '$data_nasc', obs = :obs, foto = '$foto', salario = :salario, valor_hora = :valor_hora, hora_entrada = '$hora_entrada', hora_saida = '$hora_saida', jornada_horas = '$jornada_horas'");
-	$acao = 'inserção';
-
-	$query->bindValue(":nome", "$nome");
-	$query->bindValue(":cpf", "$cpf");
-	$query->bindValue(":telefone", "$telefone");
-	$query->bindValue(":email", "$email");
-	$query->bindValue(":endereco", "$endereco");
-	$query->bindValue(":obs", "$obs");
-	$query->bindValue(":salario", "$salario");
-	$query->bindValue(":valor_hora", "$valor_hora");
-	$query->execute();
-	$ult_id = $pdo->lastInsertId();
-
-
-	
-
-	//inserir o funcionário na tabela de usuários	
-	if($nivel_usu != ""){
-		$query_usu = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email, senha_crip = :senha_crip, senha = :senha, nivel = '$nivel_usu',  foto = '$foto' , id_usu = '$ult_id'");
-
-
-		$senha_crip = md5('123');
-		$query_usu->bindValue(":nome", "$nome");
-		$query_usu->bindValue(":email", "$email");
-		$query_usu->bindValue(":cpf", "$cpf");
-		$query_usu->bindValue(":telefone", "$telefone");
-		$query_usu->bindValue(":senha_crip", "$senha_crip");
-		$query_usu->bindValue(":senha", "123");	
-		$query_usu->execute();
-	}
-	
-
-}else{
-	$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email, endereco = :endereco, cargo = '$cargo', data_cad = curDate(), data_nasc = '$data_nasc', obs = :obs, foto = '$foto', salario = :salario, valor_hora = :valor_hora, hora_entrada = '$hora_entrada', hora_saida = '$hora_saida', jornada_horas = '$jornada_horas' where id = '$id'");
-	$acao = 'edição';
-
-	$query->bindValue(":nome", "$nome");
-	$query->bindValue(":cpf", "$cpf");
-	$query->bindValue(":telefone", "$telefone");
-	$query->bindValue(":email", "$email");
-	$query->bindValue(":endereco", "$endereco");
-	$query->bindValue(":obs", "$obs");
-	$query->bindValue(":salario", "$salario");
-	$query->bindValue(":valor_hora", "$valor_hora");
-	$query->execute();
-
-
-	//atualizar na tabela de usuários
-	if(@$nivel_usu != ""){
-		$query_usu = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email, nivel = '$nivel_usu',  foto = '$foto' WHERE id_usu = '$id'");
-
-		if($query_usu != ""){
-			$senha_crip = md5('123');
-			$query_usu->bindValue(":nome", "$nome");
-			$query_usu->bindValue(":email", "$email");
-			$query_usu->bindValue(":cpf", "$cpf");
-			$query_usu->bindValue(":telefone", "$telefone");			
-			$query_usu->execute();
-		}
-	}
-
-} */
-
-
-// ... código anterior ...
 
 if ($id == "") {
-    // Inserção
     $query = $pdo->prepare("INSERT INTO $tabela (nome, cpf, telefone, email, endereco, cargo, data_cad, data_nasc, obs, foto, salario, valor_hora, hora_entrada, hora_saida, jornada_horas) 
                           VALUES (:nome, :cpf, :telefone, :email, :endereco, :cargo, curDate(), :data_nasc, :obs, :foto, :salario, :valor_hora, :hora_entrada, :hora_saida, :jornada_horas)");
     $acao = 'inserção';
@@ -196,15 +108,15 @@ if ($id == "") {
     $query->bindValue(":telefone", $telefone);
     $query->bindValue(":email", $email);
     $query->bindValue(":endereco", $endereco);
-    $query->bindValue(":cargo", $cargo); // Parâmetro para o cargo
-    $query->bindValue(":data_nasc", $data_nasc); // Parâmetro para data de nascimento
+    $query->bindValue(":cargo", $cargo); 
+    $query->bindValue(":data_nasc", $data_nasc); 
     $query->bindValue(":obs", $obs);
-    $query->bindValue(":foto", $foto); // Parâmetro para foto
+    $query->bindValue(":foto", $foto);
     $query->bindValue(":salario", $salario);
     $query->bindValue(":valor_hora", $valor_hora);
-    $query->bindValue(":hora_entrada", $hora_entrada); // Parâmetro para hora de entrada
-    $query->bindValue(":hora_saida", $hora_saida); // Parâmetro para hora de saída
-    $query->bindValue(":jornada_horas", $jornada_horas); // Parâmetro para jornada de horas
+    $query->bindValue(":hora_entrada", $hora_entrada); 
+    $query->bindValue(":hora_saida", $hora_saida); 
+    $query->bindValue(":jornada_horas", $jornada_horas); 
     $query->execute();
     $ult_id = $pdo->lastInsertId();
 
@@ -220,8 +132,8 @@ if ($id == "") {
         $query_usu->bindValue(":telefone", $telefone);
         $query_usu->bindValue(":senha_crip", $senha_crip);
         $query_usu->bindValue(":senha", "123");
-        $query_usu->bindValue(":nivel", $nivel_usu); // Parâmetro para o nível do usuário
-        $query_usu->bindValue(":foto", $foto); // Parâmetro para foto
+        $query_usu->bindValue(":nivel", $nivel_usu); 
+        $query_usu->bindValue(":foto", $foto); 
         $query_usu->bindValue(":id_usu", $ult_id);
         $query_usu->execute();
     }
@@ -240,15 +152,15 @@ if ($id == "") {
     $query->bindValue(":telefone", $telefone);
     $query->bindValue(":email", $email);
     $query->bindValue(":endereco", $endereco);
-    $query->bindValue(":cargo", $cargo); // Parâmetro para o cargo
-    $query->bindValue(":data_nasc", $data_nasc); // Parâmetro para data de nascimento
+    $query->bindValue(":cargo", $cargo); 
+    $query->bindValue(":data_nasc", $data_nasc); 
     $query->bindValue(":obs", $obs);
-    $query->bindValue(":foto", $foto); // Parâmetro para foto
+    $query->bindValue(":foto", $foto); 
     $query->bindValue(":salario", $salario);
     $query->bindValue(":valor_hora", $valor_hora);
-    $query->bindValue(":hora_entrada", $hora_entrada); // Parâmetro para hora de entrada
-    $query->bindValue(":hora_saida", $hora_saida); // Parâmetro para hora de saída
-    $query->bindValue(":jornada_horas", $jornada_horas); // Parâmetro para jornada de horas
+    $query->bindValue(":hora_entrada", $hora_entrada); 
+    $query->bindValue(":hora_saida", $hora_saida); 
+    $query->bindValue(":jornada_horas", $jornada_horas); 
     $query->bindValue(":id", $id);
     $query->execute();
 
@@ -264,18 +176,14 @@ if ($id == "") {
             $query_usu->bindValue(":email", $email);
             $query_usu->bindValue(":cpf", $cpf);
             $query_usu->bindValue(":telefone", $telefone);
-            $query_usu->bindValue(":nivel", $nivel_usu); // Parâmetro para o nível do usuário
-            $query_usu->bindValue(":foto", $foto); // Parâmetro para foto
+            $query_usu->bindValue(":nivel", $nivel_usu); 
+            $query_usu->bindValue(":foto", $foto); 
             $query_usu->bindValue(":id_usu", $id);
             $query_usu->execute();
         }
     }
 
 }
-
-// ... código restante ...
-
-
 
 if(@$ult_id == "" || @$ult_id == 0){
 	$ult_id = $id;
