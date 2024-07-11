@@ -222,6 +222,8 @@ $data_ano = $ano_atual . "-01-01";
 
 									<li><a href="index.php?pagina=contas_banco"><i class="fa fa-angle-right"></i> Contas Bancárias</a></li> -->
 
+									<!-- GRUPOS E ACESSOS -->
+
 									<!-- <li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
 
 									<li><a href="index.php?pagina=acessos"><i class="fa fa-angle-right"></i> Acessos</a></li> -->
@@ -442,7 +444,7 @@ $data_ano = $ano_atual . "-01-01";
 
 								<li> <a href="#" data-toggle="modal" data-target="#modalPerfil"><i class="fa fa-user"></i> Perfil</a> </li>
 
-								<li class="<?php echo $esc_todos ?>"> <a href="#" data-toggle="modal" data-target="#modalConfig"><i class="fa fa-cog"></i> Configurações</a> </li>
+								<li class="<?php echo $configuracoes ?>"> <a href="#" data-toggle="modal" data-target="#modalConfig"><i class="fa fa-cog"></i> Configurações</a> </li>
 
 								<li> <a href="../logout.php"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>

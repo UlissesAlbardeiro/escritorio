@@ -4,6 +4,7 @@ $id_funcionario = $_SESSION['id_funcionario'];
 
 //SEM GRUPO
 $home = 'ocultar';
+$configuracoes = 'ocultar';
 
 //GRUPO CADASTROS
 $cargos = 'ocultar';
@@ -47,6 +48,10 @@ if ($total_reg > 0) {
 
 		if ($chave == 'home') {
 			$home = '';
+		}
+		
+		if ($chave == 'configuracoes') {
+			$configuracoes = '';
 		}
 
 		//--------

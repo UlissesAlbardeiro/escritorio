@@ -144,7 +144,7 @@ exit();
 						<div class="col-md-2">
 							<div class="form-group">
 								<label>Jornada Dia</label>
-								<input type="time" class="form-control" name="jornada_horas" id="jornada_horas" required>
+								<input type="time" class="form-control" name="jornada_horas" id="jornada_horas">
 							</div>
 						</div>
 
