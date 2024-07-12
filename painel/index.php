@@ -211,9 +211,11 @@ $data_ano = $ano_atual . "-01-01";
 								<ul class="treeview-menu">
 									<li class="<?php echo $cargos ?>"><a href="index.php?pagina=cargos"><i class="fa fa-angle-right  "></i> Cargos</a></li>
 
+									<li class="<?php echo $departamentos ?>"><a href="index.php?pagina=departamentos"><i class="fa fa-angle-right  "></i> Departamentos</a></li>
+
 									<li class="<?php echo $tipos_empresas ?>"><a href="index.php?pagina=tipos_empresas"><i class="fa fa-angle-right "></i> Tipos de Empresas</a></li>
 
-									<li class="<?php echo $funcionarios ?>"><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right "></i> Funcionários</a></li>
+									<li class="<?php echo $funcionarios?>"><a href="index.php?pagina=funcionarios"><i class="fa fa-angle-right "></i> Funcionários (edição)</a></li>
 
 									<li class="<?php echo $clientes ?>"><a href="index.php?pagina=clientes"><i class="fa fa-angle-right "></i> Clientes</a></li>
 
@@ -224,9 +226,9 @@ $data_ano = $ano_atual . "-01-01";
 
 									<!-- GRUPOS E ACESSOS -->
 
-									<!-- <li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
+									<li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
 
-									<li><a href="index.php?pagina=acessos"><i class="fa fa-angle-right"></i> Acessos</a></li> -->
+									<li><a href="index.php?pagina=acessos"><i class="fa fa-angle-right"></i> Acessos</a></li>
 
 
 								</ul>
@@ -245,7 +247,7 @@ $data_ano = $ano_atual . "-01-01";
 
 									<!-- <li class=""><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
 
-									<li class="<?php echo $usuarios ?>"><a href="index.php?pagina=usuarios"><i class="fa fa-angle-right"></i> Usuários</a></li>
+									<li class="<?php echo $usuarios ?>"><a href="index.php?pagina=usuarios"><i class="fa fa-angle-right"></i> Funcionários</a></li>
 
 								</ul>
 							</li>
