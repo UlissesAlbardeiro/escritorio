@@ -1,10 +1,9 @@
 <?php 
-$tabela = 'contas_banco';
+$tabela = 'departamentos';
 require_once("../../conexao.php");
 
 $id = $_POST['id'];
 $nome = $_POST['nome'];
-
 
 $pdo->query("DELETE FROM $tabela where id = '$id'");
 

@@ -4,16 +4,16 @@ require_once("../../conexao.php");
 echo <<<HTML
 <small>
 HTML;
-$query = $pdo->query("SELECT * FROM cat_arquivos ORDER BY id desc");
+$query = $pdo->query("SELECT * FROM departamentos ORDER BY id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if($total_reg > 0){
 echo <<<HTML
 	<table class="table table-hover" id="tabela">
 		<thead> 
-			<tr> 				 
+			<tr> 
+				<th>ID</th> 
 				<th>Nome</th> 
-				<th>Setor</th> 
 				<th>Ações</th>
 			</tr> 
 		</thead> 
@@ -23,17 +23,10 @@ for($i=0; $i < $total_reg; $i++){
 	foreach ($res[$i] as $key => $value){}
 $id = $res[$i]['id'];
 $nome = $res[$i]['nome'];
-$setor = $res[$i]['setor'];
-
-$query2 = $pdo->query("SELECT * FROM setor_arquivos where id = '$setor'");
-$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-if(@count($res2) > 0){
-	$nome_setor = $res2[0]['nome'];
-}
 echo <<<HTML
 			<tr> 
-				<td>{$nome}</td> 
-				<td>{$nome_setor}</td>
+				<td>{$id}</td> 
+				<td>{$nome}</td>
 				<td>
 					<big><a href="#" onclick="editar('{$id}', '{$nome}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 					<big><a href="#" onclick="excluir('{$id}', '{$nome}')" title="Excluir Item"><i class="fa fa-trash-o text-danger"></i></a></big>

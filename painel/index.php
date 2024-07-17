@@ -219,11 +219,6 @@ $data_ano = $ano_atual . "-01-01";
 
 									<li class="<?php echo $clientes ?>"><a href="index.php?pagina=clientes"><i class="fa fa-angle-right "></i> Clientes</a></li>
 
-
-									<!-- <li><a href="index.php?pagina=frequencias"><i class="fa fa-angle-right"></i> Frequências</a></li>
-
-									<li><a href="index.php?pagina=contas_banco"><i class="fa fa-angle-right"></i> Contas Bancárias</a></li> -->
-
 									<!-- GRUPOS E ACESSOS -->
 
 									<li><a href="index.php?pagina=grupos"><i class="fa fa-angle-right"></i> Grupos</a></li>
@@ -245,31 +240,11 @@ $data_ano = $ano_atual . "-01-01";
 
 									<li class="<?php echo $mostrar_clientes ?>"><a href="index.php?pagina=mostrar_clientes"><i class="fa fa-angle-right "></i>Ver Clientes</a></li>
 
-									<!-- <li class=""><a href="index.php?pagina=fornecedores"><i class="fa fa-angle-right"></i> Fornecedores</a></li> -->
-
 									<li class="<?php echo $usuarios ?>"><a href="index.php?pagina=usuarios"><i class="fa fa-angle-right"></i> Funcionários</a></li>
 
 								</ul>
 							</li>
 
-
-							<!-- <li class="treeview ">
-								<a href="#">
-									<i class="fa fa-usd"></i>
-									<span>Movimentações</span>
-									<i class="fa fa-angle-left pull-right"></i>
-								</a>
-								<ul class="treeview-menu">
-									<li><a href="index.php?pagina=pagar"><i class="fa fa-angle-right"></i> Contas à Pagar</a></li>
-
-									<li><a href="index.php?pagina=receber"><i class="fa fa-angle-right"></i> Contas à Receber</a></li>
-
-									<li><a href="index.php?pagina=movimentacoes"><i class="fa fa-angle-right"></i> Extrato Caixa</a></li>
-
-									<li><a href="#" data-toggle="modal" data-target="#RelFin"><i class="fa fa-angle-right"></i> Relatório Financeiro</a></li>
-
-								</ul>
-							</li> -->
 
 							<!-- MENU TAREFAS -->
 							<li class="treeview <?php echo $menu_tarefas ?>">
@@ -297,29 +272,11 @@ $data_ano = $ano_atual . "-01-01";
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li class="<?php echo $setor_arquivo ?>"><a href="index.php?pagina=setor_arquivos"><i class="fa fa-angle-right"></i> Setor Arquivo</a></li>
-
-									<li class="<?php echo $cat_arquivos ?>"><a href="index.php?pagina=cat_arquivos"><i class="fa fa-angle-right"></i> Categoria Arquivos</a></li>
-
-									<li class="<?php echo $grupo_arquivos ?>"><a href="index.php?pagina=grupo_arquivos"><i class="fa fa-angle-right"></i> Grupo Arquivos</a></li>
 
 									<li class="<?php echo $arquivos ?>"><a href="index.php?pagina=arquivos"><i class="fa fa-angle-right"></i> Cadastro de Arquivos</a></li>
 
 								</ul>
 							</li>
-
-
-
-							<!-- <li class="treeview <?php echo $esc_tes ?> <?php echo $esc_sec ?> <?php echo $esc_recep ?> ">
-								<a href="#">
-									<i class="fa fa-wpforms"></i>
-									<span>Gestão RH</span>
-									<i class="fa fa-angle-left pull-right"></i>
-								</a>
-								<ul class="treeview-menu">
-									<li><a href="index.php?pagina=ponto"><i class="fa fa-angle-right"></i> Lançar Ponto</a></li>
-								</ul>
-							</li> -->
 
 
 							<li class="treeview <?php echo $menu_logs ?>">

@@ -1,17 +1,12 @@
 <?php 
 require_once("verificar.php");
 require_once("../conexao.php");
-$pag = 'grupo_arquivos';
+$pag = 'departamentos';
 
-/*
-if(@$_SESSION['nivel_usuario'] != "Administrador" and @$_SESSION['nivel_usuario'] != "Gerente"){
-echo "<script>window.location='../index.php'</script>";
-exit();
-}
-*/
+
 
  ?>
-<button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Novo Grupo</button>
+<button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Novo Departamento</button>
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
 	
@@ -22,7 +17,7 @@ exit();
 
 <!-- Modal -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="tituloModal"></h4>
@@ -34,42 +29,13 @@ exit();
 			<div class="modal-body">
 
 				<div class="row">
-					<div class="col-md-4">						
+					<div class="col-md-8">						
 						<div class="form-group"> 
-							<label>Nome</label> 
+							<label>Nome do departamento</label> 
 							<input type="text" class="form-control" name="nome" id="nome" required> 
 						</div>						
 					</div>
-
-					<div class="col-md-3">						
-						<div class="form-group"> 
-							<label>Setor</label> 
-							<select class="form-control sel2" name="setor" id="setor" required style="width:100%;"> 
-									<?php 
-									$query = $pdo->query("SELECT * FROM setor_arquivos order by id asc");
-									$res = $query->fetchAll(PDO::FETCH_ASSOC);
-									for($i=0; $i < @count($res); $i++){
-										foreach ($res[$i] as $key => $value){}
-
-											?>	
-										<option value="<?php echo $res[$i]['id'] ?>"><?php echo $res[$i]['nome'] ?></option>
-
-									<?php } ?>
-
-								</select>
-						</div>						
-					</div>
-
-
-					<div class="col-md-3">						
-						<div class="form-group"> 
-							<label>Categoria</label> 
-							<div id="listar-cat"></div>
-						</div>						
-					</div>
-
-
-					<div class="col-md-2" style="margin-top:20px">						 
+					<div class="col-md-4" style="margin-top:20px">						 
 						<button type="submit" class="btn btn-primary">Salvar</button>
 					</div>
 
@@ -131,38 +97,6 @@ exit();
 </div>
 
 
-<script type="text/javascript">var pag = "<?=$pag?>"</script>
+<script type="text/javascript">var pag = "<?=$pag?>";</script>
 <script src="js/ajax.js"></script>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.sel2').select2({
-			dropdownParent: $('#modalForm')
-		});
-
-		listarCategorias();
-
-		$('#setor').change(function(){
-				listarCategorias();
-			});
-	});
-</script>
-
-
-
-<script type="text/javascript">
-	function listarCategorias(){
-		var setor = $('#setor').val();
-    $.ajax({
-        url: pag + "/listar-cat.php",
-        method: 'POST',
-        data: {setor},
-        dataType: "text",
-
-        success:function(result){
-            $("#listar-cat").html(result);
-        },
-
-    });
-}
-</script>
