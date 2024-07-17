@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 11/07/2024 às 03:03
+-- Tempo de geração: 17/07/2024 às 02:13
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.1.25
 
@@ -42,7 +42,7 @@ INSERT INTO `acessos` (`id`, `nome`, `chave`, `grupo`) VALUES
 (1, 'Home', 'home', 0),
 (2, 'Cargos', 'cargos', 2),
 (3, 'Tipos de empresas', 'tipos_empresas', 2),
-(5, 'Funcionários', 'funcionarios', 2),
+(5, 'Funcionários (edição)', 'funcionarios', 2),
 (6, 'Clientes', 'clientes', 2),
 (9, 'Tarefas Escritório', 'tarefas_escritorio', 4),
 (10, 'Minhas tarefas', 'tarefas', 4),
@@ -52,7 +52,7 @@ INSERT INTO `acessos` (`id`, `nome`, `chave`, `grupo`) VALUES
 (14, 'Grupo Arquivos', 'grupo_arquivos', 5),
 (15, 'Cadastro de Arquivos', 'arquivos', 5),
 (16, 'Ver Logs', 'logs', 6),
-(18, 'Usuários', 'usuarios', 3),
+(18, 'Funcionários (visualizar)', 'usuarios', 3),
 (19, 'Ver Empresas', 'mostrar_clientes', 3),
 (20, 'Configurações', 'configuracoes', 0);
 
@@ -64,21 +64,10 @@ INSERT INTO `acessos` (`id`, `nome`, `chave`, `grupo`) VALUES
 
 CREATE TABLE `arquivos` (
   `id` int(11) NOT NULL,
-  `numero` varchar(30) DEFAULT NULL,
   `nome` varchar(35) NOT NULL,
-  `descricao` varchar(1000) DEFAULT NULL,
-  `setor` int(11) NOT NULL,
-  `categoria` int(11) NOT NULL,
-  `grupo` int(11) NOT NULL,
-  `fornecedor` int(11) NOT NULL,
+  `departamento` int(11) NOT NULL,
   `cliente` int(11) NOT NULL,
-  `funcionario` int(11) NOT NULL,
   `arquivo` varchar(150) NOT NULL,
-  `tipo` varchar(50) DEFAULT NULL,
-  `id_reg` int(11) NOT NULL,
-  `data_cad` date NOT NULL,
-  `vencimento` date NOT NULL,
-  `usuario_cad` int(11) NOT NULL,
   `usuario_editou` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -86,52 +75,52 @@ CREATE TABLE `arquivos` (
 -- Despejando dados para a tabela `arquivos`
 --
 
-INSERT INTO `arquivos` (`id`, `numero`, `nome`, `descricao`, `setor`, `categoria`, `grupo`, `fornecedor`, `cliente`, `funcionario`, `arquivo`, `tipo`, `id_reg`, `data_cad`, `vencimento`, `usuario_cad`, `usuario_editou`) VALUES
-(2, '12345', 'Pagamento Compra X', '<div><b><i>Pagamento Feito para Empresa CD, em anexo o comprovante que foi pago na data ......</i></b></div><div><br></div><div>Pagamento Feito para Empresa CD, em anexo o comprovante que foi pago na data ......</div><div>Pagamento Feito para Empresa CD, em anexo o comprovante que foi pago na data ......</div><div>Pagamento Feito para Empresa CD, em anexo o comprovante que foi pago na data ......</div>', 2, 3, 0, 2, 0, 0, '25-10-2021-15-33-14-pdfteste.pdf', NULL, 0, '2021-10-25', '0000-00-00', 7, 0),
-(3, '', 'Nota Fiscal Y', ' ', 2, 2, 0, 0, 0, 0, '25-10-2021-15-39-30-pdfteste.zip', NULL, 0, '2021-10-25', '0000-00-00', 7, 7),
-(4, '', 'Nota XX', ' ', 2, 2, 2, 2, 0, 0, '25-10-2021-18-16-42-conta3.jpg', NULL, 0, '2021-10-25', '2021-10-17', 7, 7),
-(6, '1545', 'Arquivo Teste', ' ', 2, 2, 2, 0, 2, 0, '25-10-2021-19-38-04-pdfteste.zip', NULL, 0, '2021-10-25', '0000-00-00', 7, 7),
-(8, '', 'Ficha da Talita', ' ', 3, 4, 0, 0, 1, 0, '25-10-2021-20-05-36-pdfteste.pdf', NULL, 0, '2021-10-25', '0000-00-00', 1, 0),
-(9, '', 'Documentos de Admissão', ' ', 4, 6, 0, 0, 0, 2, '25-10-2021-20-07-12-pdfteste.zip', NULL, 0, '2021-10-25', '0000-00-00', 1, 0),
-(10, '', 'Planilha Pagamentos', ' ', 5, 0, 0, 0, 0, 0, '25-10-2021-20-21-30-teste.xlsx', NULL, 0, '2021-10-25', '0000-00-00', 1, 0),
-(12, '84545', 'XML Teste', ' ', 6, 0, 0, 0, 0, 0, '25-10-2021-20-26-17-teste.xml', NULL, 0, '2021-10-25', '0000-00-00', 1, 0),
-(15, NULL, 'Nota Fiscal Compra', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-09-19-36-pdfteste.pdf', NULL, 0, '2021-10-26', '0000-00-00', 1, 0),
-(17, NULL, 'Arquivo Conta', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-09-27-04-pdfteste.pdf', 'Conta à Pagar', 46, '2021-10-26', '0000-00-00', 1, 0),
-(18, NULL, 'Arquivo teste', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-09-29-28-pdfteste.zip', 'Conta à Pagar', 46, '2021-10-26', '0000-00-00', 1, 0),
-(19, NULL, 'Arquivo teste 2', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-09-30-04-teste.xlsx', 'Conta à Pagar', 46, '2021-10-26', '0000-00-00', 1, 0),
-(20, NULL, 'Arquivo', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-09-30-15-teste.xml', 'Conta à Pagar', 46, '2021-10-26', '0000-00-00', 1, 0),
-(22, NULL, 'Arquivo Teste', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-09-49-09-arquivoteste.docx', 'Conta à Pagar', 46, '2021-10-26', '0000-00-00', 1, 0),
-(24, NULL, 'Nota Fiscal Compra', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-10-52-09-pdfteste.pdf', 'Conta à Pagar', 47, '2021-10-26', '0000-00-00', 1, 0),
-(26, NULL, 'Nota Fiscal', NULL, 1, 1, 0, 0, 2, 0, '26-10-2021-11-00-15-pdfteste.pdf', 'Conta à Receber', 9, '2021-10-26', '0000-00-00', 1, 0),
-(28, NULL, 'Conta', NULL, 1, 1, 0, 0, 0, 0, '26-10-2021-11-01-18-conta3.jpg', 'Conta à Receber', 8, '2021-10-26', '0000-00-00', 1, 0),
-(29, '1234565', 'Documentação Funcionário', '<div align=\"center\"><i><b>adsafsafdasf</b></i></div>', 4, 6, 0, 0, 0, 2, '26-10-2021-11-14-12-arquivoteste.docx', NULL, 0, '2021-10-26', '0000-00-00', 1, 0),
-(30, NULL, 'Nota Compra', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-11-19-29-teste.xml', 'Conta à Pagar', 47, '2021-10-26', '0000-00-00', 1, 0),
-(32, '', 'Contrato Trabalhista', ' ', 4, 6, 0, 0, 0, 6, '26-10-2021-12-29-40-arquivoteste.docx', 'Funcionário', 6, '2021-10-26', '0000-00-00', 1, 1),
-(34, '', 'Comprovante de Endereço', ' ', 4, 0, 0, 0, 0, 5, '26-10-2021-12-30-14-conta3.jpg', 'Funcionário', 5, '2021-10-26', '0000-00-00', 1, 1),
-(35, '', 'Teste', ' ', 4, 0, 0, 0, 2, 0, '26-10-2021-12-36-02-arquivoteste.docx', 'Cliente', 2, '2021-10-26', '0000-00-00', 1, 1),
-(36, '1841545', 'Teste', ' ', 6, 0, 0, 0, 0, 0, '26-10-2021-12-46-16-teste.xml', NULL, 0, '2021-10-26', '0000-00-00', 1, 0),
-(37, '5878448', 'Nota', ' ', 2, 2, 2, 1, 0, 0, '26-10-2021-12-46-34-pdfteste.pdf', NULL, 0, '2021-10-26', '0000-00-00', 1, 0),
-(38, NULL, 'Comprovante de Endereço', NULL, 1, 1, 0, 2, 0, 0, '26-10-2021-12-51-18-conta3.jpg', 'Fornecedor', 2, '2021-10-26', '0000-00-00', 1, 0),
-(40, NULL, 'aaa', NULL, 1, 1, 0, 1, 0, 0, '26-10-2021-12-52-34-teste.xml', 'Fornecedor', 1, '2021-10-26', '0000-00-00', 1, 0),
-(41, NULL, 'fdgdfgd', NULL, 1, 1, 0, 0, 0, 5, '27-10-2021-17-46-40-profile.jpg', 'Funcionário', 5, '2021-10-27', '0000-00-00', 1, 0),
-(42, '015451', 'Arquivo X', '<div><i><b>fdsfsafsafasffdsfsafsafasffdsfsafsafasffdsfsafsafasf</b></i></div><div><i><b>fdsfdsfsf</b></i></div><div><i><b>sdfsdfsdf</b></i></div><div><i><b>fdsfsfafasfasfafasdfa<br></b></i></div><div><br><div><i><b>fdsfsafsafasffdsfsafsafasffdsfsafsafasffdsfsafsafasf</b></i></div><div><i><b>fdsfdsfsf</b></i></div><div><i><b>sdfsdfsdf</b></i></div><i><b>fdsfsfafasfasfafasdfa</b></i><div><i><b>fdsfsafsafasffdsfsafsafasffdsfsafsafasffdsfsafsafasf</b></i></div><div><i><b>fdsfdsfsf</b></i></div><div><i><b>sdfsdfsdf</b></i></div><i><b>fdsfsfafasfasfafasdfa</b></i><div><i><b>fdsfsafsafasffdsfsafsafasffdsfsafsafasffdsfsafsafasf</b></i></div><div><i><b>fdsfdsfsf</b></i></div><div><i><b>sdfsdfsdf</b></i></div><i><b>fdsfsfafasfasfafasdfa</b></i><div><i><b>fdsfsafsafasffdsfsafsafasffdsfsafsafasffdsfsafsafasf</b></i></div><div><i><b>fdsfdsfsf</b></i></div><div><i><b>sdfsdfsdf</b></i></div><i><b>fdsfsfafasfasfafasdfa</b></i><div><i><b>fdsfsafsafasffdsfsafsafasffdsfsafsafasffdsfsafsafasf</b></i></div', 1, 0, 0, 0, 0, 0, 'sem-foto.png', NULL, 0, '2021-10-27', '0000-00-00', 1, 1),
-(43, 'fdsafdsaf', 'fdadfasfasfd', '<br><div><i><b>fdsfsfafasfasfafasdfa<br></b></i></div>', 1, 0, 0, 0, 0, 0, 'sem-foto.png', NULL, 0, '2021-10-27', '0000-00-00', 1, 0),
-(44, '', 'fdafsafaasdf', 'aaaaaaaaaa', 1, 0, 0, 0, 0, 0, 'sem-foto.png', NULL, 0, '2021-10-27', '0000-00-00', 1, 1),
-(45, '012', 'conta mentori', '', 3, 4, 0, 0, 1, 2, 'sem-foto.png', NULL, 0, '2024-01-08', '2024-02-01', 1, 0),
-(46, NULL, 'Fff', NULL, 1, 1, 0, 0, 0, 19, '14-01-2024-17-06-53-mensagenssistemaesocialproducaov2-2.pdf', 'Funcionário', 19, '2024-01-14', '0000-00-00', 1, 0),
-(47, NULL, 'Fff', NULL, 1, 1, 0, 0, 0, 19, '14-01-2024-17-06-55-mensagenssistemaesocialproducaov2-2.pdf', 'Funcionário', 19, '2024-01-14', '0000-00-00', 1, 0),
-(48, '11783441', 'André Gustavo', '', 2, 2, 2, 0, 0, 0, '26-01-2024-14-03-34-Etse-de-envio.pdf', NULL, 0, '2024-01-26', '2024-02-21', 1, 0),
-(50, NULL, 'arquivo teste', NULL, 1, 1, 0, 0, 0, 25, '29-01-2024-22-30-17-26-10-2021-12-36-02-arquivoteste.docx', 'Funcionário', 25, '2024-01-29', '0000-00-00', 13, 0),
-(51, 'Teste', 'Teste', '<font color=\"#cc6600\"><b>Testando a aplicação</b></font>', 1, 1, 0, 2, 2, 23, '01-02-2024-09-19-08-plantio-de-soja-5.jpg', NULL, 0, '2024-02-01', '2024-02-01', 1, 0),
-(52, NULL, 'Uso de EPIs', NULL, 1, 1, 0, 0, 0, 26, '02-02-2024-19-57-39-20180830_093158.jpg', 'Funcionário', 26, '2024-02-02', '0000-00-00', 1, 0),
-(53, NULL, 'Uso de EPIs', NULL, 1, 1, 0, 0, 0, 26, '02-02-2024-19-57-46-20180830_093158.jpg', 'Funcionário', 26, '2024-02-02', '0000-00-00', 1, 0),
-(54, NULL, 'Uso de EPIs', NULL, 1, 1, 0, 0, 0, 26, '02-02-2024-19-58-06-20180830_093158.jpg', 'Funcionário', 26, '2024-02-02', '0000-00-00', 1, 0),
-(55, NULL, 'Uso de EPIs', NULL, 1, 1, 0, 0, 0, 26, '02-02-2024-19-58-11-20180830_093158.jpg', 'Funcionário', 26, '2024-02-02', '0000-00-00', 1, 0),
-(56, 'funcionarios', 'luiz', '', 4, 5, 0, 2, 2, 24, '03-02-2024-17-29-45-20190125_095024.jpg', NULL, 0, '2024-02-03', '2024-02-04', 1, 0),
-(58, NULL, 'casa em veiculo', NULL, 1, 1, 0, 0, 0, 6, '09-02-2024-15-52-02-IMG_20211013_114439.jpg', 'Funcionário', 6, '2024-02-09', '0000-00-00', 8, 0),
-(60, NULL, 'arquiv teste de txt', NULL, 1, 1, 0, 0, 0, 6, '09-02-2024-15-52-42-teste-de-arquivo.txt', 'Funcionário', 6, '2024-02-09', '0000-00-00', 8, 0),
-(61, NULL, 'arquivo texte de excel', NULL, 1, 1, 0, 0, 0, 6, '09-02-2024-15-53-30-arquivo-teste-de-excel.xlsx', 'Funcionário', 6, '2024-02-09', '0000-00-00', 8, 0),
-(62, NULL, 'fdfsf', NULL, 1, 1, 0, 0, 0, 28, '13-02-2024-17-52-06-eu.jpeg', 'Funcionário', 28, '2024-02-13', '0000-00-00', 1, 0);
+INSERT INTO `arquivos` (`id`, `nome`, `departamento`, `cliente`, `arquivo`, `usuario_editou`) VALUES
+(2, 'Pagamento Compra X', 2, 0, '25-10-2021-15-33-14-pdfteste.pdf', 0),
+(3, 'Nota Fiscal Y', 2, 0, '25-10-2021-15-39-30-pdfteste.zip', 7),
+(4, 'Nota XX', 2, 0, '25-10-2021-18-16-42-conta3.jpg', 7),
+(6, 'Arquivo Teste', 2, 2, '25-10-2021-19-38-04-pdfteste.zip', 7),
+(8, 'Ficha da Talita', 3, 1, '25-10-2021-20-05-36-pdfteste.pdf', 0),
+(9, 'Documentos de Admissão', 4, 0, '25-10-2021-20-07-12-pdfteste.zip', 0),
+(10, 'Planilha Pagamentos', 5, 0, '25-10-2021-20-21-30-teste.xlsx', 0),
+(12, 'XML Teste', 6, 0, '25-10-2021-20-26-17-teste.xml', 0),
+(15, 'Nota Fiscal Compra', 1, 0, '26-10-2021-09-19-36-pdfteste.pdf', 0),
+(17, 'Arquivo Conta', 1, 0, '26-10-2021-09-27-04-pdfteste.pdf', 0),
+(18, 'Arquivo teste', 1, 0, '26-10-2021-09-29-28-pdfteste.zip', 0),
+(19, 'Arquivo teste 2', 1, 0, '26-10-2021-09-30-04-teste.xlsx', 0),
+(20, 'Arquivo', 1, 0, '26-10-2021-09-30-15-teste.xml', 0),
+(22, 'Arquivo Teste', 1, 0, '26-10-2021-09-49-09-arquivoteste.docx', 0),
+(24, 'Nota Fiscal Compra', 1, 0, '26-10-2021-10-52-09-pdfteste.pdf', 0),
+(26, 'Nota Fiscal', 1, 2, '26-10-2021-11-00-15-pdfteste.pdf', 0),
+(28, 'Conta', 1, 0, '26-10-2021-11-01-18-conta3.jpg', 0),
+(29, 'Documentação Funcionário', 4, 0, '26-10-2021-11-14-12-arquivoteste.docx', 0),
+(30, 'Nota Compra', 1, 0, '26-10-2021-11-19-29-teste.xml', 0),
+(32, 'Contrato Trabalhista', 4, 0, '26-10-2021-12-29-40-arquivoteste.docx', 1),
+(34, 'Comprovante de Endereço', 4, 0, '26-10-2021-12-30-14-conta3.jpg', 1),
+(35, 'Teste', 4, 2, '26-10-2021-12-36-02-arquivoteste.docx', 1),
+(36, 'Teste', 6, 0, '26-10-2021-12-46-16-teste.xml', 0),
+(37, 'Nota', 2, 0, '26-10-2021-12-46-34-pdfteste.pdf', 0),
+(38, 'Comprovante de Endereço', 1, 0, '26-10-2021-12-51-18-conta3.jpg', 0),
+(40, 'aaa', 1, 0, '26-10-2021-12-52-34-teste.xml', 0),
+(41, 'fdgdfgd', 1, 0, '27-10-2021-17-46-40-profile.jpg', 0),
+(42, 'Arquivo X', 1, 0, 'sem-foto.png', 1),
+(43, 'fdadfasfasfd', 1, 0, 'sem-foto.png', 0),
+(44, 'fdafsafaasdf', 1, 0, 'sem-foto.png', 1),
+(45, 'conta mentori', 3, 1, 'sem-foto.png', 0),
+(46, 'Fff', 1, 0, '14-01-2024-17-06-53-mensagenssistemaesocialproducaov2-2.pdf', 0),
+(47, 'Fff', 1, 0, '14-01-2024-17-06-55-mensagenssistemaesocialproducaov2-2.pdf', 0),
+(48, 'André Gustavo', 2, 0, '26-01-2024-14-03-34-Etse-de-envio.pdf', 0),
+(50, 'arquivo teste', 1, 0, '29-01-2024-22-30-17-26-10-2021-12-36-02-arquivoteste.docx', 0),
+(51, 'Teste', 1, 2, '01-02-2024-09-19-08-plantio-de-soja-5.jpg', 0),
+(52, 'Uso de EPIs', 1, 0, '02-02-2024-19-57-39-20180830_093158.jpg', 0),
+(53, 'Uso de EPIs', 1, 0, '02-02-2024-19-57-46-20180830_093158.jpg', 0),
+(54, 'Uso de EPIs', 1, 0, '02-02-2024-19-58-06-20180830_093158.jpg', 0),
+(55, 'Uso de EPIs', 1, 0, '02-02-2024-19-58-11-20180830_093158.jpg', 0),
+(56, 'luiz', 4, 2, '03-02-2024-17-29-45-20190125_095024.jpg', 0),
+(58, 'casa em veiculo', 1, 0, '09-02-2024-15-52-02-IMG_20211013_114439.jpg', 0),
+(60, 'arquiv teste de txt', 1, 0, '09-02-2024-15-52-42-teste-de-arquivo.txt', 0),
+(61, 'arquivo texte de excel', 1, 0, '09-02-2024-15-53-30-arquivo-teste-de-excel.xlsx', 0),
+(62, 'fdfsf', 1, 0, '13-02-2024-17-52-06-eu.jpeg', 0);
 
 -- --------------------------------------------------------
 
@@ -165,20 +154,6 @@ CREATE TABLE `cat_arquivos` (
   `nome` varchar(50) NOT NULL,
   `setor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `cat_arquivos`
---
-
-INSERT INTO `cat_arquivos` (`id`, `nome`, `setor`) VALUES
-(1, 'Todas', 1),
-(2, 'Notas Fiscais', 2),
-(3, 'Comprovantes', 2),
-(4, 'Ficha Funcionário', 3),
-(5, 'Folha de Ponto', 4),
-(6, 'Admissão', 4),
-(7, 'Demissão', 4),
-(8, 'Contrato', 5);
 
 -- --------------------------------------------------------
 
@@ -261,30 +236,25 @@ INSERT INTO `contas_banco` (`id`, `nome`, `banco`, `conta`, `agencia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `fornecedores`
+-- Estrutura para tabela `departamentos`
 --
 
-CREATE TABLE `fornecedores` (
+CREATE TABLE `departamentos` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `pessoa` varchar(20) NOT NULL,
-  `doc` varchar(20) NOT NULL,
-  `telefone` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `endereco` varchar(100) DEFAULT NULL,
-  `data_cad` date NOT NULL,
-  `data_nasc` date NOT NULL,
-  `obs` varchar(1000) DEFAULT NULL,
-  `ativo` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `nome` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `fornecedores`
+-- Despejando dados para a tabela `departamentos`
 --
 
-INSERT INTO `fornecedores` (`id`, `nome`, `pessoa`, `doc`, `telefone`, `email`, `endereco`, `data_cad`, `data_nasc`, `obs`, `ativo`) VALUES
-(1, 'Kamila Silva Santos', 'Física', '588.454.878-54', '(57) 44444-4444', 'kamila@hotmail.com', 'Rua A, Número 150, Bairro XX - Belo Horizonte - MG', '2021-10-13', '2021-10-13', 'Fornecedor de Materiais de Escritório.', 'Não'),
-(2, 'Empresa CD', 'Jurídica', '48.745.874/5454-55', '(84) 55454-5454', 'empresacd@hotmail.com', 'Rua S', '2021-10-13', '0000-00-00', '', 'Sim');
+INSERT INTO `departamentos` (`id`, `nome`) VALUES
+(1, 'Fiscal'),
+(2, 'Departamento Pessoal'),
+(3, 'Contábil'),
+(4, 'Imposto de Renda'),
+(5, 'Financeiro'),
+(6, 'Gerencial');
 
 -- --------------------------------------------------------
 
@@ -509,101 +479,6 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`id`, `data`, `hora`, `tabela`, `acao`, `usuario`, `id_reg`, `descricao`) VALUES
-(1397, '2024-05-31', '12:24:35', 'usuarios', 'login', 1, 0, 'login'),
-(1398, '2024-05-31', '12:25:14', 'tarefas', 'edição', 1, 175, 'teste'),
-(1399, '2024-05-31', '12:25:17', 'tarefas', 'edição', 1, 175, 'teste'),
-(1400, '2024-05-31', '12:25:18', 'tarefas', 'edição', 1, 174, 'teste2'),
-(1401, '2024-05-31', '12:25:19', 'tarefas', 'edição', 1, 174, 'teste2'),
-(1402, '2024-05-31', '12:25:19', 'tarefas', 'edição', 1, 174, 'teste2'),
-(1403, '2024-05-31', '12:25:20', 'tarefas', 'edição', 1, 174, 'teste2'),
-(1404, '2024-05-31', '12:25:21', 'tarefas', 'edição', 1, 173, 'teste9'),
-(1405, '2024-05-31', '12:25:21', 'tarefas', 'edição', 1, 173, 'teste9'),
-(1406, '2024-05-31', '12:25:39', 'tarefas', 'exclusão', 1, 173, 'teste9'),
-(1407, '2024-05-31', '12:25:42', 'tarefas', 'exclusão', 1, 174, 'teste2'),
-(1408, '2024-05-31', '12:27:49', 'tarefas', 'exclusão', 1, 176, 'teste2'),
-(1409, '2024-05-31', '12:27:51', 'tarefas', 'exclusão', 1, 175, 'teste'),
-(1410, '2024-05-31', '12:30:32', 'tarefas', 'edição', 1, 177, 'teste'),
-(1411, '2024-05-31', '12:30:35', 'tarefas', 'exclusão', 1, 177, 'teste'),
-(1412, '2024-05-31', '13:32:54', 'tarefas', 'exclusão', 1, 178, 'teste'),
-(1413, '2024-05-31', '13:32:56', 'tarefas', 'exclusão', 1, 179, 'teste2'),
-(1414, '2024-05-31', '13:43:05', 'tarefas', 'edição', 1, 185, 'Regularizar documento da empresa'),
-(1415, '2024-05-31', '13:43:08', 'tarefas', 'edição', 1, 185, 'Regularizar documento da empresa'),
-(1416, '2024-05-31', '13:43:09', 'tarefas', 'edição', 1, 185, 'Regularizar documento da empresa'),
-(1417, '2024-05-31', '13:43:12', 'tarefas', 'edição', 1, 185, 'Regularizar documento da empresa'),
-(1418, '2024-05-31', '15:45:50', 'tarefas', 'exclusão', 1, 186, 'teste545848'),
-(1419, '2024-05-31', '15:45:53', 'tarefas', 'exclusão', 1, 185, 'Regularizar documento da empresa'),
-(1420, '2024-05-31', '15:45:56', 'tarefas', 'exclusão', 1, 184, 'Regularizar  '),
-(1421, '2024-05-31', '15:45:59', 'tarefas', 'exclusão', 1, 183, 'TESTAR CÓDIGO'),
-(1422, '2024-05-31', '15:46:01', 'tarefas', 'exclusão', 1, 182, 'teste'),
-(1423, '2024-05-31', '15:46:03', 'tarefas', 'exclusão', 1, 181, 'teste2'),
-(1424, '2024-05-31', '15:46:06', 'tarefas', 'exclusão', 1, 180, 'teste'),
-(1425, '2024-05-31', '15:49:58', 'tarefas', 'exclusão', 1, 188, 'teste2'),
-(1426, '2024-05-31', '15:50:02', 'tarefas', 'exclusão', 1, 187, 'teste'),
-(1427, '2024-05-31', '16:17:23', 'tarefas', 'edição', 1, 190, 'teste'),
-(1428, '2024-05-31', '16:17:24', 'tarefas', 'edição', 1, 190, 'teste'),
-(1429, '2024-05-31', '16:17:25', 'tarefas', 'edição', 1, 189, 'teste'),
-(1430, '2024-05-31', '16:17:25', 'tarefas', 'edição', 1, 189, 'teste'),
-(1431, '2024-05-31', '16:25:28', 'tarefas', 'exclusão', 1, 197, 'TESTAR CÓDIGO'),
-(1432, '2024-05-31', '16:25:30', 'tarefas', 'exclusão', 1, 196, 'TESTAR CÓDIGO'),
-(1433, '2024-05-31', '16:25:33', 'tarefas', 'exclusão', 1, 195, 'TESTAR CÓDIGO'),
-(1434, '2024-05-31', '16:25:35', 'tarefas', 'exclusão', 1, 194, 'TESTAR CÓDIGO'),
-(1435, '2024-05-31', '16:25:37', 'tarefas', 'exclusão', 1, 193, 'TESTAR CÓDIGO'),
-(1436, '2024-05-31', '16:25:40', 'tarefas', 'exclusão', 1, 192, 'TESTAR CÓDIGO'),
-(1437, '2024-05-31', '16:25:42', 'tarefas', 'exclusão', 1, 191, 'TESTAR CÓDIGO'),
-(1438, '2024-05-31', '16:25:44', 'tarefas', 'exclusão', 1, 190, 'teste'),
-(1439, '2024-05-31', '16:28:36', 'tarefas', 'exclusão', 1, 201, 'teste2'),
-(1440, '2024-05-31', '16:28:39', 'tarefas', 'exclusão', 1, 200, 'teste2'),
-(1441, '2024-05-31', '16:28:41', 'tarefas', 'exclusão', 1, 199, 'teste2'),
-(1442, '2024-05-31', '16:28:44', 'tarefas', 'exclusão', 1, 198, 'teste2'),
-(1443, '2024-05-31', '16:29:36', 'tarefas', 'exclusão', 1, 202, 'teste2'),
-(1444, '2024-05-31', '16:31:13', 'tarefas', 'exclusão', 1, 203, 'teste2'),
-(1445, '2024-05-31', '16:31:17', 'tarefas', 'exclusão', 1, 204, 'teste2'),
-(1446, '2024-05-31', '16:31:29', 'tarefas', 'inserção', 17, 205, 'teste2'),
-(1447, '2024-05-31', '16:31:38', 'tarefas', 'edição', 17, 205, 'teste2aaaa'),
-(1448, '2024-05-31', '16:32:05', 'tarefas', 'edição', 17, 205, 'teste2'),
-(1449, '2024-05-31', '16:40:06', 'tarefas', 'edição', 1, 205, 'teste2'),
-(1450, '2024-05-31', '16:40:11', 'tarefas', 'edição', 1, 189, 'teste'),
-(1451, '2024-05-31', '16:40:17', 'tarefas', 'edição', 1, 205, 'teste2'),
-(1452, '2024-05-31', '16:40:33', 'tarefas', 'edição', 1, 189, 'teste'),
-(1453, '2024-05-31', '16:41:37', 'tarefas', 'inserção', 17, 206, 'TESTAR CÓDIGO'),
-(1454, '2024-05-31', '16:41:52', 'tarefas', 'edição', 1, 206, 'TESTAR CÓDIGO'),
-(1455, '2024-05-31', '16:57:50', 'usuarios', 'logout', 1, 0, 'logout'),
-(1456, '2024-05-31', '16:58:06', 'usuarios', 'login', 1, 0, 'login'),
-(1457, '2024-05-31', '16:58:54', 'funcionarios', 'exclusão', 1, 3, 'Pablo Silva'),
-(1458, '2024-05-31', '17:02:44', 'cargos', 'exclusão', 1, 4, 'Recepcionista'),
-(1459, '2024-05-31', '18:53:29', 'usuarios', 'login', 1, 0, 'login'),
-(1460, '2024-05-31', '18:53:59', 'usuarios', 'logout', 1, 0, 'logout'),
-(1461, '2024-05-31', '18:54:01', 'usuarios', 'login', 1, 0, 'login'),
-(1462, '2024-05-31', '18:54:13', 'tarefas', 'exclusão', 1, 189, 'teste'),
-(1463, '2024-05-31', '18:54:15', 'tarefas', 'exclusão', 1, 205, 'teste2'),
-(1464, '2024-05-31', '18:55:57', 'tarefas', 'inserção', 17, 207, 'teste'),
-(1465, '2024-05-31', '18:56:35', 'tarefas', 'inserção', 17, 208, 'teste2'),
-(1466, '2024-05-31', '18:57:07', 'tarefas', 'inserção', 17, 209, 'Regularizar documento da empresa'),
-(1467, '2024-05-31', '18:59:57', 'tarefas', 'inserção', 17, 210, 'teste9'),
-(1468, '2024-05-31', '19:01:26', 'tarefas', 'edição', 1, 209, 'Regularizar documento da empresa'),
-(1469, '2024-05-31', '19:10:15', 'funcionarios', 'inserção', 1, 31, 'vinicius'),
-(1470, '2024-05-31', '19:13:22', 'funcionarios', 'exclusão', 1, 29, 'Ulisses'),
-(1471, '2024-05-31', '19:54:40', 'usuarios', 'login', 1, 0, 'login'),
-(1472, '2024-05-31', '19:55:05', 'funcionarios', 'edição', 1, 31, 'vinicius'),
-(1473, '2024-05-31', '19:55:32', 'tarefas', 'edição', 1, 210, 'teste9'),
-(1474, '2024-05-31', '19:55:33', 'tarefas', 'edição', 1, 210, 'teste9'),
-(1475, '2024-05-31', '21:21:29', 'usuarios', 'login', 1, 0, 'login'),
-(1476, '2024-05-31', '21:36:27', 'usuarios', 'login', 1, 0, 'login'),
-(1477, '2024-05-31', '21:39:18', 'funcionarios', 'inserção', 1, 32, 'Vinicius Albardeiro'),
-(1478, '2024-05-31', '21:45:27', 'funcionarios', 'exclusão', 1, 32, 'Vinicius Albardeiro'),
-(1479, '2024-05-31', '21:46:28', 'funcionarios', 'inserção', 1, 33, 'Vinicius Albardeiro'),
-(1480, '2024-05-31', '21:47:39', 'usuarios', 'logout', 1, 0, 'logout'),
-(1481, '2024-05-31', '21:47:44', 'usuarios', 'login', 18, 0, 'login'),
-(1482, '2024-06-02', '19:33:43', 'usuarios', 'login', 1, 0, 'login'),
-(1483, '2024-06-02', '19:35:03', 'tarefas', 'inserção', 18, 211, 'Pagar documento'),
-(1484, '2024-06-02', '19:35:30', 'tarefas', 'edição', 1, 211, 'Pagar documento'),
-(1485, '2024-06-02', '19:35:33', 'tarefas', 'edição', 1, 211, 'Pagar documento'),
-(1486, '2024-06-02', '19:35:33', 'tarefas', 'edição', 1, 211, 'Pagar documento'),
-(1487, '2024-06-02', '19:35:35', 'tarefas', 'edição', 1, 211, 'Pagar documento'),
-(1488, '2024-06-02', '19:35:35', 'tarefas', 'edição', 1, 211, 'Pagar documento'),
-(1489, '2024-06-02', '19:35:45', 'tarefas', 'edição', 1, 211, 'Pagar documento'),
-(1490, '2024-06-02', '19:45:44', 'usuarios', 'login', 1, 0, 'login'),
-(1491, '2024-06-02', '19:46:34', 'tarefas', 'inserção', 1, 212, 'teste9'),
 (1492, '2024-06-07', '09:24:40', 'usuarios', 'login', 1, 0, 'login'),
 (1493, '2024-06-07', '09:54:03', 'tarefas', 'edição', 1, 212, 'teste9'),
 (1494, '2024-06-07', '09:54:04', 'tarefas', 'edição', 1, 212, 'teste9'),
@@ -1173,8 +1048,7 @@ INSERT INTO `logs` (`id`, `data`, `hora`, `tabela`, `acao`, `usuario`, `id_reg`,
 (2058, '2024-06-18', '10:51:13', 'usuarios', 'logout', 1, 0, 'logout'),
 (2059, '2024-06-18', '10:51:20', 'usuarios', 'login', 19, 0, 'login'),
 (2060, '2024-06-18', '18:16:48', 'usuarios', 'login', 1, 0, 'login'),
-(2061, '2024-06-18', '18:19:10', 'clientes', 'edição', 1, 17, 'Semear Store');
-INSERT INTO `logs` (`id`, `data`, `hora`, `tabela`, `acao`, `usuario`, `id_reg`, `descricao`) VALUES
+(2061, '2024-06-18', '18:19:10', 'clientes', 'edição', 1, 17, 'Semear Store'),
 (2062, '2024-06-18', '18:19:15', 'clientes', 'edição', 1, 17, 'Semear Store'),
 (2063, '2024-07-09', '20:58:46', 'usuarios', 'login', 1, 0, 'login'),
 (2064, '2024-07-09', '20:59:45', 'tarefas', 'edição', 1, 313, 'teste2'),
@@ -1184,69 +1058,17 @@ INSERT INTO `logs` (`id`, `data`, `hora`, `tabela`, `acao`, `usuario`, `id_reg`,
 (2068, '2024-07-10', '21:10:43', 'usuarios', 'login', 1, 0, 'login'),
 (2069, '2024-07-10', '21:28:56', 'usuarios', 'login', 19, 0, 'login'),
 (2070, '2024-07-10', '21:59:17', 'funcionarios', 'inserção', 1, 39, 'Algusto'),
-(2071, '2024-07-10', '22:00:31', 'funcionarios', 'inserção', 1, 40, 'Eduardo');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `movimentacoes`
---
-
-CREATE TABLE `movimentacoes` (
-  `id` int(11) NOT NULL,
-  `tipo` varchar(20) NOT NULL,
-  `movimento` varchar(35) NOT NULL,
-  `descricao` varchar(35) NOT NULL,
-  `valor` decimal(8,2) NOT NULL,
-  `usuario` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `lancamento` varchar(35) NOT NULL,
-  `id_mov` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `pagar`
---
-
-CREATE TABLE `pagar` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(50) DEFAULT NULL,
-  `pessoa` int(11) NOT NULL,
-  `valor` decimal(10,2) NOT NULL,
-  `data_lanc` date NOT NULL,
-  `data_venc` date NOT NULL,
-  `data_pgto` date NOT NULL,
-  `usuario_lanc` int(11) NOT NULL,
-  `usuario_pgto` int(11) NOT NULL,
-  `frequencia` int(11) NOT NULL,
-  `saida` varchar(50) NOT NULL,
-  `arquivo` varchar(255) DEFAULT NULL,
-  `pago` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `receber`
---
-
-CREATE TABLE `receber` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(50) DEFAULT NULL,
-  `pessoa` int(11) NOT NULL,
-  `valor` decimal(10,2) NOT NULL,
-  `data_lanc` date NOT NULL,
-  `data_venc` date NOT NULL,
-  `data_pgto` date NOT NULL,
-  `usuario_lanc` int(11) NOT NULL,
-  `usuario_pgto` int(11) NOT NULL,
-  `frequencia` int(11) NOT NULL,
-  `saida` varchar(50) NOT NULL,
-  `arquivo` varchar(255) DEFAULT NULL,
-  `pago` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+(2071, '2024-07-10', '22:00:31', 'funcionarios', 'inserção', 1, 40, 'Eduardo'),
+(2072, '2024-07-11', '20:21:50', 'usuarios', 'login', 1, 0, 'login'),
+(2073, '2024-07-11', '21:07:37', 'usuarios', 'login', 1, 0, 'login'),
+(2074, '2024-07-13', '15:52:15', 'usuarios', 'login', 1, 0, 'login'),
+(2075, '2024-07-16', '18:58:06', 'usuarios', 'login', 1, 0, 'login'),
+(2076, '2024-07-16', '19:24:06', 'departamentos', 'inserção', 1, 1, 'Fiscal'),
+(2077, '2024-07-16', '19:24:34', 'departamentos', 'inserção', 1, 2, 'Departamento Pessoal'),
+(2078, '2024-07-16', '19:24:50', 'departamentos', 'inserção', 1, 3, 'Contábil'),
+(2079, '2024-07-16', '19:25:04', 'departamentos', 'inserção', 1, 4, 'Imposto de Renda'),
+(2080, '2024-07-16', '19:25:13', 'departamentos', 'inserção', 1, 5, 'Financeiro'),
+(2081, '2024-07-16', '19:25:27', 'departamentos', 'inserção', 1, 6, 'Gerencial');
 
 -- --------------------------------------------------------
 
@@ -1352,33 +1174,6 @@ INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `telefone`, `senha_crip`, 
 (21, 'Algusto', '377.816.498-71', 'algusto@gmail.com', '(22) 22222-2258', '202cb962ac59075b964b07152d234b70', '123', 'Auxiliar administrativo', 'sem-perfil.jpg', 39),
 (22, 'Eduardo', '377.816.858-47', 'eduardo@gmail.com', '(19) 35614-5847', '202cb962ac59075b964b07152d234b70', '123', 'Secretário', 'sem-perfil.jpg', 40);
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `valor_parcial`
---
-
-CREATE TABLE `valor_parcial` (
-  `id` int(11) NOT NULL,
-  `id_conta` int(11) NOT NULL,
-  `tipo` varchar(30) NOT NULL,
-  `valor` decimal(8,2) NOT NULL,
-  `data` date NOT NULL,
-  `usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `valor_parcial`
---
-
-INSERT INTO `valor_parcial` (`id`, `id_conta`, `tipo`, `valor`, `data`, `usuario`) VALUES
-(1, 35, 'Pagar', 50.00, '2021-10-18', 1),
-(3, 35, 'Pagar', 20.00, '2021-10-18', 1),
-(4, 35, 'Pagar', 5.00, '2021-10-18', 1),
-(5, 35, 'Pagar', 5.00, '2021-10-18', 1),
-(6, 38, 'Pagar', 100.00, '2021-10-18', 1),
-(7, 4, 'Pagar', 50.00, '2021-10-18', 1);
-
 --
 -- Índices para tabelas despejadas
 --
@@ -1426,9 +1221,9 @@ ALTER TABLE `contas_banco`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `fornecedores`
+-- Índices de tabela `departamentos`
 --
-ALTER TABLE `fornecedores`
+ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1474,24 +1269,6 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `movimentacoes`
---
-ALTER TABLE `movimentacoes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `pagar`
---
-ALTER TABLE `pagar`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `receber`
---
-ALTER TABLE `receber`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Índices de tabela `setor_arquivos`
 --
 ALTER TABLE `setor_arquivos`
@@ -1513,12 +1290,6 @@ ALTER TABLE `tipos_empresas`
 -- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `valor_parcial`
---
-ALTER TABLE `valor_parcial`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1568,10 +1339,10 @@ ALTER TABLE `contas_banco`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `fornecedores`
+-- AUTO_INCREMENT de tabela `departamentos`
 --
-ALTER TABLE `fornecedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `departamentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `frequencias`
@@ -1613,25 +1384,7 @@ ALTER TABLE `jornada`
 -- AUTO_INCREMENT de tabela `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2072;
-
---
--- AUTO_INCREMENT de tabela `movimentacoes`
---
-ALTER TABLE `movimentacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
-
---
--- AUTO_INCREMENT de tabela `pagar`
---
-ALTER TABLE `pagar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
-
---
--- AUTO_INCREMENT de tabela `receber`
---
-ALTER TABLE `receber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2082;
 
 --
 -- AUTO_INCREMENT de tabela `setor_arquivos`
@@ -1656,12 +1409,6 @@ ALTER TABLE `tipos_empresas`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT de tabela `valor_parcial`
---
-ALTER TABLE `valor_parcial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
