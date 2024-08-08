@@ -1,17 +1,17 @@
 <?php 
-$tabela = 'fornecedores';
+$tabela = 'clientes';
 require_once("../../conexao.php");
 
 $id = $_POST['id'];
-$acao = $_POST['acao'];
 $nome = $_POST['nome'];
 
-$pdo->query("UPDATE $tabela SET ativo = '$acao' where id = '$id'");
 
-echo 'Alterado com Sucesso';
+$pdo->query("DELETE FROM $tabela where id = '$id'");
+
+echo 'Excluído com Sucesso';
 
 //inserir log
-$acao = 'edição';
+$acao = 'exclusão';
 $descricao = $nome;
 $id_reg = $id;
 require_once("../inserir-logs.php");

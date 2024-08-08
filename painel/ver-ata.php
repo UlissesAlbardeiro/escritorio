@@ -1,11 +1,11 @@
 <?php 
 require_once("verificar.php");
 require_once("../conexao.php");
-$pag = 'clientes';
+$pag = 'ver-clientes';
 ?>
 
 <!-- BOTÃO PARA COLOCAR NOVO CLIENTE -->
-<button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Novo Cliente</button>
+<!-- <button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Novo Cliente</button> -->
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
 	
@@ -68,7 +68,7 @@ $pag = 'clientes';
 					<div class="col-md-4" id="tipo_empresa_select">						
 							<div class="form-group"> 
 								<label>Tipo da Empresa </label> 
-								<select class="form-control sel2" id="tipo_empresa" name="tipo_empresa" required style="width:100%;"> 
+								<select class="form-control sel2" id="tipo_empresa name="tipo_empresa" required style="width:100%;"> 
 									<?php 
 									$query = $pdo->query("SELECT * FROM tipos_empresas order by tipo asc");
 									$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -336,7 +336,7 @@ $pag = 'clientes';
 
 
 
-<script type="text/javascript">var pag = "clientes";</script>
+<script type="text/javascript">var pag = "ver-clientes";</script>
 <script src="js/ajax.js"></script>
 
 <script>

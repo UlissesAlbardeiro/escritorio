@@ -10,10 +10,10 @@ header('Content-Type: application/json; charset=utf-8');
 date_default_timezone_set('America/Sao_Paulo');
 
 //dados do banco no servidor hospedado
-$usuario = 'hugocu75_escritorio';
-$senha = 'escritoriohugo';
+$usuario = '';
+$senha = '';
 $host = 'sh-pro24.hostgator.com.br';
-$banco = 'hugocu75_escritorio';
+$banco = '';
 
 try {
 	$pdo = new PDO("mysql:dbname=$banco; host=$host", "$usuario", "$senha");

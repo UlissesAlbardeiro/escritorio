@@ -245,6 +245,37 @@ $data_ano = $ano_atual . "-01-01";
 								</ul>
 							</li>
 
+							<!--MENU ATA-->
+
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-user"></i>
+									<span>ATA</span>
+									<i class="fa fa-angle-left pull-right"></i>
+								</a>
+								<ul class="treeview-menu">
+
+								    <li class=""><a href="index.php?pagina=ver-ata"><i class="fa fa-angle-right "></i>Ver ATA</a></li>
+									<li class=""><a href="index.php?pagina=nova-ata"><i class="fa fa-angle-right "></i>Nova ATA</a></li>
+									
+								</ul>
+							</li>
+
+							<!--MENU BUDGET-->
+
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-user"></i>
+									<span>Budget</span>
+									<i class="fa fa-angle-left pull-right"></i>
+								</a>
+								<ul class="treeview-menu">
+
+									<li class=""><a href="index.php?pagina=budget"><i class="fa fa-angle-right "></i>Planilhas</a></li>
+									
+								</ul>
+							</li>
+
 
 							<!-- MENU TAREFAS -->
 							<li class="treeview <?php echo $menu_tarefas ?>">

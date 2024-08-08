@@ -1,11 +1,13 @@
 <?php 
 require_once("verificar.php");
 require_once("../conexao.php");
-$pag = 'clientes';
+$pag = 'nova-ata';
 ?>
 
+<link rel="stylesheet" href="css/bootstrap-multiselect.css">
+
 <!-- BOTÃO PARA COLOCAR NOVO CLIENTE -->
-<button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Novo Cliente</button>
+<button onclick="inserir()" type="button" class="btn btn-primary btn-flat btn-pri"><i class="fa fa-plus" aria-hidden="true"></i> Nova ATA</button>
 
 <div class="bs-example widget-shadow" style="padding:15px" id="listar">
 	
@@ -14,9 +16,9 @@ $pag = 'clientes';
 
 
 
-<!-- MODAL PARA INSERIR NOVO CLIENTE -->
+<!-- MODAL PARA INSERIR NOVA ATA -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="tituloModal"></h4>
@@ -28,80 +30,28 @@ $pag = 'clientes';
 				<div class="modal-body">
 
 					<div class="row">
-						<div class="col-md-2">						
+
+						<div class="col-md-6" id="tipo_empresa_select">						
 							<div class="form-group"> 
-								<label>Código</label> 
-								<input type="text" class="form-control" name="codigo" id="codigo" required> 
-							</div>						
-						</div>
-
-						<div class="col-md-2">						
-							<div class="form-group"> 
-								<label>Tipo</label> 
-								<select class="form-control" name="pessoa" id="pessoa"> 
-									<option value="Física">Física</option>
-									<option value="Jurídica">Jurídica</option>
-								</select>
-							</div>						
-						</div>
-
-
-						<div class="col-md-3">						
-							<div class="form-group"> 
-								<label>CPF / CNPJ</label> 
-								<input type="text" class="form-control" name="doc" id="doc" required> 
-							</div>						
-						</div>
-						
-						<div class="col-md-5">						
-							<div class="form-group"> 
-								<label>Razão Social/Nome</label> 
-								<input type="text" class="form-control" name="nome" id="nome" required> 
-							</div>						
-						</div>
-
-					</div>
-
-
-					<div class="row">
-
-					<div class="col-md-4" id="tipo_empresa_select">						
-							<div class="form-group"> 
-								<label>Tipo da Empresa </label> 
+								<label>Empresa </label> 
 								<select class="form-control sel2" id="tipo_empresa" name="tipo_empresa" required style="width:100%;"> 
 									<?php 
-									$query = $pdo->query("SELECT * FROM tipos_empresas order by tipo asc");
+									$query = $pdo->query("SELECT * FROM clientes order by id asc");
 									$res = $query->fetchAll(PDO::FETCH_ASSOC);
 									for($i=0; $i < @count($res); $i++){
 										foreach ($res[$i] as $key => $value){}?>	
 
-										<option><?php echo $res[$i]['tipo']?></option>
+										<option><?php echo $res[$i]['nome']?></option>
 
 									<?php } ?>
 
 								</select>
 							</div>						
-						</div>
-
-						<div class="col-md-4">						
-							<div class="form-group"> 
-								<label>Telefone</label> 
-								<input type="text" class="form-control" name="telefone" id="telefone" required> 
-							</div>						
-						</div>
-
-
-						<div class="col-md-4">						
-							<div class="form-group"> 
-								<label>Email</label> 
-								<input type="email" class="form-control" name="email" id="email" required> 
-							</div>						
 						</div>						
 
-
-						<div class="col-md-4" id="nasc">						
+						<div class="col-md-6" id="nasc">						
 							<div class="form-group"> 
-								<label>Data Nascimento</label> 
+								<label>Data</label> 
 								<input type="date" class="form-control" name="data_nasc" id="data_nasc" value="<?php echo date('Y-m-d') ?>"> 
 							</div>						
 						</div>
@@ -110,12 +60,32 @@ $pag = 'clientes';
 					</div>
 
 
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group"> 
-							<label>Endereço</label> 
-							<input type="text" class="form-control" name="endereco" id="endereco" placeholder="Rua X Número 20 Bairro X"> 
+							<label>Valor</label> 
+							<input type="text" class="form-control" name="endereco" id="endereco" placeholder=""> 
 						</div>
 					</div>	
+
+					<div class="col-md-6" id="tipo_empresa_select">						
+							<div class="form-group"> 
+								<label>Colaborador</label> 
+								<select class="form-control sel2" id="colors" name="tipo_empresa" style="width:100%;"> 
+									<?php 
+									$query = $pdo->query("SELECT * FROM usuarios order by id asc");
+									$res = $query->fetchAll(PDO::FETCH_ASSOC);
+									for($i=0; $i < @count($res); $i++){
+										foreach ($res[$i] as $key => $value){}?>	
+
+										<option><?php echo $res[$i]['nome']?></option>
+
+									<?php } ?>
+
+								</select>
+
+								</select>
+							</div>						
+						</div>	
 
 					<div class="col-md-12">
 						<div class="form-group"> 
@@ -336,8 +306,16 @@ $pag = 'clientes';
 
 
 
-<script type="text/javascript">var pag = "clientes";</script>
+<script type="text/javascript">var pag = <?= $pag ?>;</script>
 <script src="js/ajax.js"></script>
+<script src="js/bootstrap-multiselect.js"></script>
+
+<script>
+	//CAMPO MULTISELECT
+	$(documente).read(function(){
+		$('#colors').multselect();
+	});
+</script>
 
 <script>
 

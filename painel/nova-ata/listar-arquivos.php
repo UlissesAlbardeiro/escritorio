@@ -6,7 +6,7 @@ $id = $_POST['id'];
 echo <<<HTML
 <small>
 HTML;
-$query = $pdo->query("SELECT * FROM $pagina where fornecedor = '$id' order by id desc");
+$query = $pdo->query("SELECT * FROM $pagina where cliente = '$id' order by id desc");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 if($total_reg > 0){

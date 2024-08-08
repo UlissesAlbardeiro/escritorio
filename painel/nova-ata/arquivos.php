@@ -34,7 +34,7 @@ if(@$_FILES['arquivo_conta']['name'] != ""){
 	exit();
 }
 
-$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, setor = '1', categoria = '1',  fornecedor = '$id', data_cad = curDate(), usuario_cad = '$id_usuario', arquivo = '$foto', tipo = 'Fornecedor', id_reg = '$id'");
+$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, setor = '1', categoria = '1',  cliente = '$id', data_cad = curDate(), usuario_cad = '$id_usuario', arquivo = '$foto', tipo = 'Cliente', id_reg = '$id'");
 	$acao = 'inserção';
 
 $query->bindValue(":nome", "$nome");
